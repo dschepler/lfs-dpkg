@@ -1,0 +1,27 @@
+<sect2>
+<title>Installation of GCC</title>
+
+<para>This package is known to behave badly when you have changed its default
+optimization flags (including the -march and -mcpu options). GCC is best
+left alone, so we recommend you unsetting CFLAGS, CXXFLAGS and other
+such variables/settings that would change the default optimization that
+it comes with.</para>
+
+<para>Install GCC by running the following commands:</para>
+
+<para><screen><userinput>patch -Np1 -i ../gcc-&gcc-patch-version;.patch &amp;&amp;</userinput>
+<userinput>mkdir ../gcc-build &amp;&amp;</userinput>
+<userinput>cd ../gcc-build &amp;&amp;</userinput>
+<userinput>../gcc-&gcc-version;/configure --prefix=/usr --enable-languages=c,c++ \</userinput>
+<userinput>&nbsp;&nbsp;&nbsp;--disable-nls --disable-shared --enable-threads=posix &amp;&amp;</userinput>
+<userinput>make BOOT_LDFLAGS=-static bootstrap &amp;&amp;</userinput>
+<userinput>make prefix=$LFS/usr install &amp;&amp;</userinput>
+<userinput>cd $LFS/lib &amp;&amp;</userinput>
+<userinput>ln -sf ../usr/bin/cpp &amp;&amp;</userinput>
+<userinput>cd $LFS/usr/lib &amp;&amp;</userinput>
+<userinput>ln -sf ../bin/cpp &amp;&amp;</userinput>
+<userinput>cd $LFS/usr/bin &amp;&amp;</userinput>
+<userinput>ln -sf gcc cc</userinput></screen></para>
+
+</sect2>
+

@@ -1,0 +1,21 @@
+<sect2>
+<title>Installation of Ncurses</title>
+
+<para>Install Ncurses by running the following commands:</para>
+
+<para><screen><userinput>./configure --prefix=/usr --libdir=/lib \</userinput>
+<userinput>&nbsp;&nbsp;&nbsp;--with-shared --disable-termcap &amp;&amp;</userinput>
+<userinput>make &amp;&amp;</userinput>
+<userinput>make install &amp;&amp;</userinput>
+<userinput>cd /lib &amp;&amp;</userinput>
+<userinput>mv *.a /usr/lib &amp;&amp;</userinput>
+<userinput>chmod 755 *.5.2 &amp;&amp;</userinput>
+<userinput>cd /usr/lib &amp;&amp;</userinput>
+<userinput>ln -sf libncurses.a libcurses.a &amp;&amp;</userinput>
+<userinput>ln -sf ../../lib/libncurses.so &amp;&amp;</userinput>
+<userinput>ln -sf ../../lib/libcurses.so &amp;&amp;</userinput>
+<userinput>ln -sf ../../lib/libform.so &amp;&amp;</userinput>
+<userinput>ln -sf ../../lib/libpanel.so &amp;&amp;</userinput>
+<userinput>ln -sf ../../lib/libmenu.so</userinput></screen></para>
+</sect2>
+
