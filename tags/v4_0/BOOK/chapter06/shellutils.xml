@@ -1,0 +1,13 @@
+<sect1 id="ch06-shutils">
+<title>Installing Sh-utils-&sh-utils-version;</title>
+<?dbhtml filename="sh-utils.html" dir="chapter06"?>
+
+<screen>Estimated build time:           &sh-utils-time;
+Estimated required disk space:  &sh-utils-compsize;</screen>
+
+&c6-shellutils-inst;
+&c6-shellutils-exp;
+&aa-shellutils-desc;
+&aa-shellutils-dep;
+
+</sect1>
