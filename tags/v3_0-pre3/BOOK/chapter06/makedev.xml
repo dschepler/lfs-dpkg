@@ -1,0 +1,9 @@
+<sect1 id="ch06-makedev">
+<title>Creating devices</title>
+
+&c6-makedev-inst;
+&c6-makedev-exp;
+&aa-makedev-desc;
+
+</sect1>
+

@@ -1,0 +1,19 @@
+<sect1 id="ch02-bootscripts">
+<title>Download the bootscripts</title>
+
+<para>
+Typing out all the bootscripts in chapters 7 and 9 can be a long, tedious
+process, not to mention very error-prone.
+</para>
+
+<para>
+To save some time, the bootscripts can be downloaded
+from <ulink
+url="http://packages.linuxfromscratch.org/bootscripts/">
+http://packages.linuxfromscratch.org/bootscripts/</ulink> or <ulink
+url="ftp://packages.linuxfromscratch.org/bootscripts/">
+ftp://packages.linuxfromscratch.org/bootscripts/</ulink>.
+</para>
+
+</sect1>
+
