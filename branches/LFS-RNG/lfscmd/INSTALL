@@ -1,0 +1,6 @@
+INSTALLATION
+	make
+	make install
+
+DEPENDENCIES
+	libxml2
