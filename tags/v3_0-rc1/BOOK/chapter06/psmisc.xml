@@ -1,0 +1,11 @@
+<sect1 id="ch06-psmisc">
+<title>Installing Psmisc-&psmisc-version;</title>
+
+<screen>Estimated build time:           &psmisc-time;
+Estimated required disk space:  &psmisc-compsize;</screen>
+
+&c6-psmisc-inst;
+&aa-psmisc-desc;
+&ab-psmisc-dep;
+
+</sect1>

@@ -1,0 +1,11 @@
+<sect1 id="ch06-automake">
+<title>Installing Automake-&automake-version;</title>
+
+<screen>Estimated build time:           &automake-time;
+Estimated required disk space:  &automake-compsize;</screen>
+
+&c6-automake-inst;
+&aa-automake-desc;
+&ab-automake-dep;
+
+</sect1>
