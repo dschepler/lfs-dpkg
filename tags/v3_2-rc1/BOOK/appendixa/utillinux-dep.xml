@@ -1,0 +1,21 @@
+<sect2>
+<title>Dependencies</title>
+
+<para>Util-linux-&util-linux-depversion; needs the following to be 
+installed:</para>
+
+<literallayout>
+bash: sh
+binutils: as, ld
+fileutils: chgrp, chmod, cp, install, ln, mkdir, mv, rm
+gcc: cc, cpp
+glibc: rpcgen
+grep: grep
+make: make
+sed: sed
+sh-utils: uname, whoami
+textutils: cat
+</literallayout>
+
+</sect2>
+

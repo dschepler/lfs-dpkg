@@ -1,0 +1,21 @@
+<sect2>
+<title>Dependencies</title>
+
+<para>Ncurses-&ncurses-depversion; needs the following to be installed:</para>
+
+<literallayout>
+bash: sh
+binutils: ar, as, ld
+diffutils: cmp
+fileutils: chmod, cp, ln, mkdir, mv, rm
+gcc: c++, gcc
+grep: egrep, fgrep, grep
+make: make
+mawk: mawk
+sed: sed
+sh-utils: basename, date, echo, expr, test, uname
+textutils: cat, sort, tr, wc
+</literallayout>
+
+</sect2>
+

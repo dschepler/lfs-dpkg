@@ -1,0 +1,18 @@
+<sect2>
+<title>Dependencies</title>
+
+<para>Ed-&ed-depversion; needs the following to be installed:</para>
+
+<literallayout>
+bash: sh
+binutils: ar, as, ld
+fileutils: chmod, cp, ln, mv, rm, touch
+gcc: cc
+grep: grep, egrep
+make: make
+sed: sed
+textutils: cat, tr
+</literallayout>
+
+</sect2>
+

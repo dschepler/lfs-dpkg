@@ -1,0 +1,20 @@
+<sect2>
+<title>Dependencies</title>
+
+<para>Patch-&patch-depversion; needs the following to be installed:</para>
+
+<literallayout>
+bash: sh
+binutils: as, ld
+diffutils: cmp
+fileutils: chmod, cp, mv, rm
+gcc: cc
+grep: egrep, grep
+make: make
+sed: sed
+sh-utils: basename, expr, uname
+textutils: cat, tr
+</literallayout>
+
+</sect2>
+

@@ -1,0 +1,14 @@
+<sect2>
+<title>Dependencies</title>
+
+<para>Procinfo-&procinfo-depversion; needs the following to be installed:</para>
+
+<literallayout>
+binutils: as, ld
+fileutils: install, mkdir
+make: make
+sed: sed
+</literallayout>
+
+</sect2>
+

@@ -1,0 +1,21 @@
+<sect2>
+<title>Dependencies</title>
+
+<para>Findutils-&findutils-depversion; needs the following to be 
+installed:</para>
+
+<literallayout>
+bash: sh
+binutils: ar, as, ld
+fileutils: chmod, cp, mv, rm
+grep: grep
+gcc: cc
+make: make
+patch: patch
+sed: sed
+sh-utils: basename, date
+textutils: cat, tr
+</literallayout>
+
+</sect2>
+

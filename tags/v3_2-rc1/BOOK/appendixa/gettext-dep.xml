@@ -1,0 +1,20 @@
+<sect2>
+<title>Dependencies</title>
+
+<para>Gettext-&gettext-depversion; needs the following to be installed:</para>
+
+<literallayout>
+bash: sh
+binutils: ar, as, ld, nm
+diffutils: cmp
+fileutils: chmod, cp, ln, ls, mkdir, mv, rm, rmdir
+gcc: cc
+grep: egrep, grep
+make: make
+sed: sed
+sh-utils: basename, echo, expr, sleep, uname
+textutils: cat, sort, tr, uniq
+</literallayout>
+
+</sect2>
+

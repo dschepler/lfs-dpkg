@@ -1,0 +1,20 @@
+<sect2>
+<title>Dependencies</title>
+
+<para>Libtool-&libtool-depversion; needs the following to be installed:</para>
+
+<literallayout>
+bash: sh
+binutils: ar, as, ld
+diffutils: cmp
+fileutils: chmod, cp, ln, ls, mkdir, mv, rm, rmdir
+gcc: cc
+grep: egrep, grep
+make: make
+sed: sed
+sh-utils: basename, expr, sleep, uname
+textutils: cat, tr
+</literallayout>
+
+</sect2>
+
