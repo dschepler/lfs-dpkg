@@ -1,0 +1,11 @@
+<sect1 id="aa-texinfo">
+<title>Texinfo</title>
+<?dbhtml filename="texinfo.html" dir="appendixa"?>
+
+&aa-texinfo-down;
+&aa-texinfo-shortdesc;
+&aa-texinfo-desc;
+&aa-texinfo-dep;
+
+</sect1>
+
