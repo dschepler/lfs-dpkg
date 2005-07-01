@@ -1,9 +1,0 @@
-<sect2>
-<title>Official Download Location</title>
-
-<para><literallayout>expect (&expect-version;):
-<ulink url="http://expect.nist.gov/src/"/>
-
-Expect Patch (&expect-patch-version;):
-<ulink url="&http;/"/></literallayout></para>
-</sect2>
