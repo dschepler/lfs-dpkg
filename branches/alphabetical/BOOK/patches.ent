@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- Start of Common Patches -->
+<!ENTITY bash-fixes-patch "bash-&bash-version;-fixes-3.patch">
+<!ENTITY bash-avoid_WCONTINUED-patch "bash-&bash-version;-avoid_WCONTINUED-1.patch">
+
+<!ENTITY bzip2-docs-patch "bzip2-&bzip2-version;-install_docs-1.patch">
+<!ENTITY bzip2-bzgrep-patch "bzip2-&bzip2-version;-bzgrep_security-1.patch">
+
+<!ENTITY coreutils-suppress-patch "coreutils-&coreutils-version;-suppress_uptime_kill_su-1.patch">
+<!ENTITY coreutils-uname-patch "coreutils-&coreutils-version;-uname-1.patch">
+
+<!ENTITY expect-spawn-patch "expect-&expect-version;-spawn-1.patch">
+
+<!ENTITY flex-fixes-patch "flex-&flex-version;-debian_fixes-3.patch">
+
+<!ENTITY gawk-segfault-patch "gawk-&gawk-version;-segfault_fix-1.patch">
+
+<!ENTITY gcc-specs-patch "gcc-&gcc-version;-specs-1.patch">
+
+<!ENTITY glibc-testfix-patch "glibc-&glibc-version;-fix_test-1.patch">
+<!ENTITY glibc-gcc4_symbols-patch "glibc-&glibc-version;-gcc4_fix_symbols-1.patch">
+<!ENTITY glibc-gcc4_string-patch "glibc-&glibc-version;-gcc4_fix_string-1.patch">
+<!ENTITY glibc-gcc4_elf-patch "glibc-&glibc-version;-gcc4_fix_elf-1.patch">
+<!ENTITY glibc-gcc4_iconvdata-patch "glibc-&glibc-version;-gcc4_fix_iconvdata-1.patch">
+<!ENTITY glibc-gcc4_mathtest-patch "glibc-&glibc-version;-gcc4_fix_math_tests-1.patch">
+
+<!ENTITY gzip-security_fix-patch "gzip-&gzip-version;-security_fixes-1.patch">
+
+<!ENTITY kbd-gcc4_fixes-patch "kbd-&kbd-version;-gcc4_fixes-1.patch">
+
+<!ENTITY inetutils-gcc4_fixes-patch "inetutils-&inetutils-version;-gcc4_fixes-3.patch">
+<!ENTITY inetutils-man_pages-patch "inetutils-&inetutils-version;-no_server_man_pages-1.patch">
+
+<!ENTITY mktemp-tempfile-patch "mktemp-&mktemp-version;-add_tempfile-3.patch">
+
+<!ENTITY perl-libc-patch "perl-&perl-version;-libc-1.patch">
+
+<!ENTITY readline-fixes-patch "readline-&readline-version;-fixes-1.patch">
+
+<!ENTITY shadow-configure-patch "shadow-&shadow-version;-configure_fix-1.patch">
+
+<!ENTITY sysklogd-fixes-patch "sysklogd-&sysklogd-version;-fixes-1.patch">
+
+<!ENTITY tar-sparse_fix-patch "tar-&tar-version;-sparse_fix-1.patch">
+<!ENTITY tar-gcc4_fix-patch "tar-&tar-version;-gcc4_fix_tests-1.patch">
+
+<!ENTITY texinfo-tempfile_fix-patch "texinfo-&texinfo-version;-tempfile_fix-1.patch">
+
+<!ENTITY util-linux-cramfs-patch "util-linux-&util-linux-version;-cramfs-1.patch">
