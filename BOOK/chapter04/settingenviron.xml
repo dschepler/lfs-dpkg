@@ -83,6 +83,8 @@ their installation. This, combined with turning off hashing, limits the risk
 that old programs are used from the host when the same programs are available in
 the chapter 5 environment.</para>
 
+<beginpage/>
+
 <para>Finally, to have the environment fully prepared for building the
 temporary tools, source the just-created user profile:</para>
 

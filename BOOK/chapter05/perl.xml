@@ -17,7 +17,7 @@
 <segmentedlist>
 <segtitle>&buildtime;</segtitle>
 <segtitle>&diskspace;</segtitle>
-<seglistitem><seg>0.8 SBU</seg><seg>79.8 MB</seg></seglistitem>
+<seglistitem><seg>0.8 SBU</seg><seg>81.6 MB</seg></seglistitem>
 </segmentedlist>
 
 <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" href="../chapter06/perl.xml" xpointer="xpointer(/sect1/sect2[1]/segmentedlist[2])"/>
@@ -32,17 +32,16 @@ the following patch:</para>
 
 <screen><userinput>patch -Np1 -i ../&perl-libc-patch;</userinput></screen>
 
-<para>Prepare Perl for compilation (make sure to get the
-'Data/Dumper Fcntl IO POSIX' part of the command correct&mdash;they are all
-letters):</para>
+<para>Prepare Perl for compilation (make sure to get the 'IO Fcntl POSIX'
+part of the command correct&mdash;they are all letters):</para>
 
-<screen><userinput>./configure.gnu --prefix=/tools -Dstatic_ext='Data/Dumper Fcntl IO POSIX'</userinput></screen>
+<screen><userinput>./configure.gnu --prefix=/tools -Dstatic_ext='IO Fcntl POSIX'</userinput></screen>
 
 <para>The meaning of the configure options:</para>
 
 <variablelist>
 <varlistentry>
-<term><parameter>-Dstatic_ext='Data/Dumper Fcntl IO POSIX'</parameter></term>
+<term><parameter>-Dstatic_ext='IO Fcntl POSIX'</parameter></term>
 <listitem><para>This tells Perl to build the minimum set of static
 extensions needed for installing and testing the Coreutils package in
 the next chapter.</para></listitem>

@@ -51,12 +51,11 @@ problem. The above command takes care of this issue.</para>
 <para>Remove the Binutils source and build directories now.</para>
 
 <para>Next, amend the GCC specs file so that it points to the new
-dynamic linker. A <command>sed</command> command accomplishes this:</para>
+dynamic linker. A <command>perl</command> command accomplishes this:</para>
 
-<screen><userinput>SPECFILE=`dirname $(gcc -print-libgcc-file-name)`/specs &amp;&amp;
-gcc -dumpspecs > $SPECFILE &amp;&amp;
-sed -i 's@^/tools/lib/ld-linux.so.2@/lib/ld-linux.so.2@g' $SPECFILE &amp;&amp;
-unset SPECFILE</userinput></screen>
+<screen><userinput>perl -pi -e 's@ /tools/lib/ld-linux.so.2@ /lib/ld-linux.so.2@g;' \
+    -e 's@\*startfile_prefix_spec:\n@$_/usr/lib/ @g;' \
+        `gcc --print-file specs`</userinput></screen>
 
 <para>It is a good idea to visually inspect the specs file to verify the intended 
 change was actually made.</para>
@@ -68,6 +67,8 @@ dynamic linker is something other than
 dynamic linker in the above commands. Refer back to <xref
 linkend="ch-tools-toolchaintechnotes" role=","/> if
 necessary.</para></important>
+
+<beginpage/>
 
 <caution><para>It is imperative at this point to stop and ensure that
 the basic functions (compiling and linking) of the adjusted toolchain

@@ -40,14 +40,14 @@
 </varlistentry>
 
 <varlistentry>
-<term>Binutils (&binutils-version;) - 12,272 KB:</term>
+<term>Binutils (&binutils-version;) - 11,056 KB:</term>
 <listitem>
-<para><ulink url="&gnu;binutils/"/></para>
+<para><ulink url="&kernel;linux/devel/binutils/"/></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Bison (&bison-version;) - 982 KB:</term>
+<term>Bison (&bison-version;) - 916 KB:</term>
 <listitem>
 <para><ulink url="&gnu;bison/"/></para>
 </listitem>
@@ -61,7 +61,7 @@
 </varlistentry>
 
 <varlistentry>
-<term>Coreutils (&coreutils-version;) - 4,782 KB:</term>
+<term>Coreutils (&coreutils-version;) - 4,184 KB:</term>
 <listitem>
 <para><ulink url="&gnu;coreutils/"/></para>
 </listitem>
@@ -82,7 +82,7 @@
 </varlistentry>
 
 <varlistentry>
-<term>E2fsprogs (&e2fsprogs-version;) - 3,120 KB:</term>
+<term>E2fsprogs (&e2fsprogs-version;) - 3,100 KB:</term>
 <listitem>
 <para><ulink url="&sourceforge;e2fsprogs/"/></para>
 </listitem>
@@ -96,7 +96,7 @@
 </varlistentry>
 
 <varlistentry>
-<term>File (&file-version;) - 399 KB:</term>
+<term>File (&file-version;) - 324 KB:</term>
 <listitem>
 <para><ulink url="ftp://ftp.gw.com/mirrors/pub/unix/file/"/></para>
 <note><para>File (&file-version;) may no longer be available at the
@@ -109,7 +109,7 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>Findutils (&findutils-version;) - 881 KB:</term>
+<term>Findutils (&findutils-version;) - 784 KB:</term>
 <listitem>
 <para><ulink url="&gnu;findutils/"/></para>
 </listitem>
@@ -130,21 +130,28 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>GCC (&gcc-version;) - 31,048 KB:</term>
+<term>GCC (&gcc-version;) - 26,816 KB:</term>
 <listitem>
 <para><ulink url="&gnu;gcc/"/></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Gettext (&gettext-version;) - 4,668 KB:</term>
+<term>Gettext (&gettext-version;) - 4,568 KB:</term>
 <listitem>
 <para><ulink url="&gnu;gettext/"/></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Glibc (&glibc-version;) - 13,687 KB:</term>
+<term>Glibc (&glibc-version;) - 12,924 KB:</term>
+<listitem>
+<para><ulink url="&gnu;glibc/"/></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Glibc-Linuxthreads (&glibc-version;) - 236 KB: </term>
 <listitem>
 <para><ulink url="&gnu;glibc/"/></para>
 </listitem>
@@ -165,7 +172,7 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>GRUB (&grub-version;) - 772 KB:</term>
+<term>GRUB (&grub-version;) - 768 KB:</term>
 <listitem>
 <para><ulink url="&alpha-gnu;grub/"/></para>
 </listitem>
@@ -186,7 +193,7 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>Iana-Etc (&iana-etc-version;) - 174 KB:</term>
+<term>Iana-Etc (&iana-etc-version;) - 176 KB:</term>
 <listitem>
 <para><ulink url="http://www.sethwklein.net/projects/iana-etc/downloads/"/></para>
 </listitem>
@@ -200,7 +207,7 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>IPRoute2 (&iproute2-version;) - 291 KB:</term>
+<term>IPRoute2 (&iproute2-version;) - 276 KB:</term>
 <listitem>
 <para><ulink url="http://developer.osdl.org/dev/iproute2/download/"/></para>
 </listitem>
@@ -228,28 +235,28 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>Libtool (&libtool-version;) - 1,642 KB:</term>
+<term>Libtool (&libtool-version;) - 1,604 KB:</term>
 <listitem>
 <para><ulink url="&gnu;libtool/"/></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Linux (&linux-version;) - 36,522 KB:</term>
+<term>Linux (&linux-version;) - 35,792 KB:</term>
 <listitem>
 <para><ulink url="&kernel;linux/kernel/v&linux-dl-version;/"/></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Linux-Libc-Headers (&linux-libc-headers-version;) - 2,480 KB:</term>
+<term>Linux-Libc-Headers (&linux-libc-headers-version;) - 2,476 KB:</term>
 <listitem>
 <para><ulink url="http://ep09.pld-linux.org/~mmazur/linux-libc-headers/"/></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>M4 (&m4-version;) - 300 KB:</term>
+<term>M4 (&m4-version;) - 304 KB:</term>
 <listitem>
 <para><ulink url="&gnu;m4/"/></para>
 </listitem>
@@ -263,14 +270,14 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>Man (&man-version;) - 205 KB:</term>
+<term>Man (&man-version;) - 208 KB:</term>
 <listitem>
-<para><ulink url="http://primates.ximian.com/~flucifredi/man/"/></para>
+<para><ulink url="&kernel;linux/utils/man/"/></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Man-pages (&man-pages-version;) - 1,674 KB:</term>
+<term>Man-pages (&man-pages-version;) - 1,640 KB:</term>
 <listitem>
 <para><ulink url="&kernel;linux/docs/manpages/"/></para>
 </listitem>
@@ -284,14 +291,21 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>Module-Init-Tools (&module-init-tools-version;) - 164 KB:</term>
+<term>Module-Init-Tools (&module-init-tools-version;) - 128 KB:</term>
 <listitem>
 <para><ulink url="&kernel;linux/utils/kernel/module-init-tools/"/></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Ncurses (&ncurses-version;) - 1,683 KB:</term>
+<term>Module-Init-Tools-Testsuite (&module-init-tools-version;) - 34 KB:</term>
+<listitem>
+<para><ulink url="&kernel;linux/utils/kernel/module-init-tools/"/></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Ncurses (&ncurses-version;) - 1,556 KB:</term>
 <listitem>
 <para><ulink url="ftp://invisible-island.net/ncurses/"/></para>
 </listitem>
@@ -312,14 +326,14 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>Procps (&procps-version;) - 221 KB:</term>
+<term>Procps (&procps-version;) - 224 KB:</term>
 <listitem>
 <para><ulink url="http://procps.sourceforge.net/"/></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Psmisc (&psmisc-version;) - 189 KB:</term>
+<term>Psmisc (&psmisc-version;) - 188 KB:</term>
 <listitem>
 <para><ulink url="&sourceforge;psmisc/"/></para>
 </listitem>
@@ -340,7 +354,7 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>Shadow (&shadow-version;) - 1,057 KB:</term>
+<term>Shadow (&shadow-version;) - 1,084 KB:</term>
 <listitem>
 <para><ulink url="ftp://ftp.pld.org.pl/software/shadow/"/></para>
 <note><para>Shadow (&shadow-version;) may no longer be available at the listed
@@ -373,7 +387,7 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>Tcl (&tcl-version;) - 2,672 KB:</term>
+<term>Tcl (&tcl-version;) - 2,748 KB:</term>
 <listitem>
 <para><ulink url="&sourceforge;tcl/"/></para>
 </listitem>
@@ -387,7 +401,7 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>Udev (&udev-version;) - 427 KB:</term>
+<term>Udev (&udev-version;) - 476 KB:</term>
 <listitem>
 <para><ulink url="&kernel;linux/utils/kernel/hotplug/"/></para>
 </listitem>
@@ -408,7 +422,7 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 </varlistentry>
 
 <varlistentry>
-<term>Vim (&vim-version;) - 3,650 KB:</term>
+<term>Vim (&vim-version;) - 3,620 KB:</term>
 <listitem>
 <para><ulink url="ftp://ftp.vim.org/pub/vim/unix/"/></para>
 </listitem>
@@ -430,6 +444,6 @@ url="http://www.linuxfromscratch.org/lfs/download.html#ftp"/>.</para></note>
 
 </variablelist>
 
-<para>Total size of these packages: 148 MB</para>
+<para>Total size of these packages: 146 MB</para>
 
 </sect1>

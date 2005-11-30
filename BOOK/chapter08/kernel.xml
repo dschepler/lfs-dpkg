@@ -54,7 +54,9 @@ compile the keymap into the kernel, issue the command below:</para>
 <para>Configure the kernel via a menu-driven interface. BLFS has some
 information regarding particular kernel configuration requirements of
 packages outside of LFS at <ulink
-url="&blfs-root;view/svn/longindex.html#kernel-config-index"/>:</para>
+url="&blfs-root;view/svn/longindex.html#kernel-config-index"><phrase
+condition="pdf">&blfs-root;view/svn/
+longindex.html#kernel-config-index</phrase></ulink>:</para>
 
 <screen role="nodump"><userinput>make menuconfig</userinput></screen>
 
@@ -76,6 +78,8 @@ this causes failures in the Glibc test suite. Normally, this wouldn't be
 mentioned as LFS doesn't build GCC-2.95.x. Unfortunately, the kernel
 documentation is outdated and still claims GCC-2.95.3 is the recommended
 compiler.</para></note>
+
+<beginpage/>
 
 <para>Compile the kernel image and modules:</para>
 
@@ -129,6 +133,8 @@ that was just compiled. It is a good idea to keep this file for future
 reference:</para>
 
 <screen><userinput>cp -v .config /boot/config-&linux-version;</userinput></screen>
+
+<beginpage/>
 
 <para>It is important to note that the files in the kernel source
 directory are not owned by <emphasis>root</emphasis>. Whenever a

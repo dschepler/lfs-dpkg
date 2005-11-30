@@ -16,7 +16,7 @@ way.</para>
 <segmentedlist>
 <segtitle>&buildtime;</segtitle>
 <segtitle>&diskspace;</segtitle>
-<seglistitem><seg>0.3 SBU</seg><seg>15.9 MB</seg></seglistitem>
+<seglistitem><seg>0.4 SBU</seg><seg>13.7 MB</seg></seglistitem>
 </segmentedlist>
 
 <segmentedlist>
@@ -34,19 +34,15 @@ Diffutils, GCC, Gettext, Glibc, Grep, Make, and Sed</seg></seglistitem>
 prior to building Shadow. Then add <parameter>--with-libcrack</parameter> to the
 <command>configure</command> command below.</para></note>
 
-<para>Apply a patch to fix a number of incorrect assumptions in Shadow's
-<command>configure</command> script:</para>
-
-<screen><userinput>patch -Np1 -i ../&shadow-configure-patch;</userinput></screen>
-
 <para>Prepare Shadow for compilation:</para>
 
 <screen><userinput>./configure --libdir=/lib --enable-shared</userinput></screen>
 
-<para>Disable the installation of the <command>groups</command> program and its man page, as Coreutils provides a better version:</para>
+<para>Disable the installation of the <command>groups</command> program and 
+its man page, as Coreutils provides a better version:</para>
 
 <screen><userinput>sed -i 's/groups$(EXEEXT) //' src/Makefile
-find man -name Makefile -exec sed -i '/groups/d' {} \;</userinput></screen>
+sed -i '/groups/d' man/Makefile</userinput></screen>
 
 <para>Compile the package:</para>
 
@@ -83,9 +79,11 @@ the <command>sed</command> given below:</para>
 <screen><literal>-e 's@DICTPATH.*@DICTPATH\t/lib/cracklib/pw_dict@'</literal></screen>
 </note>
 
+<beginpage/>
+
 <screen><userinput>sed -e's@#MD5_CRYPT_ENAB.no@MD5_CRYPT_ENAB yes@' \
     -e 's@/var/spool/mail@/var/mail@' \
-    etc/login.defs &gt; /etc/login.defs</userinput></screen>
+    etc/login.defs.linux &gt; /etc/login.defs</userinput></screen>
 
 <para>Move a misplaced program to its proper location:</para>
 
@@ -156,8 +154,8 @@ by running:</para>
 <segtitle>Installed libraries</segtitle>
 <seglistitem><seg>chage, chfn, chpasswd, chsh, expiry, faillog, gpasswd,
 groupadd, groupdel, groupmod, grpck, grpconv, grpunconv, lastlog, login,
-logoutd, newgrp, newusers, passwd, pwck, pwconv, pwunconv, sg (link to newgrp),
-su, useradd, userdel, usermod, vigr (link to vipw), and vipw</seg>
+logoutd, mkpasswd, newgrp, newusers, passwd, pwck, pwconv, pwunconv, sg
+(link to newgrp), useradd, userdel, usermod, vigr (link to vipw), and vipw</seg>
 <seg>libshadow.[a,so]</seg>
 </seglistitem>
 </segmentedlist>
@@ -296,6 +294,14 @@ from <filename>/etc/gshadow</filename> and then deletes the latter</para>
 <listitem>
 <para>Is a daemon used to enforce restrictions on log-on time and ports</para>
 <indexterm zone="ch-system-shadow logoutd"><primary sortas="b-logoutd">logoutd</primary></indexterm>
+</listitem>
+</varlistentry>
+
+<varlistentry id="mkpasswd">
+<term><command>mkpasswd</command></term>
+<listitem>
+<para>Generates random passwords</para>
+<indexterm zone="ch-system-shadow mkpasswd"><primary sortas="b-mkpasswd">mkpasswd</primary></indexterm>
 </listitem>
 </varlistentry>
 

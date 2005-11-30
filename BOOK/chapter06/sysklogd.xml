@@ -71,8 +71,9 @@ local2.* -/var/log/boot.log
 # End /etc/syslog.conf</literal>
 EOF</userinput></screen>
 
-</sect2>
+<beginpage/>
 
+</sect2>
 
 <sect2 id="contents-sysklogd" role="content"><title>Contents of Sysklogd</title>
 

@@ -10,7 +10,7 @@
 <indexterm zone="ch-system-glibc"><primary sortas="a-Glibc">Glibc</primary></indexterm>
 
 <sect2 role="package"><title/>
-<para>The Glibc package contains the main C library. This library provides
+<para>The Glibc package contains the main C library. This library provides 
 the basic routines for allocating memory, searching directories, opening and
 closing files, reading and writing files, string handling, pattern matching,
 arithmetic, and so on.</para>
@@ -18,7 +18,7 @@ arithmetic, and so on.</para>
 <segmentedlist>
 <segtitle>&buildtime;</segtitle>
 <segtitle>&diskspace;</segtitle>
-<seglistitem><seg>16.7 SBU</seg><seg>500 MB</seg></seglistitem>
+<seglistitem><seg>12.3 SBU</seg><seg>476 MB</seg></seglistitem>
 </segmentedlist>
 
 <segmentedlist>
@@ -40,12 +40,41 @@ which don't have one, or whose implementation cannot convert from/to Unicode.
 convert from/to Unicode, therefore libiconv is not required on an LFS
 system.</para></note>
 
+<para>This package is known to have issues when its default
+optimization flags (including the <parameter>-march</parameter> and
+<parameter>-mcpu</parameter> options) are changed. If any environment
+variables that override default optimizations have been defined, such
+as <envar>CFLAGS</envar> and <envar>CXXFLAGS</envar>,
+unset them when building Glibc.</para>
+
 <para>The Glibc build system is self-contained and will install
 perfectly, even though the compiler specs file and linker are still
 pointing at <filename class="directory">/tools</filename>. The specs
 and linker cannot be adjusted before the Glibc install because the
 Glibc autoconf tests would give false results and defeat the goal
 of achieving a clean build.</para>
+
+<para>The linuxthreads tarball contains the man pages for the
+threading libraries installed by Glibc.  Unpack the tarball from
+within the Glibc source directory:</para>
+
+<screen><userinput>tar -xjvf ../glibc-linuxthreads-&glibc-version;.tar.bz2</userinput></screen>
+
+<para>In certain rare circumstances, Glibc can segfault when no standard search
+directories exist.  The following patch prevents this:</para> 
+
+<screen><userinput>patch -Np1 -i ../&glibc-rtld-patch;</userinput></screen>
+
+<para>Glibc has two tests which fail when the running kernel is 2.6.11.x The
+problem has been determined to be with the tests themselves, not with the libc
+nor the kernel. This patch fixes the problem:</para>
+
+<screen><userinput>patch -Np1 -i ../&glibc-testfix-patch;</userinput></screen>
+
+<para>Apply the following patch to fix a bug in Glibc that can prevent some
+programs (including OpenOffice.org) from running:</para>
+
+<screen><userinput>patch -Np1 -i ../&glibc-tls_assert-patch;</userinput></screen>
 
 <para>The Glibc documentation recommends building Glibc outside of the source
 directory in a dedicated build directory:</para>
@@ -84,20 +113,14 @@ circumstance.</para></important>
 <screen><userinput>make -k check &gt;glibc-check-log 2&gt;&amp;1
 grep Error glibc-check-log</userinput></screen>
 
-<para>On at least i686 you can expect to see failures in the <emphasis>test-double
-</emphasis> and <emphasis>test-idouble</emphasis> math tests with
-gcc-&gcc-version;, as well as an expected (ignored) failure in <emphasis>
-posix/annexc</emphasis>.  These two failures in the math tests appear to be
-harmless.</para>
-
 <para>The Glibc test suite is highly dependent on certain functions of
-the host system, in particular the kernel. In certain circumstances,
+the host system, in particular the kernel. In general, the Glibc test
+suite is always expected to pass. However, in certain circumstances,
 some failures are unavoidable. This is a list of the most common
 issues:</para>
 
 <itemizedlist>
-<listitem><para>The <emphasis>math</emphasis> tests sometimes fail in other tests
-when running
+<listitem><para>The <emphasis>math</emphasis> tests sometimes fail when running
 on systems where the CPU is not a relatively new genuine Intel or authentic AMD.
 Certain optimization settings are also known to be a factor here.</para></listitem>
 
@@ -170,6 +193,17 @@ installed only for GCC and Gettext tests to pass, and the
 properly in them. Various attempts to circumvent these restrictions are
 documented in internationalization-related hints.</para>
 
+<para>Build the linuxthreads man pages, which are a great reference
+on the threading API (applicable to NPTL as well):</para>
+
+<screen><userinput>make -C ../glibc-&glibc-version;/linuxthreads/man</userinput></screen>
+
+<para>Install these pages:</para>
+
+<screen><userinput>make -C ../glibc-&glibc-version;/linuxthreads/man install</userinput></screen>
+
+<beginpage/>
+
 </sect2>
 
 <sect2 id="conf-glibc" role="configuration"><title>Configuring Glibc</title>
@@ -232,8 +266,9 @@ mode.</para></listitem>
 </varlistentry>
 </variablelist>
 
-</sect2>
+<beginpage/>
 
+</sect2>
 
 <sect2 id="conf-ld" role="configuration">
 <title>Configuring Dynamic Loader</title>
@@ -277,7 +312,7 @@ getent, iconv, iconvconfig, ldconfig, ldd, lddlibc4, locale,
 localedef, mtrace, nscd, nscd_nischeck, pcprofiledump, pt_chown, rpcgen,
 rpcinfo, sln, sprof, tzselect, xtrace, zdump, and zic</seg>
 <seg>ld.so, libBrokenLocale.[a,so],
-libSegFault.so, libanl.[a,so], libbsd-compat.a, libc.[a,so],
+libSegFault.so, libanl.[a,so], libbsd-compat.a, libc.[a,so], 
 libcrypt.[a,so], libdl.[a,so], libg.a, libieee.a, libm.[a,so], libmcheck.a,
 libmemusage.so, libnsl.a, libnss_compat.so, libnss_dns.so, libnss_files.so,
 libnss_hesiod.so, libnss_nis.so, libnss_nisplus.so, libpcprofile.so,

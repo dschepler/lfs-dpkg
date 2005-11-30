@@ -30,6 +30,10 @@ Diffutils, Gawk, GCC, Gettext, Glibc, Grep, Make, Sed, and Texinfo</seg></seglis
 <sect2 role="installation">
 <title>Installation of E2fsprogs</title>
 
+<para>Fix a compilation error in E2fsprogs' testsuite:</para>
+
+<screen><userinput>sed -i -e 's/-DTEST/$(ALL_CFLAGS) &amp;/' lib/e2p/Makefile.in</userinput></screen>
+
 <para>It is recommended that E2fsprogs be built in a subdirectory of the source tree:
 </para>
 
@@ -80,6 +84,8 @@ information regarding EVMS.</para></listitem>
 
 <para>To test the results, issue:
 <userinput>make check</userinput>.</para>
+
+<beginpage/>
 
 <para>Install the binaries and documentation:</para>
 

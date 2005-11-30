@@ -72,6 +72,8 @@ newly-created directories:</para>
 <screen><userinput>mount -vt devpts -o gid=4,mode=620 none /dev/pts
 mount -vt tmpfs none /dev/shm</userinput></screen>
 
+<beginpage/>
+
 <para>The <command>mount</command> commands executed above may result
 in the following warning message:</para>
 

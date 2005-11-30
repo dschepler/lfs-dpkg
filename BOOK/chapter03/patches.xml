@@ -30,9 +30,9 @@ needed to build an LFS system:</para>
 </varlistentry>
 
 <varlistentry>
-<term>Bzip2 Bzgrep Security Fixes Patch - 1 KB:</term>
+<term>Binutils Build From Host Running Gcc4 Patch - 2 KB:</term>
 <listitem>
-<para><ulink url="&patches-root;&bzip2-bzgrep-patch;"/></para>
+<para><ulink url="&patches-root;&binutils-gcc4-patch;"/></para>
 </listitem>
 </varlistentry>
 
@@ -40,6 +40,13 @@ needed to build an LFS system:</para>
 <term>Bzip2 Documentation Patch - 1 KB:</term>
 <listitem>
 <para><ulink url="&patches-root;&bzip2-docs-patch;"/></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Bzip2 Bzgrep Security Fixes Patch - 1 KB:</term>
+<listitem>
+<para><ulink url="&patches-root;&bzip2-bzgrep-patch;"/></para>
 </listitem>
 </varlistentry>
 
@@ -72,9 +79,16 @@ needed to build an LFS system:</para>
 </varlistentry>
 
 <varlistentry>
-<term>Gawk Segfault Patch - 1 KB:</term>
+<term> GCC Linkonce Patch - 12 KB:</term>
 <listitem>
-<para><ulink url="&patches-root;&gawk-segfault-patch;"/></para>
+<para><ulink url="&patches-root;&gcc-linkonce-patch;"/></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>GCC No-Fixincludes Patch - 1 KB:</term>
+<listitem>
+<para><ulink url="&patches-root;&gcc-no_fixincludes-patch;"/></para>
 </listitem>
 </varlistentry>
 
@@ -86,22 +100,37 @@ needed to build an LFS system:</para>
 </varlistentry>
 
 <varlistentry>
+<term>Glibc Rtld Search Dirs Patch - 1 KB:</term>
+<listitem>
+<para><ulink url="&patches-root;&glibc-rtld-patch;"/></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Glibc Fix Testsuite Patch - 1 KB:</term>
+<listitem>
+<para><ulink url="&patches-root;&glibc-testfix-patch;"/></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Glibc TLS Assertion Patch - 6 KB:</term>
+<listitem>
+<para><ulink url="&patches-root;&glibc-tls_assert-patch;"/></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
 <term>Gzip Security Patch - 2 KB:</term><listitem>
 <para><ulink url="&patches-root;&gzip-security_fix-patch;"/></para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>Kbd GCC-4.x Fix Patch - 1 KB:</term>
+<term>Inetutils Kernel Headers Patch - 1 KB:</term>
 <listitem>
-<para><ulink url="&patches-root;&kbd-gcc4_fixes-patch;"/></para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>Inetutils GCC-4.x Fix Patch - 2 KB:</term>
-<listitem>
-<para><ulink url="&patches-root;&inetutils-gcc4_fixes-patch;"/></para>
+<para><ulink url="&patches-root;&inetutils-kernel_headers-patch;"/></para>
+<beginpage/>
 </listitem>
 </varlistentry>
 
@@ -113,7 +142,7 @@ needed to build an LFS system:</para>
 </varlistentry>
 
 <varlistentry>
-<term>Mktemp Tempfile Patch - 4 KB:</term>
+<term>Mktemp Tempfile Patch - 3 KB:</term>
 <listitem>
 <para><ulink url="&patches-root;&mktemp-tempfile-patch;"/></para>
 </listitem>
@@ -134,23 +163,9 @@ needed to build an LFS system:</para>
 </varlistentry>
 
 <varlistentry>
-<term>Shadow Configure Script Patch - 1KB:</term>
-<listitem>
-<para><ulink url="&patches-root;&shadow-configure-patch;"/></para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
 <term>Sysklogd Fixes Patch - 27 KB:</term>
 <listitem>
 <para><ulink url="&patches-root;&sysklogd-fixes-patch;"/></para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>Tar GCC-4.x Fix Patch - 1 KB:</term>
-<listitem>
-<para><ulink url="&patches-root;&tar-gcc4_fix-patch;"/></para>
 </listitem>
 </varlistentry>
 
@@ -171,6 +186,18 @@ needed to build an LFS system:</para>
 <varlistentry>
 <term>Util-linux Cramfs Patch - 3 KB:</term> <listitem>
 <para><ulink url="&patches-root;&util-linux-cramfs-patch;"/></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Util-linux Umount Patch - 1 KB:</term> <listitem>
+<para><ulink url="&patches-root;&util-linux-umount-patch;"/></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Vim Security Patch - 8 KB:</term><listitem>
+<para><ulink url="&patches-root;&vim-security_fix-patch;"/></para>
 </listitem>
 </varlistentry>
 

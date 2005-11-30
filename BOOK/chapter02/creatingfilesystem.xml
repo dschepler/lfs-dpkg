@@ -13,7 +13,8 @@ second extended file system (ext2), but with newer high-capacity
 hard disks, journaling file systems are becoming increasingly
 popular.  We will create an ext2 file system.  Build instructions for other file
 systems can be found at <ulink
-url="&blfs-root;view/svn/postlfs/filesystems.html"/>.</para>
+url="&blfs-root;view/svn/postlfs/filesystems.html"><phrase 
+condition="pdf">&blfs-root;view/svn/ postlfs/filesystems.html</phrase></ulink>.</para>
 
 <para>To create an ext2 file system on the LFS partition, run the following:</para>
 

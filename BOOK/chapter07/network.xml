@@ -73,6 +73,8 @@ cable-based Internet Service Providers (ISPs). In this example (PREFIX=24), the
 netmask is 255.255.255.0. Adjust the <envar>PREFIX</envar> variable according to
 your specific subnet.</para>
 
+<beginpage/>
+
 </sect2>
 
 <sect2 id="resolv.conf">

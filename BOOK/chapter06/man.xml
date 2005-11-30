@@ -15,7 +15,7 @@
 <segmentedlist>
 <segtitle>&buildtime;</segtitle>
 <segtitle>&diskspace;</segtitle>
-<seglistitem><seg>0.1 SBU</seg><seg>1.3 MB</seg></seglistitem>
+<seglistitem><seg>0.1 SBU</seg><seg>2.9 MB</seg></seglistitem>
 </segmentedlist>
 
 <segmentedlist>
@@ -73,6 +73,8 @@ adding the <parameter>-c</parameter> option to the <envar>NROFF</envar>
 variable. If you use multiple terminal types for one computer it may be better
 to selectively add the <envar>GROFF_NO_SGR</envar> environment variable for the
 terminals that do not support SGR.</para></note>
+
+<beginpage/>
 
 <para>If the character set of the locale uses 8-bit characters, search for the
 line beginning with <quote>NROFF</quote> in <filename>/etc/man.conf</filename>,

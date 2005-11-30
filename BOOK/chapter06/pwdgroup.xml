@@ -29,7 +29,7 @@ EOF</userinput></screen>
 <para>The actual password for <emphasis>root</emphasis> (the <quote>x</quote>
 used here is just a placeholder) will be set later.</para>
 
-<para>Create the <filename>/etc/group</filename> file by running the following
+<para>Create the <filename>/etc/group</filename> file by running the following 
 command:</para>
 
 <screen><userinput>cat &gt; /etc/group &lt;&lt; "EOF"
@@ -77,11 +77,13 @@ executed. To ensure the use of the newly compiled binaries as soon as they are
 installed, the <parameter>+h</parameter> directive will be used for the duration
 of this chapter.</para>
 
+<beginpage/>
+
 <para>The <command>login</command>, <command>agetty</command>, and
 <command>init</command> programs (and others) use a number of log
 files to record information such as who was logged into the system and
 when. However, these programs will not write to the log files if they
-do not already exist. Initialize the log files and give them
+do not already exist. Initialize the log files and give them 
 proper permissions:</para>
 
 <screen><userinput>touch /var/run/utmp /var/log/{btmp,lastlog,wtmp}

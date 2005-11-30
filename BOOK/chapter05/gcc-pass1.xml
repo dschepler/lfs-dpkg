@@ -27,6 +27,13 @@
 <sect2 role="installation">
 <title>Installation of GCC</title>
 
+<para>This package is known to have issues when its default
+optimization flags (including the <parameter>-march</parameter> and
+<parameter>-mcpu</parameter> options) are changed. If any environment
+variables that override default optimizations have been defined, such
+as <envar>CFLAGS</envar> and <envar>CXXFLAGS</envar>,
+unset them when building GCC.</para>
+
 <para>The GCC documentation recommends building GCC outside of the
 source directory in a dedicated build directory:</para>
 
@@ -36,9 +43,9 @@ cd ../gcc-build</userinput></screen>
 <para>Prepare GCC for compilation:</para>
 
 <screen><userinput>../gcc-&gcc-version;/configure --prefix=/tools \
-    --with-local-prefix=/tools --disable-nls --enable-shared \
-    --enable-languages=c</userinput></screen>
-
+    --libexecdir=/tools/lib --with-local-prefix=/tools \
+    --disable-nls --enable-shared --enable-languages=c</userinput></screen>
+    
 <para>The meaning of the configure options:</para>
 
 <variablelist>
@@ -71,6 +78,8 @@ results.</para></listitem>
 <para>Continue with compiling the package:</para>
 
 <screen><userinput>make bootstrap</userinput></screen>
+
+<beginpage/>
 
 <para>The meaning of the make parameters:</para>
 

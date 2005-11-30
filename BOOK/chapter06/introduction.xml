@@ -31,13 +31,11 @@ refuses to compile when using optimization, try to compile it without
 optimization and see if that fixes the problem. Even if the package
 does compile when using optimization, there is the risk it may have
 been compiled incorrectly because of the complex interactions between
-the code and build tools.  Also note that the <option>-march</option>
-and <option>-mtune</option> options may cause problems with the
-toolchain packages (Binutils, GCC and Glibc).  The small potential
-gains achieved in using compiler optimizations are often outweighed by
-the risks. First-time builders of LFS are encouraged to build without
-custom optimizations.  The subsequent system will still run very fast
-and be stable at the same time.</para>
+the code and build tools.  The small potential gains achieved in using
+compiler optimizations are often outweighed by the risks. First-time
+builders of LFS are encouraged to build without custom optimizations.
+The subsequent system will still run very fast and be stable at the
+same time.</para>
 
 <para>The order that packages are installed in this chapter needs to
 be strictly followed to ensure that no program accidentally acquires a
@@ -61,7 +59,8 @@ the package installs.</para>
 <para>To keep track of which package installs particular files, a package
 manager can be used. For a general overview of different styles of package
 managers, please refer to <ulink
-url="&blfs-root;view/svn/introduction/important.html"/>.
+url="&blfs-root;view/svn/introduction/important.html"><phrase 
+condition="pdf">&blfs-root;view/svn/ introduction/important.html</phrase></ulink>.
 For a package management method specifically geared towards LFS, we recommend <ulink
 url="&hints-root;more_control_and_pkg_man.txt"/>.</para>
 

@@ -27,6 +27,23 @@
 <sect2 role="installation">
 <title>Installation of Glibc</title>
 
+<para>This package is known to have issues when its default
+optimization flags (including the <parameter>-march</parameter> and
+<parameter>-mcpu</parameter> options) are changed. If any environment
+variables that override default optimizations have been defined, such
+as <envar>CFLAGS</envar> and <envar>CXXFLAGS</envar>,
+unset them when building Glibc.</para>
+
+<para>It should be noted that compiling Glibc in any way other than
+the method suggested in this book puts the stability of the system at
+risk.</para>
+
+<para>Glibc has two tests which fail when the running kernel is 2.6.11 or later.
+The problem has been determined to be with the tests themselves, not with the C
+library or the kernel. If you plan to run the testsuite apply this patch:</para>
+
+<screen><userinput>patch -Np1 -i ../&glibc-testfix-patch;</userinput></screen>
+
 <para>The Glibc documentation recommends building Glibc outside of the source
 directory in a dedicated build directory:</para>
 
@@ -60,7 +77,7 @@ library.</para></listitem>
 <varlistentry>
 <term><parameter>--enable-kernel=2.6.0</parameter></term>
 <listitem><para>This tells Glibc to compile the library with support
-for 2.6.x Linux kernels.</para></listitem>
+for 2.6.x Linux kernels.</para><beginpage/></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -137,6 +154,8 @@ reissuing the <command>make check</command> command. The test suite should pick 
 off and continue. This stop-start sequence can be circumvented by
 issuing a <command>make -k check</command> command. If using this option, be sure to log the
 output so that the log file can be examined for failures later.</para>
+
+<beginpage/>
 
 <para>The install stage of Glibc will issue a harmless warning at the
 end about the absence of <filename>/tools/etc/ld.so.conf</filename>. 

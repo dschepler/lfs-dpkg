@@ -44,6 +44,11 @@ class="directory">/etc</filename>:</para>
 
 <screen><userinput>echo '#define SYS_VIMRC_FILE "/etc/vimrc"' &gt;&gt; src/feature.h</userinput></screen>
 
+<para>Vim has two known security vulnerabilities that have already been
+addressed upstream.  The following patch fixes the problems:</para>
+
+<screen><userinput>patch -Np1 -i ../&vim-security_fix-patch;</userinput></screen>
+
 <para>Now prepare Vim for compilation:</para>
 
 <screen><userinput>./configure --prefix=/usr --enable-multibyte</userinput></screen>
@@ -73,25 +78,7 @@ redirecting the output to a log file.</para>
 
 <para>Install the package:</para>
 
-<screen><userinput>make HELPSUBLOC=/usr/share/doc/vim-&vim-version; install</userinput></screen>
-
-<para>The meaning of the make option:</para>
-
-<variablelist>
-  <varlistentry>
-    <term><parameter>HELPSUBLOC=/usr/share/doc/vim-&vim-version;</parameter>
-    </term>
-    <listitem>
-      <para>This defines the directory that Vim's documentation will be
-        installed in.  By default, Vim's documentation is installed in the
-        <filename class="directory">/usr/share/vim</filename> hierarchy. Other
-        packages install their documentation in the
-        <filename class="directory">/usr/share/doc</filename> hierarchy, so the
-        <parameter>HELPSUBLOC</parameter> option is used to ensure consistency.
-      </para>
-    </listitem>
-  </varlistentry>
-</variablelist>
+<screen><userinput>make install</userinput></screen>
 
 <para>Many users are used to using <command>vi</command> instead of
 <command>vim</command>. To allow execution of <command>vim</command>
@@ -137,7 +124,7 @@ EOF</userinput></screen>
 
 <para>The <parameter>set nocompatible</parameter> makes
 <command>vim</command> behave in a more useful way (the default) than
-the vi-compatible manner. Remove the <quote>no</quote> to keep the
+the vi-compatible manner. Remove the <quote>no</quote> to keep the 
 old <command>vi</command> behavior. The <parameter>set
 backspace=2</parameter> allows backspacing over line breaks,
 autoindents, and the start of insert. The <parameter>syntax
@@ -159,9 +146,9 @@ running the following command:</para>
 
 <segmentedlist>
 <segtitle>Installed programs</segtitle>
-<seglistitem><seg>efm_filter.pl, efm_perl.pl, ex (link to vim), less.sh, mve.awk,
-pltags.pl, ref, rview (link to vim), rvim (link to vim), shtags.pl, tcltags, vi (link to vim),
-view (link to vim), vim, vim132, vim2html.pl, vimdiff (link to vim), vimm, vimspell.sh,
+<seglistitem><seg>efm_filter.pl, efm_perl.pl, ex (link to vim), less.sh, mve.awk, 
+pltags.pl, ref, rview (link to vim), rvim (link to vim), shtags.pl, tcltags, vi (link to vim), 
+view (link to vim), vim, vim132, vim2html.pl, vimdiff (link to vim), vimm, vimspell.sh, 
 vimtutor, and xxd</seg></seglistitem>
 </segmentedlist>
 
