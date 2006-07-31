@@ -28,6 +28,10 @@
 <!ENTITY coreutils-uname-patch-size "4.6 KB">
 
 
+<!ENTITY db-trap-patch "db-&db-version;-trap-1.patch">
+<!ENTITY db-trap-patch-md5 "fb8cd6be418eac24b1916c53080ce1f3">
+<!ENTITY db-trap-patch-size "1.7 KB">
+
 <!ENTITY diffutils-i18n-patch "diffutils-&diffutils-version;-i18n-1.patch">
 <!ENTITY diffutils-i18n-patch-md5 "c8d481223db274a33b121fb8c25af9f7">
 <!ENTITY diffutils-i18n-patch-size "18 KB">
@@ -93,6 +97,10 @@
 <!ENTITY linux-utf8-patch "linux-&linux-version;-utf8_input-1.patch">
 <!ENTITY linux-utf8-patch-md5 "d67b53e1e99c782bd28d879e11ee16c3">
 <!ENTITY linux-utf8-patch-size "11 KB">
+
+<!ENTITY linux-inotify-patch "linux-libc-headers-2.6.12.0-inotify-2.patch">
+<!ENTITY linux-inotify-patch-md5 "e6976f61b7d74b7f714830ee0ac47bcd">
+<!ENTITY linux-inotify-patch-size "5.7 KB">
 
 
 <!ENTITY mktemp-tempfile-patch "mktemp-&mktemp-version;-add_tempfile-3.patch">

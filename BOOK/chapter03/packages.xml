@@ -317,7 +317,6 @@
         <para>Home page: <ulink url="&linux-home;"/></para>
         <para>Download: <ulink url="&linux-url;"/></para>
         <para>MD5 sum: <literal>&linux-md5;</literal></para>
-
         <note>
           <para>The Linux kernel is updated relatively often, many times due to
           discoveries of security vulnerabilities.  The latest available
