@@ -59,7 +59,7 @@ mount -v -t ext3 /dev/<replaceable>&lt;yyy&gt;</replaceable> $LFS/usr</userinput
 <screen role="nodump"><userinput>/sbin/swapon -v /dev/<replaceable>&lt;zzz&gt;</replaceable></userinput></screen>
 
   <para>Replace <replaceable>&lt;zzz&gt;</replaceable> with the name of the
-  <systemitem class="filesystem">swap</systemitem> partition.</para>
+  swap partition.</para>
 
   <para>Now that there is an established place to work, it is time to
   download the packages.</para>

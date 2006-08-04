@@ -59,10 +59,10 @@ EOF</userinput></screen>
      incorrect by default when every distro does this right. -->
 
     <note>
-      <para>Although the examples in this book work properly, be aware
-      that Udev does not recognize the backslash for line continuation.
-      If modifying Udev rules with an editor, be sure to leave each rule
-      on one physical line.</para>
+      <para>Although the examples in this book work properly, be aware that
+      <application>udev</application> does not recognize the backslash for line
+      continuation.  If modifying <application>udev</application> rules with an
+      editor, be sure to leave each rule on one physical line.</para>
     </note>
 
     <para>If you are going to use the bus position as a key, create
@@ -74,6 +74,8 @@ EOF</userinput></screen>
 ACTION=="add", SUBSYSTEM=="net", BUS=="<replaceable>pci</replaceable>", ID=="<replaceable>0000:00:0d.0</replaceable>", \
     NAME="<replaceable>intel</replaceable>"</literal>
 EOF</userinput></screen>
+
+    <beginpage/>
 
     <para>These rules will always rename the network cards to
     <quote>realtek</quote> and <quote>intel</quote>, independently
@@ -149,6 +151,8 @@ EOF</userinput></screen>
     directory allows other IP assignment methods. This is commonly used for
     Dynamic Host Configuration Protocol (DHCP), which is addressed in the
     BLFS book.</para>
+
+    <beginpage/>
 
     <para>The <envar>GATEWAY</envar> variable should contain the default
     gateway IP address, if one is present. If not, then comment out the

@@ -88,6 +88,8 @@
     test would be carried out against the wrong Glibc. We can force the script
     to check the Glibc we have just installed with the following:</para>
 
+    <beginpage/>
+
 <screen><userinput>sed -i \
 's|libs -o|libs -L/usr/lib -Wl,-dynamic-linker=/lib/ld-linux.so.2 -o|' \
         scripts/test-installation.pl</userinput></screen>
@@ -162,6 +164,8 @@ grep Error glibc-check-log</userinput></screen>
       </listitem>
     </itemizedlist>
 
+    <beginpage/>
+
     <para>Though it is a harmless message, the install stage of Glibc will
     complain about the absence of <filename>/etc/ld.so.conf</filename>.
     Prevent this warning with:</para>
@@ -224,6 +228,8 @@ localedef -i ja_JP -f EUC-JP ja_JP</userinput></screen>
     in the unlikely case if you need them.</para>
     <!-- The Live CD patches the localedata/SUPPORTED file instead of
     running localedef, the results are equivalent -->
+
+    <beginpage/>
 
   </sect2>
 
@@ -301,6 +307,8 @@ EOF</userinput></screen>
       </varlistentry>
 
     </variablelist>
+
+    <beginpage/>
 
   </sect2>
 

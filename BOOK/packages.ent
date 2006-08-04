@@ -7,12 +7,12 @@
      Allowed deviation in disk usage : 2% -->
 
 
-<!ENTITY autoconf-version "2.60">
-<!ENTITY autoconf-size "995 KB">
+<!ENTITY autoconf-version "2.59">
+<!ENTITY autoconf-size "904 KB">
 <!ENTITY autoconf-url "&gnu;autoconf/autoconf-&autoconf-version;.tar.bz2">
-<!ENTITY autoconf-md5 "019609c29d0cbd9110c38480304aafc8">
+<!ENTITY autoconf-md5 "1ee40f7a676b3cfdc0e3f7cd81551b5f">
 <!ENTITY autoconf-home "&gnu-software;autoconf/">
-<!ENTITY autoconf-ch6-du "8.1 MB">
+<!ENTITY autoconf-ch6-du "7.2 MB">
 <!ENTITY autoconf-ch6-sbu "less than 0.1 SBU">
 
 <!ENTITY automake-version "1.9.6">
@@ -38,29 +38,29 @@
 <!ENTITY bash-doc-md5 "a8c517c6a7b21b8b855190399c5935ae">
 <!ENTITY bash-doc-home " ">
 
-<!ENTITY binutils-version "2.17">
-<!ENTITY binutils-size "13,472 KB">
+<!ENTITY binutils-version "2.16.1">
+<!ENTITY binutils-size "12,256 KB">
 <!ENTITY binutils-url "&gnu;binutils/binutils-&binutils-version;.tar.bz2">
-<!ENTITY binutils-md5 "e26e2e06b6e4bf3acf1dc8688a94c0d1">
+<!ENTITY binutils-md5 "6a9d529efb285071dad10e1f3d2b2967">
 <!ENTITY binutils-home "http://sources.redhat.com/binutils/">
-<!ENTITY binutils-ch5p1-du "213 MB">
+<!ENTITY binutils-ch5p1-du "189 MB">
 <!ENTITY binutils-ch5p1-sbu "1 SBU">
-<!ENTITY binutils-ch5p2-du "177 MB">
-<!ENTITY binutils-ch5p2-sbu "1 SBU">
-<!ENTITY binutils-ch6-du "186 MB testsuite included">
-<!ENTITY binutils-ch6-sbu "1.7 SBU testsuite included">
+<!ENTITY binutils-ch5p2-du "154 MB">
+<!ENTITY binutils-ch5p2-sbu "1.1 SBU">
+<!ENTITY binutils-ch6-du "172 MB testsuite included">
+<!ENTITY binutils-ch6-sbu "1.5 SBU testsuite included">
 
-<!ENTITY bison-version "2.3">
-<!ENTITY bison-size "1,055 KB">
+<!ENTITY bison-version "2.2">
+<!ENTITY bison-size "1,052 KB">
 <!ENTITY bison-url "&gnu;bison/bison-&bison-version;.tar.bz2">
-<!ENTITY bison-md5 "c18640c6ec31a169d351e3117ecce3ec">
+<!ENTITY bison-md5 "e345a5d021db850f06ce49eba78af027">
 <!ENTITY bison-home "&gnu-software;bison/">
 <!--
 <!ENTITY bison-ch5-du "">
-<!ENTITY bison-ch5-sbu "">
+<!ENTITY bison-ch6-sbu "">
 -->
-<!ENTITY bison-ch6-du "12.3 MB">
-<!ENTITY bison-ch6-sbu "0.2 SBU">
+<!ENTITY bison-ch6-du "11.9 MB">
+<!ENTITY bison-ch6-sbu "0.6 SBU">
 
 <!ENTITY bzip2-version "1.0.3">
 <!ENTITY bzip2-size "654 KB">
@@ -72,15 +72,15 @@
 <!ENTITY bzip2-ch6-du "5.3 MB">
 <!ENTITY bzip2-ch6-sbu "less than 0.1 SBU">
 
-<!ENTITY coreutils-version "5.97">
-<!ENTITY coreutils-size "4,946 KB">
+<!ENTITY coreutils-version "5.96">
+<!ENTITY coreutils-size "4,948 KB">
 <!ENTITY coreutils-url "&gnu;coreutils/coreutils-&coreutils-version;.tar.bz2">
-<!ENTITY coreutils-md5 "1537379b6264a1def443713988a78020">
+<!ENTITY coreutils-md5 "bf55d069d82128fd754a090ce8b5acff">
 <!ENTITY coreutils-home "&gnu-software;coreutils/">
-<!ENTITY coreutils-ch5-du "67.6 MB">
-<!ENTITY coreutils-ch5-sbu "0.5 SBU">
-<!ENTITY coreutils-ch6-du "68.9 MB">
-<!ENTITY coreutils-ch6-sbu "0.5 SBU">
+<!ENTITY coreutils-ch5-du "56.1 MB">
+<!ENTITY coreutils-ch5-sbu "0.6 SBU">
+<!ENTITY coreutils-ch6-du "58.3 MB">
+<!ENTITY coreutils-ch6-sbu "1.1 SBU">
 
 <!ENTITY db-version "4.4.20">
 <!ENTITY db-size "7,767 KB">
@@ -108,9 +108,6 @@
 <!ENTITY diffutils-ch6-du "6.3 MB">
 <!ENTITY diffutils-ch6-sbu "0.1 SBU">
 
-<!-- NOTE: When updating e2fsprogs, remember to check the list
-     of acceptable features that can be shown by debugfs in
-     chapter02/creatingfilesystem.xml -->
 <!ENTITY e2fsprogs-version "1.39">
 <!ENTITY e2fsprogs-size "3,616 KB">
 <!ENTITY e2fsprogs-url "&sourceforge;e2fsprogs/e2fsprogs-&e2fsprogs-version;.tar.gz?download">
@@ -168,22 +165,22 @@
 <!ENTITY gawk-ch6-du "18.2 MB">
 <!ENTITY gawk-ch6-sbu "0.2 SBU">
 
-<!ENTITY gcc-version "4.1.1">
-<!ENTITY gcc-size "38,254 KB">
+<!ENTITY gcc-version "4.0.3">
+<!ENTITY gcc-size "32,208 KB">
 <!ENTITY gcc-url "&gnu;gcc/gcc-&gcc-version;/gcc-&gcc-version;.tar.bz2">
-<!ENTITY gcc-md5 "ad9f97a4d04982ccf4fd67cb464879f3">
+<!ENTITY gcc-md5 "6ff1af12c53cbb3f79b27f2d6a9a3d50">
 <!ENTITY gcc-home "http://gcc.gnu.org/">
-<!ENTITY gcc-ch5p1-du "655 MB">
-<!ENTITY gcc-ch5p1-sbu "9.2 SBU">
-<!ENTITY gcc-ch5p2-du "553 MB">
+<!ENTITY gcc-ch5p1-du "514 MB">
+<!ENTITY gcc-ch5p1-sbu "8.2 SBU">
+<!ENTITY gcc-ch5p2-du "443 MB">
 <!ENTITY gcc-ch5p2-sbu "4.2 SBU">
-<!ENTITY gcc-ch6-du "681 MB testsuite included">
+<!ENTITY gcc-ch6-du "566 MB testsuite included">
 <!ENTITY gcc-ch6-sbu "22 SBU testsuite included">
 
-<!ENTITY gettext-version "0.15">
-<!ENTITY gettext-size "7,893 KB">
+<!ENTITY gettext-version "0.14.5">
+<!ENTITY gettext-size "6,940 KB">
 <!ENTITY gettext-url "&gnu;gettext/gettext-&gettext-version;.tar.gz">
-<!ENTITY gettext-md5 "16bc6e4d37ac3d07495f737a2349a22b">
+<!ENTITY gettext-md5 "e2f6581626a22a0de66dce1d81d00de3">
 <!ENTITY gettext-home "&gnu-software;gettext/">
 <!ENTITY gettext-ch5-du "43 MB">
 <!ENTITY gettext-ch5-sbu "0.4 SBU">
@@ -281,10 +278,10 @@
 <!ENTITY less-ch6-du "2.6 MB">
 <!ENTITY less-ch6-sbu "0.1 SBU">
 
-<!ENTITY lfs-bootscripts-version "20060712">
+<!ENTITY lfs-bootscripts-version "6.2">
 <!ENTITY lfs-bootscripts-size "24 KB">
-<!ENTITY lfs-bootscripts-url "http://www.linuxfromscratch.org/lfs/downloads/development/lfs-bootscripts-&lfs-bootscripts-version;.tar.bz2">
-<!ENTITY lfs-bootscripts-md5 "24ad0604791f0c2a4cac12679298bf9c">
+<!ENTITY lfs-bootscripts-url "http://www.linuxfromscratch.org/lfs/downloads/6.2/lfs-bootscripts-&lfs-bootscripts-version;.tar.bz2">
+<!ENTITY lfs-bootscripts-md5 "45f9efc6b75c26751ddb74d1ad0276c1">
 <!ENTITY lfs-bootscripts-home " ">
 <!ENTITY lfs-bootscripts-ch7-du "0.4 MB">
 <!ENTITY lfs-bootscripts-ch7-sbu "less than 0.1 SBU">
@@ -316,24 +313,24 @@
 <!ENTITY linux-libc-headers-ch6-du "27 MB">
 <!ENTITY linux-libc-headers-ch6-sbu "less than 0.1 SBU">
 
-<!ENTITY m4-version "1.4.5">
-<!ENTITY m4-size "479 KB">
+<!ENTITY m4-version "1.4.4">
+<!ENTITY m4-size "376 KB">
 <!ENTITY m4-url "&gnu;m4/m4-&m4-version;.tar.gz">
-<!ENTITY m4-md5 "8bcd8244d5bed9f8e2d5f05ad693b8b4">
+<!ENTITY m4-md5 "8d1d64dbecf1494690a0f3ba8db4482a">
 <!ENTITY m4-home "&gnu-software;m4/">
-<!ENTITY m4-ch5-du "4.4 MB">
+<!ENTITY m4-ch5-du "3 MB">
 <!ENTITY m4-ch5-sbu "less than 0.1 SBU">
-<!ENTITY m4-ch6-du "4.4 MB">
+<!ENTITY m4-ch6-du "3 MB">
 <!ENTITY m4-ch6-sbu "less than 0.1 SBU">
 
-<!ENTITY make-version "3.81">
-<!ENTITY make-size "1,125 KB">
+<!ENTITY make-version "3.80">
+<!ENTITY make-size "900 KB">
 <!ENTITY make-url "&gnu;make/make-&make-version;.tar.bz2">
-<!ENTITY make-md5 "354853e0b2da90c527e35aabb8d6f1e6">
+<!ENTITY make-md5 "0bbd1df101bc0294d440471e50feca71">
 <!ENTITY make-home "&gnu-software;make/">
-<!ENTITY make-ch5-du "9.6 MB">
+<!ENTITY make-ch5-du "7.8 MB">
 <!ENTITY make-ch5-sbu "0.1 SBU">
-<!ENTITY make-ch6-du "9.6 MB">
+<!ENTITY make-ch6-du "7.8 MB">
 <!ENTITY make-ch6-sbu "0.1 SBU">
 
 <!ENTITY man-db-version "2.4.3">
@@ -344,12 +341,12 @@
 <!ENTITY man-db-ch6-du "9 MB">
 <!ENTITY man-db-ch6-sbu "0.2 SBU">
 
-<!ENTITY man-pages-version "2.36">
-<!ENTITY man-pages-size "1,763 KB">
+<!ENTITY man-pages-version "2.34">
+<!ENTITY man-pages-size "1,760 KB">
 <!ENTITY man-pages-url "&kernel;linux/docs/manpages/man-pages-&man-pages-version;.tar.bz2">
-<!ENTITY man-pages-md5 "c661eb3ff67a3bfe45fe966d74dd22df">
+<!ENTITY man-pages-md5 "fb8d9f55fef19ea5ab899437159c9420">
 <!ENTITY man-pages-home " ">
-<!ENTITY man-pages-ch6-du "36.6 MB">
+<!ENTITY man-pages-ch6-du "18.4 MB">
 <!ENTITY man-pages-ch6-sbu "less than 0.1 SBU">
 
 <!ENTITY mktemp-version "1.5">
@@ -399,10 +396,10 @@
 <!ENTITY perl-ch6-du "143 MB">
 <!ENTITY perl-ch6-sbu "1.5 SBU">
 
-<!ENTITY procps-version "3.2.7">
-<!ENTITY procps-size "275 KB">
+<!ENTITY procps-version "3.2.6">
+<!ENTITY procps-size "273 KB">
 <!ENTITY procps-url "http://procps.sourceforge.net/procps-&procps-version;.tar.gz">
-<!ENTITY procps-md5 "f490bca772b16472962c7b9f23b1e97d">
+<!ENTITY procps-md5 "7ce39ea27d7b3da0e8ad74dd41d06783">
 <!ENTITY procps-home "http://procps.sourceforge.net/">
 <!ENTITY procps-ch6-du "2.3 MB">
 <!ENTITY procps-ch6-sbu "0.1 SBU">
@@ -433,12 +430,12 @@
 <!ENTITY sed-ch6-du "6.4 MB">
 <!ENTITY sed-ch6-sbu "0.1 SBU">
 
-<!ENTITY shadow-version "4.0.17">
-<!ENTITY shadow-size "1,461 KB">
+<!ENTITY shadow-version "4.0.15">
+<!ENTITY shadow-size "1,265 KB">
 <!ENTITY shadow-url "ftp://ftp.pld.org.pl/software/shadow/shadow-&shadow-version;.tar.bz2">
 <!ENTITY shadow-md5 "a0452fa989f8ba45023cc5a08136568e">
 <!ENTITY shadow-home " ">
-<!ENTITY shadow-ch6-du "20.7 MB">
+<!ENTITY shadow-ch6-du "18.6 MB">
 <!ENTITY shadow-ch6-sbu "0.3 SBU">
 
 <!ENTITY sysklogd-version "1.4.1">
@@ -493,10 +490,10 @@
 <!ENTITY udev-ch6-du "6.8 MB">
 <!ENTITY udev-ch6-sbu "0.1 SBU">
 
-<!ENTITY udev-config "udev-config-20060715">
+<!ENTITY udev-config "udev-config-6.2">
 <!ENTITY udev-config-size "4 KB">
-<!ENTITY udev-config-url "http://www.linuxfromscratch.org/lfs/downloads/development/&udev-config;.tar.bz2">
-<!ENTITY udev-config-md5 "aaecd7c2d977ee35b19777776476e012">
+<!ENTITY udev-config-url "http://www.linuxfromscratch.org/lfs/downloads/6.2/&udev-config;.tar.bz2">
+<!ENTITY udev-config-md5 "9ff2667ab0f7bfe8182966ef690078a0">
 <!-- <!ENTITY udev-config-md5 "TBD-udev-config-md5"> -->
 <!ENTITY udev-config-home " ">
 

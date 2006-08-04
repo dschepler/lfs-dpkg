@@ -43,10 +43,10 @@ SUBSYSTEM=="block", ENV{ID_MODEL}=="PHILIPS_CDD5301", \
 EOF</userinput></screen>
 
     <note>
-      <para>Although the examples in this book work properly, be aware
-      that Udev does not recognize the backslash for line continuation.
-      If modifying Udev rules with an editor, be sure to leave each rule
-      on one physical line.</para>
+      <para>Although the examples in this book work properly, be aware that
+      <application>udev</application> does not recognize the backslash for line
+      continuation.  If modifying <application>udev</application> rules with an
+      editor, be sure to leave each rule on one physical line.</para>
     </note>
 
     <para>This way, the symlinks will stay correct even if you move the drives
