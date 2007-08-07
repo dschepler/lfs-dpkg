@@ -86,7 +86,7 @@ sed 's/^XCFLAGS =$/&amp; -fomit-frame-pointer/' gcc/Makefile.in.tmp \
 
     <para>Apply the following patch to change the location of GCC's default
     dynamic linker (typically <filename
-    class="libraryfile">ld-linux.so.2</filename>):</para>
+    class="libraryfile">ld-linux-x86-64.so.2</filename>):</para>
 
 <screen><userinput>patch -Np1 -i ../&gcc-specs-patch;</userinput></screen>
 
@@ -102,6 +102,13 @@ sed 's/^XCFLAGS =$/&amp; -fomit-frame-pointer/' gcc/Makefile.in.tmp \
       build. Do not forget to apply it.</para>
     </important>
 
+    <para>Unsetting the multlib spec for GCC ensures that it
+    won't attempt to link against libraries on the host:</para>
+
+<screen><userinput>cp gcc/config/i386/t-linux64{,.tmp}
+sed '/MULTILIB_OSDIRNAMES/d' gcc/config/i386/t-linux64.tmp \
+  > gcc/config/i386/t-linux64</userinput></screen>
+
     <para>Create a separate build directory again:</para>
 
 <screen><userinput>mkdir -v ../gcc-build
@@ -116,7 +123,7 @@ cd ../gcc-build</userinput></screen>
     --with-local-prefix=/tools --enable-clocale=gnu \
     --enable-shared --enable-threads=posix \
     --enable-__cxa_atexit --enable-languages=c,c++ \
-    --disable-libstdcxx-pch</userinput></screen>
+    --disable-libstdcxx-pch --disable-multilib</userinput></screen>
 
     <variablelist>
       <title>The meaning of the new configure options:</title>

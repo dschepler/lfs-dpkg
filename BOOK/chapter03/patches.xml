@@ -114,13 +114,13 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
+<!--    <varlistentry>
       <term>GRUB Disk Geometry Patch - <token>&grub-geometry-patch-size;</token>:</term>
       <listitem>
         <para>Download: <ulink url="&patches-root;&grub-geometry-patch;"/></para>
         <para>MD5 sum: <literal>&grub-geometry-patch-md5;</literal></para>
       </listitem>
-    </varlistentry>
+    </varlistentry> -->
 
     <varlistentry>
       <term>Inetutils No-Server-Man-Pages Patch - <token>&inetutils-man_pages-patch-size;</token>:</term>

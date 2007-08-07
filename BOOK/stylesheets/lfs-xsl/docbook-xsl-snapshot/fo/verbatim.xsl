@@ -350,8 +350,7 @@
 
 <xsl:template match="node()|@*" mode="hyphenate.verbatim">
   <xsl:copy>
-    <xsl:copy-of select="@*"/>
-    <xsl:apply-templates mode="hyphenate.verbatim"/>
+    <xsl:apply-templates select="node()|@*" mode="hyphenate.verbatim"/>
   </xsl:copy>
 </xsl:template>
 

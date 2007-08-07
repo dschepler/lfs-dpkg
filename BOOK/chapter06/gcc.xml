@@ -77,7 +77,8 @@ cd ../gcc-build</userinput></screen>
 <screen><userinput>../gcc-&gcc-version;/configure --prefix=/usr \
     --libexecdir=/usr/lib --enable-shared \
     --enable-threads=posix --enable-__cxa_atexit \
-    --enable-clocale=gnu --enable-languages=c,c++</userinput></screen>
+    --enable-clocale=gnu --enable-languages=c,c++ \
+    --disable-multilib</userinput></screen>
 
     <para>Compile the package:</para>
 
@@ -153,9 +154,9 @@ cd ../gcc-build</userinput></screen>
     href="readjusting.xml"
     xpointer="xpointer(//*[@os='f'])"/>
 
-<screen><computeroutput>/usr/lib/gcc/i686-pc-linux-gnu/&gcc-version;/../../../crt1.o succeeded
-/usr/lib/gcc/i686-pc-linux-gnu/&gcc-version;/../../../crti.o succeeded
-/usr/lib/gcc/i686-pc-linux-gnu/&gcc-version;/../../../crtn.o succeeded</computeroutput></screen>
+<screen><computeroutput>/usr/lib/gcc/x86_64-unknown-linux-gnu/&gcc-version;/../../../../lib64/crt1.o succeeded
+/usr/lib/gcc/x86_64-unknown-linux-gnu/&gcc-version;/../../../../lib64/crti.o succeeded
+/usr/lib/gcc/x86_64-unknown-linux-gnu/&gcc-version;/../../../../lib64/crtn.o succeeded</computeroutput></screen>
 
     <xi:include xmlns:xi="http://www.w3.org/2003/XInclude"
     href="readjusting.xml"
@@ -169,7 +170,7 @@ cd ../gcc-build</userinput></screen>
 
 <screen><computeroutput>#include &lt;...&gt; search starts here:
  /usr/local/include
- /usr/lib/gcc/i686-pc-linux-gnu/&gcc-version;/include
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/&gcc-version;/include
  /usr/include</computeroutput></screen>
 
     <xi:include xmlns:xi="http://www.w3.org/2003/XInclude"
@@ -184,7 +185,11 @@ cd ../gcc-build</userinput></screen>
     href="readjusting.xml"
     xpointer="xpointer(//*[@os='k'])"/>
 
-<screen><computeroutput>SEARCH_DIR("/usr/i686-pc-linux-gnu/lib")
+<screen><computeroutput>SEARCH_DIR("/usr/x86_64-unknown-linux-gnu/lib64")
+SEARCH_DIR("/usr/local/lib64")
+SEARCH_DIR("/lib64")
+SEARCH_DIR("/usr/lib64")
+SEARCH_DIR("/usr/x86_64-unknown-linux-gnu/lib")
 SEARCH_DIR("/usr/local/lib")
 SEARCH_DIR("/lib")
 SEARCH_DIR("/usr/lib");</computeroutput></screen>

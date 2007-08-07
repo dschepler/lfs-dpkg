@@ -221,8 +221,9 @@
   </xsl:variable>
 
   <xsl:variable name="img.src.path.pi">
-    <xsl:call-template name="pi.dbhtml_img.src.path">
-      <xsl:with-param name="node" select=".."/>
+    <xsl:call-template name="dbhtml-attribute">
+      <xsl:with-param name="pis" select="../processing-instruction('dbhtml')"/>
+      <xsl:with-param name="attribute" select="'img.src.path'"/>
     </xsl:call-template>
   </xsl:variable>
 
@@ -597,8 +598,9 @@ valign: <xsl:value-of select="@valign"/></xsl:message>
   </xsl:variable>
 
   <xsl:variable name="bgcolor">
-    <xsl:call-template name="pi.dbhtml_background-color">
-      <xsl:with-param name="node" select=".."/>
+    <xsl:call-template name="dbhtml-attribute">
+      <xsl:with-param name="pis" select="../processing-instruction('dbhtml')"/>
+      <xsl:with-param name="attribute" select="'background-color'"/>
     </xsl:call-template>
   </xsl:variable>
 

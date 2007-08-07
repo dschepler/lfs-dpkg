@@ -928,9 +928,7 @@
 
   <h1>
     <xsl:apply-templates select="." mode="class.attribute"/>
-    <xsl:if test="$generate.id.attributes = 0">
-      <a id="{$id}"/>
-    </xsl:if>
+    <a id="{$id}"/>
     <xsl:choose>
       <xsl:when test="$show.revisionflag != 0 and @revisionflag">
 	<span class="{@revisionflag}">

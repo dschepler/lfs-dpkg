@@ -113,12 +113,12 @@
       </xsl:attribute>
     </xsl:if>
 
-    <xsl:if test="$admon.textlabel != 0 or title or info/title">
-      <h3 class="title">
-        <xsl:call-template name="anchor"/>
+    <h3 class="title">
+      <xsl:call-template name="anchor"/>
+      <xsl:if test="$admon.textlabel != 0 or title or info/title">
         <xsl:apply-templates select="." mode="object.title.markup"/>
-      </h3>
-    </xsl:if>
+      </xsl:if>
+    </h3>
 
     <xsl:apply-templates/>
   </div>
