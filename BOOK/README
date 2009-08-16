@@ -26,5 +26,3 @@ lynx -dump /path/to/nochunks >/path/to/output
 XML to PDF:
 -----------
 make BASEDIR=/path/to/output/location pdf
-
-
