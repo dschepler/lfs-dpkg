@@ -1,4 +1,4 @@
-<!ENTITY version "SVN-20100831">
+<!ENTITY version "6.7-rc1">
 <!ENTITY releasedate "August 31, 2010">
 <!ENTITY copyrightdate "1999-2010"><!-- jhalfs needs a literal dash, not &ndash; -->
 <!ENTITY milestone "6.7">
