@@ -40,6 +40,10 @@
       <para>2010-09-18</para>
       <itemizedlist>
         <listitem>
+          <para>[bdubbs] - Release LFS-6.7.
+          </para>
+        </listitem>
+        <listitem>
           <para>[matthew] - Add instruction to increase 
           stack size during gcc tests.
           </para>
