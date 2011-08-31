@@ -1,0 +1,62 @@
+#!/bin/sh
+########################################################################
+# Begin scriptname
+#
+# Description :
+#
+# Authors     :
+#
+# Version     : LFS x.x
+#
+# Notes       :
+#
+########################################################################
+
+### BEGIN INIT INFO
+# Provides:            template
+# Required-Start:
+# Should-Start:
+# Required-Stop:
+# Should-Stop:
+# Default-Start:
+# Default-Stop:
+# Short-Description:
+# Description:
+# X-LFS-Provided-By:
+### END INIT INFO
+
+. /lib/boot/functions
+
+case "${1}" in
+   start)
+      boot_mesg "Starting..."
+      loadproc
+      ;;
+
+   stop)
+      boot_mesg "Stopping..."
+      killproc
+      ;;
+
+   reload)
+      boot_mesg "Reloading..."
+      reloadproc
+      ;;
+
+   restart)
+      ${0} stop
+      sleep 1
+      ${0} start
+      ;;
+
+   status)
+      statusproc
+      ;;
+
+   *)
+      echo "Usage: ${0} {start|stop|reload|restart|status}"
+      exit 1
+      ;;
+esac
+
+# End scriptname
