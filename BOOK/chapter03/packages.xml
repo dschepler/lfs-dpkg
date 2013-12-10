@@ -15,6 +15,24 @@
   <variablelist role="materials">
 
     <varlistentry>
+      <term>Acl (&acl-version;) - <token>&acl-size;</token>:</term>
+      <listitem>
+        <para>Home page: <ulink url="&acl-home;"/></para>
+        <para>Download: <ulink url="&acl-url;"/></para>
+        <para>MD5 sum: <literal>&acl-md5;</literal></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Attr (&attr-version;) - <token>&attr-size;</token>:</term>
+      <listitem>
+        <para>Home page: <ulink url="&attr-home;"/></para>
+        <para>Download: <ulink url="&attr-url;"/></para>
+        <para>MD5 sum: <literal>&attr-md5;</literal></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
       <term>Autoconf (&autoconf-version;) - <token>&autoconf-size;</token>:</term>
       <listitem>
         <para>Home page: <ulink url="&autoconf-home;"/></para>
@@ -96,6 +114,15 @@
     </varlistentry>
 
     <varlistentry>
+      <term>D-Bus (&dbus-version;) - <token>&dbus-size;</token>:</term>
+      <listitem>
+        <para>Home page: <ulink url="&dbus-home;"/></para>
+        <para>Download: <ulink url="&dbus-url;"/></para>
+        <para>MD5 sum: <literal>&dbus-md5;</literal></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
       <term>DejaGNU (&dejagnu-version;) - <token>&dejagnu-size;</token>:</term>
       <listitem>
         <para>Home page: <ulink url="&dejagnu-home;"/></para>
@@ -119,6 +146,15 @@
         <para>Home page: <ulink url="&e2fsprogs-home;"/></para>
         <para>Download: <ulink url="&e2fsprogs-url;"/></para>
         <para>MD5 sum: <literal>&e2fsprogs-md5;</literal></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Expat (&expat-version;) - <token>&expat-size;</token>:</term>
+      <listitem>
+        <para>Home page: <ulink url="&expat-home;"/></para>
+        <para>Download: <ulink url="&expat-url;"/></para>
+        <para>MD5 sum: <literal>&expat-md5;</literal></para>
       </listitem>
     </varlistentry>
 
@@ -222,6 +258,15 @@
     </varlistentry>
 
     <varlistentry>
+      <term>Gperf (&gperf-version;) - <token>&gperf-size;</token>:</term>
+      <listitem>
+        <para>Home page: <ulink url="&gperf-home;"/></para>
+        <para>Download: <ulink url="&gperf-url;"/></para>
+        <para>MD5 sum: <literal>&gperf-md5;</literal></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
       <term>Grep (&grep-version;) - <token>&grep-size;</token>:</term>
       <listitem>
         <para>Home page: <ulink url="&grep-home;"/></para>
@@ -276,6 +321,15 @@
     </varlistentry>
 
     <varlistentry>
+      <term>Intltool (&intltool-version;) - <token>&intltool-size;</token>:</term>
+      <listitem>
+        <para>Home page: <ulink url="&intltool-home;"/></para>
+        <para>Download: <ulink url="&intltool-url;"/></para>
+        <para>MD5 sum: <literal>&intltool-md5;</literal></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
       <term>IPRoute2 (&iproute2-version;) - <token>&iproute2-size;</token>:</term>
       <listitem>
         <para>Home page: <ulink url="&iproute2-home;"/></para>
@@ -312,11 +366,20 @@
     </varlistentry>
 
     <varlistentry>
-      <term>LFS-Bootscripts (&lfs-bootscripts-version;) - <token>&lfs-bootscripts-size;</token>:</term>
+      <term>LFS-Network-Scripts (&lfs-network-scripts-version;) - <token>&lfs-network-scripts-size;</token>:</term>
       <listitem>
-        <para>Home page: <ulink url="&lfs-bootscripts-home;"/></para>
-        <para>Download: <ulink url="&lfs-bootscripts-url;"/></para>
-        <para>MD5 sum: <literal>&lfs-bootscripts-md5;</literal></para>
+        <para>Home page: <ulink url="&lfs-network-scripts-home;"/></para>
+        <para>Download: <ulink url="&lfs-network-scripts-url;"/></para>
+        <para>MD5 sum: <literal>&lfs-network-scripts-md5;</literal></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Libcap (&libcap-version;) - <token>&libcap-size;</token>:</term>
+      <listitem>
+        <para>Home page: <ulink url="&libcap-home;"/></para>
+        <para>Download: <ulink url="&libcap-url;"/></para>
+        <para>MD5 sum: <literal>&libcap-md5;</literal></para>
       </listitem>
     </varlistentry>
 
@@ -424,22 +487,6 @@
       </listitem>
     </varlistentry>
 
-    <!-- FIXME:
-    <varlistentry>
-      <term>Ncurses Rollup Patch (&ncurses-date;) - 328 KB:</term>
-      <listitem>
-        <para><ulink url="ftp://invisible-island.net/ncurses/&ncurses-version;/"/></para>
-
-        <note>
-          <para>Ncurses Rollup Patch (&ncurses-date;) may no longer be available
-          at the listed location. The site administrators of the master download
-          location occasionally remove older versions when new ones are released.
-          There is no alternative download location yet.</para>
-        </note>
-      </listitem>
-    </varlistentry>
-    -->
-
     <varlistentry>
       <term>Patch (&patch-version;) - <token>&patch-size;</token>:</term>
       <listitem>
@@ -523,24 +570,6 @@
     </varlistentry>
 
     <varlistentry>
-      <term>Sysklogd (&sysklogd-version;) - <token>&sysklogd-size;</token>:</term>
-      <listitem>
-        <para>Home page: <ulink url="&sysklogd-home;"/></para>
-        <para>Download: <ulink url="&sysklogd-url;"/></para>
-        <para>MD5 sum: <literal>&sysklogd-md5;</literal></para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Sysvinit (&sysvinit-version;) - <token>&sysvinit-size;</token>:</term>
-      <listitem>
-        <para>Home page: <ulink url="&sysvinit-home;"/></para>
-        <para>Download: <ulink url="&sysvinit-url;"/></para>
-        <para>MD5 sum: <literal>&sysvinit-md5;</literal></para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
       <term>Tar (&tar-version;) - <token>&tar-size;</token>:</term>
       <listitem>
         <para>Home page: <ulink url="&tar-home;"/></para>
@@ -586,14 +615,6 @@
     </varlistentry>
 
     <varlistentry>
-      <term>Udev-lfs Tarball (&systemd-version;) - <token>&udev-lfs-size;</token>:</term>
-      <listitem>
-        <para>Download: <ulink url="&udev-lfs-url;"/></para>
-        <para>MD5 sum: <literal>&udev-lfs-md5;</literal></para>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
       <term>Util-linux (&util-linux-version;) - <token>&util-linux-size;</token>:</term>
       <listitem>
         <para>Home page: <ulink url="&util-linux-home;"/></para>
@@ -608,6 +629,15 @@
         <para>Home page: <ulink url="&vim-home;"/></para>
         <para>Download: <ulink url="&vim-url;"/></para>
         <para>MD5 sum: <literal>&vim-md5;</literal></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>XML::Parser (&xml-parser-version;) - <token>&xml-parser-size;</token>:</term>
+      <listitem>
+        <para>Home page: <ulink url="&xml-parser-home;"/></para>
+        <para>Download: <ulink url="&xml-parser-url;"/></para>
+        <para>MD5 sum: <literal>&xml-parser-md5;</literal></para>
       </listitem>
     </varlistentry>
 

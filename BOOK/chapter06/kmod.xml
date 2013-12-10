@@ -43,15 +43,25 @@
 
     <para>Prepare Kmod for compilation:</para>
 
-<screen><userinput remap="configure">./configure --prefix=/usr       \
-            --bindir=/bin       \
-            --sysconfdir=/etc   \
-            --disable-manpages  \
-            --with-xz           \
+<screen><userinput remap="configure">./configure --prefix=/usr          \
+            --bindir=/bin          \
+            --with-rootlibdir=/lib \
+            --sysconfdir=/etc      \
+            --disable-manpages     \
+            --with-xz              \
             --with-zlib</userinput></screen>
 
     <variablelist>
       <title>The meaning of the configure options:</title>
+
+       <varlistentry>
+        <term><parameter>--with-rootlibdir</parameter></term>
+        <listitem>
+          <para>This switch ensures that shared library is installed in
+          <filename class="directory">/lib</filename> instead of
+          <filename class="directory">/usr/lib</filename>.</para>
+        </listitem>
+      </varlistentry>
 
       <varlistentry>
         <term><parameter>--with-*</parameter></term>
@@ -86,19 +96,11 @@
 
 <screen><userinput remap="install">make install
 
-for target in depmod insmod modinfo modprobe rmmod; do
+for target in depmod insmod lsmod modinfo modprobe rmmod; do
   ln -sv ../bin/kmod /sbin/$target
 done
 
 ln -sv kmod /bin/lsmod</userinput></screen>
-
-    <para> Make sure that all libraries are in the correct directory: </para>
-
-<screen><userinput remap="install">mv -v /usr/lib/libkmod.so.* /lib
-ln -svf ../../lib/libkmod.so.2.2.4 /usr/lib/libkmod.so</userinput></screen>
-
-<!-- Note to editors:  When upgrading kmod, make sure the library version
-     specified above has not changed -->
 
   </sect2>
 
@@ -113,7 +115,7 @@ ln -svf ../../lib/libkmod.so.2.2.4 /usr/lib/libkmod.so</userinput></screen>
         <seg>depmod (link to kmod), insmod (link to kmod), kmod, 
         lsmod (link to kmod), modinfo (link to kmod), modprobe (link to kmod),
         and rmmod (link to kmod)</seg>
-        <seg>/lib/kmod.so</seg>
+        <seg>libkmod.so</seg>
       </seglistitem>
     </segmentedlist>
 
@@ -151,17 +153,6 @@ ln -svf ../../lib/libkmod.so.2.2.4 /usr/lib/libkmod.so</userinput></screen>
           <para>Loads and unloads kernel modules</para>
           <indexterm zone="ch-system-kmod kmod">
             <primary sortas="b-kmod">kmod</primary>
-          </indexterm>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry id="libkmod">
-        <term><filename class="libraryfile">libkmod</filename></term>
-        <listitem>
-          <para>This library is used by other programs to load and unload kernel
-           modules</para>
-          <indexterm zone="ch-system-kmod">
-            <primary sortas="c-libkmod">libkmod</primary>
           </indexterm>
         </listitem>
       </varlistentry>
@@ -204,6 +195,17 @@ ln -svf ../../lib/libkmod.so.2.2.4 /usr/lib/libkmod.so</userinput></screen>
           <para>Unloads modules from the running kernel</para>
           <indexterm zone="ch-system-kmod rmmod">
             <primary sortas="b-rmmod">rmmod</primary>
+          </indexterm>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="libkmod">
+        <term><filename class="libraryfile">libkmod</filename></term>
+        <listitem>
+          <para>This library is used by other programs to load and unload kernel
+           modules</para>
+          <indexterm zone="ch-system-kmod">
+            <primary sortas="c-libkmod">libkmod</primary>
           </indexterm>
         </listitem>
       </varlistentry>

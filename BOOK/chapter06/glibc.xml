@@ -69,6 +69,13 @@
 
 <screen><userinput remap="pre">sed -r -i 's/(3..89..)/\1 | 4.*/' configure</userinput></screen>
 
+    <para>Some of the Glibc programs use non-FHS compilant
+    <filename class="directory">/var/db</filename> directory
+    to store their runtime data. Apply the following patch to make such programs
+    store their runtime data in the FHS-compliant locations:</para>
+
+<screen><userinput remap="pre">patch -Np1 -i ../&glibc-fhs-patch;</userinput></screen>
+
     <para>The Glibc documentation recommends building Glibc outside of the source
     directory in a dedicated build directory:</para>
 
@@ -81,17 +88,17 @@ cd ../glibc-build</userinput></screen>
     --prefix=/usr          \
     --disable-profile      \
     --enable-kernel=&min-kernel; \
-    --libexecdir=/usr/lib/glibc</userinput></screen>
+    --libexecdir=/usr/lib</userinput></screen>
 
     <variablelist>
       <title>The meaning of the new configure options:</title>
 
       <varlistentry>
-        <term><parameter>--libexecdir=/usr/lib/glibc</parameter></term>
+        <term><parameter>--libexecdir=/usr/lib</parameter></term>
         <listitem>
           <para>This changes the location of some auxillary files from the
           default of <filename class="directory">/usr/libexec</filename> to
-          <filename class="directory">/usr/lib/glibc</filename>.</para>
+          <filename class="directory">/usr/lib</filename>.</para>
         </listitem>
       </varlistentry>
 
@@ -173,6 +180,12 @@ grep Error glibc-check-log</userinput></screen>
 <screen><userinput remap="install">cp -v ../glibc-&glibc-version;/sunrpc/rpc/*.h /usr/include/rpc
 cp -v ../glibc-&glibc-version;/sunrpc/rpcsvc/*.h /usr/include/rpcsvc
 cp -v ../glibc-&glibc-version;/nis/rpcsvc/*.h /usr/include/rpcsvc</userinput></screen>
+
+    <para>Install the configuration file and runtime directory for
+    <command>nscd</command>:</para>
+
+<screen><userinput remap="install">cp -v ../glibc-&glibc-version;/nscd/nscd.conf /etc/nscd.conf
+mkdir -pv /var/cache/nscd</userinput></screen>
 
     <para>The locales that can make the system respond in a different language
     were not installed by the above command. None of the locales are required,
@@ -341,27 +354,10 @@ unset ZONEINFO</userinput></screen>
     <para>Then create the <filename>/etc/localtime</filename> file by
     running:</para>
 
-<screen><userinput>cp -v --remove-destination /usr/share/zoneinfo/<replaceable>&lt;xxx&gt;</replaceable> \
-    /etc/localtime</userinput></screen>
+<screen><userinput>ln -sv /usr/share/zoneinfo/<replaceable>&lt;xxx&gt;</replaceable> /etc/localtime</userinput></screen>
 
     <para>Replace <replaceable>&lt;xxx&gt;</replaceable> with the name of the
     time zone selected (e.g., Canada/Eastern).</para>
-
-    <variablelist>
-      <title>The meaning of the cp option:</title>
-
-      <varlistentry>
-        <term><parameter>--remove-destination</parameter></term>
-        <listitem>
-          <para>This is needed to force removal of the already existing symbolic
-          link. The reason for copying the file instead of using a symlink is to
-          cover the situation where <filename class="directory">/usr</filename>
-          is on a separate partition. This could be important when booted into
-          single user mode.</para>
-        </listitem>
-      </varlistentry>
-
-    </variablelist>
 
   </sect2>
 
@@ -437,8 +433,9 @@ mkdir -pv /etc/ld.so.conf.d</userinput></screen>
         /usr/include/netipx, /usr/include/netiucv, /usr/include/netpacket,
         /usr/include/netrom, /usr/include/netrose, /usr/include/nfs,
         /usr/include/protocols, /usr/include/rpc, /usr/include/rpcsvc,
-        /usr/include/sys, /usr/lib/audit, /usr/lib/gconv, /usr/lib/glibc,
-        /usr/lib/locale, /usr/share/i18n, /usr/share/zoneinfo, /var/db</seg>
+        /usr/include/sys, /usr/lib/audit, /usr/lib/gconv, /usr/lib/getconf,
+        /usr/lib/locale, /usr/share/i18n, /usr/share/zoneinfo, /var/cache/nscd,
+        and /var/lib/nss_db</seg>
       </seglistitem>
     </segmentedlist>
 

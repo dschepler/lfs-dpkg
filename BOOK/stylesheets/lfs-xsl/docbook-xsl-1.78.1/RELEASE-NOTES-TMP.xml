@@ -4,7 +4,7 @@
 <info>
   <title>Release Notes for the DocBook XSL Stylesheets</title>
   <pubdate><?dbtimestamp format="Y-m-d"?></pubdate>
-  <releaseinfo role="cvs">$Revision: 9401 $ $Date: 2012-06-04 21:47:26 +0000 (Mon, 04 Jun 2012) $</releaseinfo>
+  <releaseinfo role="cvs">$Revision: 9401 $ $Date$</releaseinfo>
   <!-- * <author><orgname>DocBook Project Development Team</orgname></author> -->
 <abstract>
 <para condition="dot-zero;dot-one-plus">This release-notes

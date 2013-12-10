@@ -10,7 +10,7 @@ FILE=$1
 ./make-aux-files.sh
 
 # Bootscript data
-bootscripts=$(ls lfs-bootscripts*.bz2)
+bootscripts=$(ls lfs-network-scripts*.bz2)
 base=$(basename $bootscripts .tar.bz2)
 bootsize=$(ls -l --block-size=1024 $bootscripts | cut -f5 -d" ")
 bootmd5=$(md5sum $bootscripts | cut -f1 -d" ")
@@ -24,7 +24,7 @@ bootinstallsize=$(du -sk $TMP_DIR | cut -f1)
 popd > /dev/null
 rm -rf $TMP_DIR
 
-sed -i -e s/BOOTSCRIPTS-SIZE/$bootsize/              \
-       -e s/BOOTSCRIPTS-INSTALL-KB/$bootinstallsize/ \
-       -e s/BOOTSCRIPTS-MD5SUM/$bootmd5/ $FILE
+sed -i -e s/LFS-NETSCRIPTS-SIZE/$bootsize/              \
+       -e s/LFS-NETSCRIPTS-INSTALL-KB/$bootinstallsize/ \
+       -e s/LFS-NETSCRIPTS-MD5SUM/$bootmd5/ $FILE
 
