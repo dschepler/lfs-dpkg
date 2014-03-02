@@ -39,6 +39,9 @@
       <para>2014-03-02</para>
       <itemizedlist>
         <listitem>
+          <para>[bdubbs] - LFS-7.5 released.</para>
+        </listitem>
+        <listitem>
           <para>[bdubbs] - Update host system requirements to address
           possible host installation of inconsistent libraries.</para>
         </listitem>
