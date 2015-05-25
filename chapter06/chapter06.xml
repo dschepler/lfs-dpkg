@@ -17,6 +17,8 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="chroot.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="creatingdirs.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="createfiles.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="lfs-dpkg-wrapper.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="lfs-base.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="linux-headers.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="man-pages.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="glibc.xml"/>

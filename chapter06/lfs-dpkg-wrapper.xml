@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+  <!ENTITY % general-entities SYSTEM "../general.ent">
+  %general-entities;
+]>
+
+<sect1 id="ch-system-lfs-dpkg-wrapper" role="wrap">
+  <?dbhtml filename="lfs-dpkg-wrapper.html"?>
+
+  <sect1info condition="script">
+    <productname>lfs-dpkg-wrapper</productname>
+    <productnumber>&lfs-dpkg-wrapper-version;</productnumber>
+    <address>&lfs-dpkg-wrapper-url;</address>
+  </sect1info>
+
+  <title>LFS-Dpkg-Wrapper-&lfs-dpkg-wrapper-version;</title>
+
+  <indexterm zone="ch-system-lfs-dpkg-wrapper">
+    <primary sortas="a-LFS-Dpkg-Wrapper">LFS-Dpkg-Wrapper</primary>
+    <secondary>tools</secondary>
+  </indexterm>
+
+  <sect2 role="package">
+    <title/>
+
+    <para>The LFS Dpkg Wrapper provides a script to automate the tasks
+    involved in creating a deb package archive.</para>
+
+    <segmentedlist>
+      <segtitle>&buildtime;</segtitle>
+      <segtitle>&diskspace;</segtitle>
+
+      <seglistitem>
+        <seg>&lfs-dpkg-wrapper-ch6-sbu;</seg>
+        <seg>&lfs-dpkg-wrapper-ch6-du;</seg>
+      </seglistitem>
+    </segmentedlist>
+
+  </sect2>
+
+  <sect2 role="installation">
+    <title>Installation of LFS Dpkg Wrapper</title>
+
+    <para>The version of <command>buildpkg</command> to be used in this
+    chapter and beyond will use a different set up fixup scripts than
+    the version used in the previous chapter. In order to create the new
+    package using the new set of fixup scripts, again create a temporary
+    version of the main script which will be able to run using the
+    install image:</para>
+
+<screen><userinput>make PREFIX=$(pwd)/debian/tmp/usr
+mv -v buildpkg buildpkg.tmp
+make clean</userinput></screen>
+
+    <para>Install the package into a temporary directory:</para>
+
+<screen><userinput>make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <note><para>If you wish to customize the way that your packages
+    are created, you should take a look at the snippets in
+    <filename class="directory">debian/tmp/usr/lib/lfs-dpkg-wrapper</filename>.
+    For example, if you want to preserve debugging information,
+    then remove <filename>50strip.sh</filename> from that
+    directory.</para></note>
+
+    <para>Run the custom version of the script to create a
+    package archive:</para>
+
+<screen><userinput>./buildpkg.tmp</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../lfs-dpkg-wrapper_&lfs-dpkg-wrapper-version;_*.deb</userinput></screen>
+
+    <para>Remove the previous version of the package:</para>
+
+<screen><userinput>dpkg --purge lfs-dpkg-wrapper-pass1</userinput></screen>
+
+  </sect2>
+
+  <sect2 id="contents-lfs-dpkg-wrapper" role="content">
+    <title>Contents of LFS Dpkg Wrapper</title>
+
+    <segmentedlist>
+      <segtitle>Installed script</segtitle>
+      <segtitle>Installed directory</segtitle>
+
+      <seglistitem>
+	<seg>/usr/bin/buildpkg</seg>
+	<seg>/usr/lib/lfs-dpkg-wrapper</seg>
+      </seglistitem>
+    </segmentedlist>
+
+    <variablelist>
+      <bridgehead renderas="sect3">Short Descriptions</bridgehead>
+      <?dbfo list-presentation="list"?>
+      <?dbhtml list-presentation="table"?>
+
+      <varlistentry id="buildpkg">
+	<term><command>buildpkg</command></term>
+	<listitem>
+	  <para>Apply fixups to the package staging directory and
+	  then build a package archive</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry id="fixups">
+	<term><filename class="directory">/usr/lib/lfs-dpkg-wrapper</filename></term>
+	<listitem>
+	  <para>Contains snippets sourced by the main
+	  <command>buildpkg</command> script to do the actual work</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </sect2>
+
+</sect1>

@@ -360,9 +360,9 @@
 <!ENTITY less-ch6-du "4.1 MB">
 <!ENTITY less-ch6-sbu "less than 0.1 SBU">
 
-<!ENTITY lfs-dpkg-wrapper-version "0.1">
+<!ENTITY lfs-dpkg-wrapper-version "0.2">
 <!ENTITY lfs-dpkg-wrapper-size "small">
-<!ENTITY lfs-dpkg-wrapper-url "none yet">
+<!ENTITY lfs-dpkg-wrapper-url "http://dschepler.github.io/lfs-dpkg/lfs-dpkg-wrapper-&lfs-dpkg-wrapper-version;.tar.xz">
 <!ENTITY lfs-dpkg-wrapper-md5 "unknown">
 <!ENTITY lfs-dpkg-wrapper-ch5-du "unknown">
 <!ENTITY lfs-dpkg-wrapper-ch5-sbu "less than 0.1 SBU">

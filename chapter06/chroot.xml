@@ -19,7 +19,7 @@
     HOME=/root                  \
     TERM="$TERM"                \
     PS1='\u:\w\$ '              \
-    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/tools/sbin \
     /tools/bin/bash --login +h</userinput></screen>
 
   <para>The <parameter>-i</parameter> option given to the <command>env</command>

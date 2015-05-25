@@ -77,7 +77,7 @@ make clean</userinput></screen>
 
     </variablelist>
 
-    <para>Run the script from the temporary directory to create
+    <para>Run the custom version of the script to create
     a package archive:</para>
 
 <screen><userinput>./buildpkg.tmp --package=lfs-dpkg-wrapper-pass1</userinput></screen>
@@ -102,6 +102,14 @@ make clean</userinput></screen>
     <para>Install the package:</para>
 
 <screen><userinput>dpkg -i ../lfs-dpkg-wrapper-pass1_&lfs-dpkg-wrapper-version;_*.deb</userinput></screen>
+
+  </sect2>
+
+  <sect2 role="content">
+    <title/>
+
+    <para>Details on this package are located in
+    <xref linkend="contents-lfs-dpkg-wrapper" role="."/></para>
 
   </sect2>
 
