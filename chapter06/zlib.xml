@@ -83,6 +83,9 @@ buildpkg --package=zlib-static debian/tmp-static</userinput></screen>
 
 <screen><userinput>dpkg -i ../zlib_&zlib-version;_*.deb ../zlib-static_&zlib-version;_*.deb</userinput></screen>
 
+    <note><para>zlib-pass1 cannot be removed yet as dpkg-pass2 still requires
+    it.</para></note>
+
   </sect2>
 
   <sect2 id="contents-zlib" role="content">
