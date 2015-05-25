@@ -67,10 +67,19 @@ make html</userinput></screen>
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-    <para>Install the package and its documentation:</para>
+    <para>Install the package and its documentation to a temporary
+    directory:</para>
 
-<screen><userinput remap="install">make install
-make install-html</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp
+make install-html DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../mpfr_&mpfr-version;_*.deb</userinput></screen>
 
   </sect2>
 
