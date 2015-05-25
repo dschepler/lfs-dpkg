@@ -40,9 +40,17 @@
   <sect2 role="installation">
     <title>Installation of Man-pages</title>
 
-    <para>Install Man-pages by running:</para>
+    <para>Install Man-pages to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../man-pages_&man-pages-version;_*.deb</userinput></screen>
 
   </sect2>
 
