@@ -45,7 +45,8 @@
 
     <para>Prepare Coreutils for compilation:</para>
 
-<screen><userinput remap="configure">./configure --prefix=/tools --enable-install-program=hostname</userinput></screen>
+<screen><userinput remap="configure">./configure --prefix=/tools --enable-install-program=hostname \
+    --enable-no-install-program=kill</userinput></screen>
 
     <variablelist>
       <title>The meaning of the configure options:</title>
@@ -58,6 +59,16 @@
           Perl test suite.</para>
         </listitem>
       </varlistentry>
+
+      <varlistentry>
+	<term><envar>--enable-no-install-program=kill</envar></term>
+	<listitem>
+	  <para>This disables the <command>kill</command> binary to be built
+	  and installed &ndash; it will be installed as part of util-linux
+	  later.</para>
+	</listitem>
+      </varlistentry>
+
     </variablelist>
 
     <para>Compile the package:</para>
@@ -75,9 +86,9 @@
     relatively expensive (in terms of CPU power and memory usage) on some
     platforms, but generally are not a problem on Linux.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 <!--
     <para>The above command refuses to install <filename>su</filename>
     because the program cannot be installed setuid root as a non-privileged
@@ -86,6 +97,15 @@
 
 <screen><userinput remap="install">cp -v src/su /tools/bin</userinput></screen>
 -->
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=coreutils-pass1</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../coreutils-pass1_&coreutils-version;_*.deb</userinput></screen>
+
   </sect2>
 
   <sect2 role="content">

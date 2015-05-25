@@ -99,16 +99,16 @@ RANLIB=$LFS_TGT-ranlib         \
 
 <screen><userinput remap="make">make</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>Now prepare the linker for the <quote>Re-adjusting</quote> phase in
     the next chapter:</para>
 
 <screen><userinput remap="adjust">make -C ld clean
 make -C ld LIB_PATH=/usr/lib:/lib
-cp -v ld/ld-new /tools/bin</userinput></screen>
+cp -v ld/ld-new debian/tmp/tools/bin</userinput></screen>
 
     <variablelist>
       <title>The meaning of the make parameters:</title>
@@ -136,6 +136,17 @@ cp -v ld/ld-new /tools/bin</userinput></screen>
       </varlistentry>
 
     </variablelist>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=binutils-pass2 --version=&binutils-version;</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../binutils-pass2_&binutils-version;_*.deb</userinput></screen>
+
+    <note><para>binutils-pass1 cannot be removed yet as the Cross
+    GCC still relies on it.</para></note>
 
   </sect2>
 

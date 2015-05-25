@@ -240,9 +240,10 @@ cd ../gcc-build</userinput></screen>
     are minimal since the programs from this first pass will soon be
     replaced.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
 <!--
     <para>Using <parameter>- -disable-shared</parameter> means that the
     <filename>libgcc_eh.a</filename> file isn't created and installed. The
@@ -254,6 +255,15 @@ cd ../gcc-build</userinput></screen>
 
 <screen><userinput remap="install">ln -sv libgcc.a `$LFS_TGT-gcc -print-libgcc-file-name | sed 's/libgcc/&amp;_eh/'`</userinput></screen>
 -->
+
+    <para>Build the package archive:</para>
+
+<screen><userinput>buildpkg --package=gcc-pass1 --version=&gcc-version;</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../gcc-pass1_&gcc-version;_*.deb</userinput></screen>
+
   </sect2>
 
   <sect2 role="content">

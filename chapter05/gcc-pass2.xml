@@ -163,9 +163,9 @@ RANLIB=$LFS_TGT-ranlib                             \
 
 <screen><userinput remap="make">make</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>As a finishing touch, create a symlink. Many programs and scripts
     run <command>cc</command> instead of <command>gcc</command>, which is
@@ -174,7 +174,49 @@ RANLIB=$LFS_TGT-ranlib                             \
     <command>cc</command> leaves the system administrator free to decide
     which C compiler to install:</para>
 
-<screen><userinput remap="install">ln -sv gcc /tools/bin/cc</userinput></screen>
+<screen><userinput remap="install">ln -sv gcc debian/tmp/tools/bin/cc</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+    <screen><userinput>buildpkg --package=gcc-pass2 --version=&gcc-version;</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i --force-overwrite ../gcc-pass2_&gcc-version;_*.deb</userinput></screen>
+
+    <variablelist>
+      <title>The meaning of the dpkg options:</title>
+
+      <varlistentry>
+        <term><parameter>--force-overwrite</parameter></term>
+        <listitem>
+          <para>This option forces Dpkg to overwrite some files in
+	  gcc-pass1 and libstdc++-pass1 with the new libraries just built
+	  and packaged into gcc-pass2.</para>
+        </listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>The cross toolchain is no longer needed, so remove it:</para>
+
+<screen><userinput>dpkg --purge binutils-pass1 gcc-pass1 libstdc++-pass1</userinput></screen>
+
+    <variablelist>
+      <title>The meaning of the dpkg options:</title>
+
+      <varlistentry>
+	<term><parameter>--purge</parameter></term>
+	<listitem>
+	  <para>If you remove a package using the usual -r or --remove
+	  option, Dpkg will preserve the package's configuration files
+	  in case you want to reinstall the package later. This option
+	  forces Dpkg to remove any configuration files from the listed
+	  packages.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
 
   <caution>
     <para>At this point, it is imperative to stop and ensure that the basic

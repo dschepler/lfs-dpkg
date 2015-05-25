@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+  <!ENTITY % general-entities SYSTEM "../general.ent">
+  %general-entities;
+]>
+
+<sect1 id="ch-tools-lfs-dpkg-wrapper" role="wrap">
+  <?dbhtml filename="lfs-dpkg-wrapper.html"?>
+
+  <sect1info condition="script">
+    <productname>lfs-dpkg-wrapper</productname>
+    <productnumber>&lfs-dpkg-wrapper-version;</productnumber>
+  </sect1info>
+
+  <title>LFS-Dpkg-Wrapper-&lfs-dpkg-wrapper-version;</title>
+
+  <indexterm zone="ch-tools-lfs-dpkg-wrapper">
+    <primary sortas="a-LFS-Dpkg-Wrapper">LFS-Dpkg-Wrapper</primary>
+    <secondary>tools</secondary>
+  </indexterm>
+
+  <sect2 role="package">
+    <title/>
+
+    <segmentedlist>
+      <segtitle>&buildtime;</segtitle>
+      <segtitle>&diskspace;</segtitle>
+
+      <seglistitem>
+        <seg>&lfs-dpkg-wrapper-ch5-sbu;</seg>
+        <seg>&lfs-dpkg-wrapper-ch5-du;</seg>
+      </seglistitem>
+    </segmentedlist>
+
+  </sect2>
+
+  <sect2 role="installation">
+    <title>Installation of LFS-Dpkg-Wrapper</title>
+
+    <para>Repeating the packaging commands from the previous section for
+    every package would quickly become repetitive, and distract the
+    reader from the actual build process.  Therefore, this section
+    will create a wrapper script to automate the process.</para>
+
+    <para>Create a version of the script which will be able to
+    run using the install image:</para>
+
+<screen><userinput>make PREFIX=$(pwd)/debian/tmp/tools
+mv -v buildpkg buildpkg.tmp
+make clean</userinput></screen>
+
+    <para>Install the package into a temporary directory:</para>
+
+<screen><userinput>make install DESTDIR=$(pwd)/debian/tmp PREFIX=/tools \
+    USE_TOOLS_SCRIPTS=1</userinput></screen>
+
+    <variablelist>
+      <title>The meaning of the make parameters:</title>
+
+      <varlistentry>
+	<term><parameter>PREFIX=/tools</parameter></term>
+	<listitem>
+	  <para>This tells the Makefile to generate an install image
+	  with the scripts in /tools instead of /usr.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><parameter>USE_TOOLS_SCRIPTS=1</parameter></term>
+	<listitem>
+	  <para>This tells the Makefile to use the package fixup scripts
+	  for packages from this chapter installing contents in
+	  /tools.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Run the script from the temporary directory to create
+    a package archive:</para>
+
+<screen><userinput>./buildpkg.tmp --package=lfs-dpkg-wrapper-pass1</userinput></screen>
+
+    <variablelist>
+      <title>The meaning of the buildpkg parameters:</title>
+
+      <varlistentry>
+	<term><parameter>--package=lfs-dpkg-wrapper-pass1</parameter></term>
+	<listitem>
+	  <para>Normally, based on the current working directory name
+	  of lfs-dpkg-wrapper-0.1, buildpkg would create a package with
+	  name lfs-dpkg-wrapper and version 0.1. For this chapter, it
+	  is necessary to append -pass1 or -pass2 to package names, as
+	  intermediate packages from this chapter and the final packages
+	  from the next will often need to coexist for a time.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../lfs-dpkg-wrapper-pass1_&lfs-dpkg-wrapper-version;_*.deb</userinput></screen>
+
+  </sect2>
+
+</sect1>

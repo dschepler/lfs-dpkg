@@ -108,9 +108,17 @@ cd ../gcc-build</userinput></screen>
 
 <screen><userinput remap="make">make</userinput></screen>
 
-    <para>Install the library:</para>
+    <para>Install the library to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=libstdc++-pass1 --version=&gcc-version;</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../libstdc++-pass1_&gcc-version;_*.deb</userinput></screen>
 
   </sect2>
 

@@ -76,23 +76,32 @@
     are exercised correctly. Details on the <envar>TZ</envar> environment
     variable are provided in <xref linkend="chapter-bootscripts"/>.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/../debian/tmp</userinput></screen>
 
     <para>Make the installed library writable so debugging symbols can
-    be removed later:</para>
+    be removed by the buildpkg fixups:</para>
 
-<screen><userinput remap="install">chmod -v u+w /tools/lib/libtcl&tcl-major-version;.so</userinput></screen>
+<screen><userinput remap="install">chmod -v u+w ../debian/tmp/tools/lib/libtcl&tcl-major-version;.so</userinput></screen>
 
     <para>Install Tcl's headers. The next package, Expect, requires them
     to build.</para>
 
-<screen><userinput remap="install">make install-private-headers</userinput></screen>
+<screen><userinput remap="install">make install-private-headers DESTDIR=$(pwd)/../debian/tmp</userinput></screen>
 
     <para>Now make a necessary symbolic link:</para>
 
-<screen><userinput remap="install">ln -sv tclsh&tcl-major-version; /tools/bin/tclsh</userinput></screen>
+<screen><userinput remap="install">ln -sv tclsh&tcl-major-version; ../debian/tmp/tools/bin/tclsh</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>cd ..
+buildpkg --package=tcl-pass1 --version=&tcl-version;</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../tcl-pass1_&tcl-version;_*.deb</userinput></screen>
 
   </sect2>
 

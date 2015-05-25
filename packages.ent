@@ -131,6 +131,17 @@
 <!ENTITY diffutils-ch6-du "30 MB">
 <!ENTITY diffutils-ch6-sbu "0.4 SBU">
 
+<!ENTITY dpkg-version "1.18.0">
+<!ENTITY dpkg-size "4.2 MB">
+<!ENTITY dpkg-url "http://http.debian.net/debian/pool/main/d/dpkg/dpkg_1.18.0.tar.xz">
+<!ENTITY dpkg-md5 "22d1a0cc18910fc1275a4fbc22aa4982">
+<!ENTITY dpkg-ch5p1-du "99 MB">
+<!ENTITY dpkg-ch5p1-sbu "0.9 SBU">
+<!ENTITY dpkg-ch5p2-du "99 MB">
+<!ENTITY dpkg-ch5p2-sbu "0.9 SBU">
+<!ENTITY dpkg-ch6-du "99 MB">
+<!ENTITY dpkg-ch6-sbu "0.9 SBU">
+
 <!-- NOTE: When updating e2fsprogs, remember to check the list
      of acceptable features that can be shown by debugfs in
      chapter02/creatingfilesystem.xml -->
@@ -348,6 +359,15 @@
 <!ENTITY less-home "http://www.greenwoodsoftware.com/less/">
 <!ENTITY less-ch6-du "4.1 MB">
 <!ENTITY less-ch6-sbu "less than 0.1 SBU">
+
+<!ENTITY lfs-dpkg-wrapper-version "0.1">
+<!ENTITY lfs-dpkg-wrapper-size "small">
+<!ENTITY lfs-dpkg-wrapper-url "none yet">
+<!ENTITY lfs-dpkg-wrapper-md5 "unknown">
+<!ENTITY lfs-dpkg-wrapper-ch5-du "unknown">
+<!ENTITY lfs-dpkg-wrapper-ch5-sbu "less than 0.1 SBU">
+<!ENTITY lfs-dpkg-wrapper-ch6-du "unknown">
+<!ENTITY lfs-dpkg-wrapper-ch6-sbu "less than 0.1 SBU">
 
 <!ENTITY libcap-version "2.24">
 <!ENTITY libcap-size "64 KB">
@@ -610,6 +630,8 @@
 <!ENTITY zlib-url "http://www.zlib.net/zlib-&zlib-version;.tar.xz">
 <!ENTITY zlib-md5 "28f1205d8dd2001f26fec1e8c2cebe37">
 <!ENTITY zlib-home "http://www.zlib.net/">
+<!ENTITY zlib-ch5-du "4.1 MB">
+<!ENTITY zlib-ch5-sbu "less than 0.1 SBU">
 <!ENTITY zlib-ch6-du "4.1 MB">
 <!ENTITY zlib-ch6-sbu "less than 0.1 SBU">
 

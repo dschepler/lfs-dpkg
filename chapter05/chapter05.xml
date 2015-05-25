@@ -14,6 +14,8 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="introduction.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="toolchaintechnotes.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="generalinstructions.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dpkg-pass1.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="lfs-dpkg-wrapper.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="binutils-pass1.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="gcc-pass1.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="linux-headers.xml"/>
@@ -45,7 +47,8 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="texinfo.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="util-linux.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="xz.xml"/>
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="stripping.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="zlib.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dpkg-pass2.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="changingowner.xml"/>
 
 </chapter>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+  <!ENTITY % general-entities SYSTEM "../general.ent">
+  %general-entities;
+]>
+
+<sect1 id="ch-tools-dpkg-pass1" role="wrap">
+  <?dbhtml filename="dpkg-pass1.html"?>
+
+  <sect1info condition="script">
+    <productname>dpkg</productname>
+    <productnumber>&dpkg-version;</productnumber>
+  </sect1info>
+
+  <title>Dpkg-&dpkg-version; - Pass 1</title>
+
+  <indexterm zone="ch-tools-dpkg-pass1">
+    <primary sortas="a-Dpkg">Dpkg</primary>
+    <secondary>tools, pass1</secondary>
+  </indexterm>
+
+  <sect2 role="package">
+    <title/>
+
+    <segmentedlist>
+      <segtitle>&buildtime;</segtitle>
+      <segtitle>&diskspace;</segtitle>
+
+      <seglistitem>
+	<seg>&dpkg-ch5p1-sbu;</seg>
+	<seg>&dpkg-ch5p1-du;</seg>
+      </seglistitem>
+    </segmentedlist>
+      
+  </sect2>
+
+  <sect2 role="installation">
+    <title>Installation of Initial Dpkg</title>
+
+    <note><para>Go back and re-read the notes in the previous section.
+    Understanding the notes labeled important will save you a lot
+    of problems later.</para></note>
+
+    <para>Fix a bug which prevents dpkg-deb from
+    being able to build .deb files when compiled
+    without zlib support:</para>
+
+<screen><userinput>sed -i -e '/control_compress_params\.level = / s/-1/9/' dpkg-deb/build.c</userinput></screen>
+
+    <para>Prepare Dpkg for compilation:</para>
+
+<screen><userinput remap="configure">./configure --prefix=/tools \
+    --disable-dselect       \
+    --without-zlib          \
+    --without-bz2           \
+    --without-liblzma       \
+    --without-selinux       \
+    PERL_LIBDIR=/tools/lib/perl/&perl-version;</userinput></screen>
+
+    <variablelist>
+      <title>The meaning of the configure options:</title>
+
+      <varlistentry>
+        <term><parameter>--prefix=/tools</parameter></term>
+        <listitem>
+          <para>This tells the configure script to prepare to install the
+          Dpkg programs in the <filename class="directory">/tools</filename>
+          directory.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><parameter>--disable-dselect</parameter></term>
+	<listitem>
+	  <para>This disables building of the dselect
+	  utility, which is obsolete and also useless for an LFS
+	  system.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><parameter>--without-zlib, --without-bz2,
+	--without-liblzma, --without-selinux</parameter></term>
+	<listitem>
+	  <para>These parameters disable building against various libraries
+	  which might be present on the build host.  In the case of the
+	  first three libraries, dpkg-deb will instead
+	  call the corresponding compression binaries.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><parameter>PERL_LIBDIR=/tools/lib/perl/&perl-version;</parameter></term>
+	<listitem>
+	  <para>This tells the configure script where to install the
+	  Dpkg perl modules.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Continue with compiling the package:</para>
+
+<screen><userinput remap="make">make</userinput></screen>
+
+    <para>Compilation is now complete.  As discussed earlier, running
+    the test suite is not mandatory for the temporary tools here in this
+    chapter.  To run the Dpkg test sute anyway, issue the following
+    command:</para>
+
+<screen><userinput remap="test">make check</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput remap="install">make install</userinput></screen>
+
+    <para>In preparation for creating a package archive, also install into a
+    temporary staging directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <variablelist>
+      <title>The meaning of the make parameters:</title>
+
+      <varlistentry>
+	<term><parameter>DESTDIR=$(pwd)/debian/tmp</parameter></term>
+	<listitem>
+	  <para>This tells the build system to create an install image in
+	  debian/tmp instead of installing directly to the filesystem.
+	  The DESTDIR variable is supported by most packages using autotools
+	  or CMake, and by quite a few packages besides.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Create a package metadata file:</para>
+
+<screen><userinput>mkdir -v debian/tmp/DEBIAN
+cat &gt; debian/tmp/DEBIAN/control &lt;&lt; EOF
+<literal>Package: dpkg-pass1
+Version: &dpkg-version;
+Maintainer: Linux From Scratch
+Architecture: `dpkg --print-architecture`
+Description: LFS dpkg-pass1</literal>
+EOF</userinput></screen>
+
+    <para>(Note: the command above is correct.  Even though the usual
+    file creation process puts quotes around "EOF", in this case the
+    quotes would cause the backquote substitution to be skipped.)</para>
+
+    <para>Optionally, strip the binaries to be placed in the package.
+    This will reduce the required disk space:</para>
+
+<screen><userinput>strip --strip-debug debian/tmp/tools/lib/*
+strip --strip-unneeded debian/tmp/tools/{,s}bin/*</userinput></screen>
+
+    <para>These commands will skip a number of files, reporting that
+    it does not recognize their file format.  Most of these are scripts
+    or directories instead of binaries.</para>
+
+    <para>Take care <emphasis>not</emphasis> to use
+    <parameter>--strip-unneeded</parameter> on the libraries. The static
+    ones would be destroyed.</para>
+
+    <para>To save more disk space, remove the documentation:</para>
+
+<screen><userinput>rm -rf debian/tmp/tools/share/man
+rm -rf /tools/share/man</userinput></screen>
+
+    <para>Build the package archive:</para>
+
+<screen><userinput>dpkg-deb --build debian/tmp ..</userinput></screen>
+
+    <para>Initialize Dpkg's package status file and triggers
+    directory:</para>
+
+<screen><userinput>touch /tools/var/lib/dpkg/status
+mkdir -v /tools/var/lib/dpkg/triggers</userinput></screen>
+
+    <para>Reinstall Dpkg using the newly built package archive, in
+    order to register its contents with Dpkg:</para>
+
+<screen><userinput>dpkg -i --force-not-root --force-bad-path ../dpkg-pass1_&dpkg-version;_*.deb</userinput></screen>
+
+    <variablelist>
+      <title>The meaning of the dpkg parameters:</title>
+
+      <varlistentry>
+	<term><parameter>--force-not-root</parameter></term>
+	<listitem>
+	  <para>This tells dpkg to install the package even though it is not
+	  being run as root.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><parameter>--force-bad-path</parameter></term>
+	<listitem>
+	  <para>This tells dpkg to install the package even though
+	  ldconfig is not yet on the LFS user's PATH.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Now set these options as the default for future dpkg runs:</para>
+
+<screen><userinput>cat &gt; /tools/etc/dpkg/dpkg.cfg &lt;&lt; "EOF"
+<literal>force-not-root
+force-bad-path</literal>
+EOF</userinput></screen>
+
+  </sect2>
+
+</sect1>

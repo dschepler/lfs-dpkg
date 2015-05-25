@@ -87,9 +87,19 @@ make -C src xgettext</userinput></screen>
     this stage.</para>
 
     <para>Install the <command>msgfmt</command>, <command>msgmerge</command> and
-    <command>xgettext</command> programs:</para>
+    <command>xgettext</command> programs to a temporary directory:</para>
 
-<screen><userinput remap="install">cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin</userinput></screen>
+<screen><userinput remap="install">mkdir -pv ../debian/tmp/tools/bin
+cp -v src/{msgfmt,msgmerge,xgettext} ../debian/tmp/tools/bin</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>cd ..
+buildpkg --package=gettext-pass1</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../gettext-pass1_&gettext-version;_*.deb</userinput></screen>
 
   </sect2>
 

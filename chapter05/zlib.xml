@@ -5,19 +5,19 @@
   %general-entities;
 ]>
 
-<sect1 id="ch-tools-gawk" role="wrap">
-  <?dbhtml filename="gawk.html"?>
+<sect1 id="ch-tools-zlib" role="wrap">
+  <?dbhtml filename="zlib.html"?>
 
   <sect1info condition="script">
-    <productname>gawk</productname>
-    <productnumber>&gawk-version;</productnumber>
-    <address>&gawk-url;</address>
+    <productname>zlib</productname>
+    <productnumber>&zlib-version;</productnumber>
+    <address>&zlib-url;</address>
   </sect1info>
 
-  <title>Gawk-&gawk-version;</title>
+  <title>Zlib-&zlib-version;</title>
 
-  <indexterm zone="ch-tools-gawk">
-    <primary sortas="a-Gawk">Gawk</primary>
+  <indexterm zone="ch-tools-zlib">
+    <primary sortas="a-zlib">Zlib</primary>
     <secondary>tools</secondary>
   </indexterm>
 
@@ -25,7 +25,7 @@
     <title/>
 
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-    href="../chapter06/gawk.xml"
+    href="../chapter06/zlib.xml"
     xpointer="xpointer(/sect1/sect2[1]/para[1])"/>
 
     <segmentedlist>
@@ -33,27 +33,27 @@
       <segtitle>&diskspace;</segtitle>
 
       <seglistitem>
-        <seg>&gawk-ch5-sbu;</seg>
-        <seg>&gawk-ch5-du;</seg>
+        <seg>&zlib-ch5-sbu;</seg>
+        <seg>&zlib-ch5-du;</seg>
       </seglistitem>
     </segmentedlist>
 
   </sect2>
 
   <sect2 role="installation">
-    <title>Installation of Gawk</title>
+    <title>Installation of Zlib</title>
 
-    <para>Prepare Gawk for compilation:</para>
+    <para>Prepare Zlib for compilation:</para>
 
 <screen><userinput remap="configure">./configure --prefix=/tools</userinput></screen>
 
-    <para>Compile the package:</para>
+   <para>Compile the package:</para>
 
 <screen><userinput remap="make">make</userinput></screen>
 
     <para>Compilation is now complete. As discussed earlier, running the test
     suite is not mandatory for the temporary tools here in this chapter. To run
-    the Gawk test suite anyway, issue the following command:</para>
+    the Zlib test suite anyway, issue the following command:</para>
 
 <screen><userinput remap="test">make check</userinput></screen>
 
@@ -63,11 +63,11 @@
 
     <para>Create the package archive:</para>
 
-<screen><userinput>buildpkg --package=gawk-pass1</userinput></screen>
+<screen><userinput>buildpkg --package=zlib-pass1</userinput></screen>
 
     <para>Install the package:</para>
 
-<screen><userinput>dpkg -i ../gawk-pass1_&gawk-version;_*.deb</userinput></screen>
+<screen><userinput>dpkg -i ../zlib-pass1_&zlib-version;_*.deb</userinput></screen>
 
   </sect2>
 
@@ -75,7 +75,7 @@
     <title/>
 
     <para>Details on this package are located in
-    <xref linkend="contents-gawk" role="."/></para>
+    <xref linkend="contents-zlib" role="."/></para>
 
   </sect2>
 

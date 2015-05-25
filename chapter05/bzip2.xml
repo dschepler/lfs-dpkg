@@ -48,9 +48,17 @@
 
 <screen><userinput remap="make">make</userinput></screen>
 
+    <para>Install the package to a temporary directory:</para>
+
+<screen><userinput remap="install">make PREFIX=$(pwd)/debian/tmp/tools install</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=bzip2-pass1</userinput></screen>
+
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make PREFIX=/tools install</userinput></screen>
+<screen><userinput>dpkg -i ../bzip2-pass1_&bzip2-version;_*.deb</userinput></screen>
 
   </sect2>
 

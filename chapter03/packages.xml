@@ -141,6 +141,14 @@
     </varlistentry>
 
     <varlistentry>
+      <term>Dpkg (&dpkg-version;) - <token>&dpkg-size;</token>:</term>
+      <listitem>
+	<para>Download: <ulink url="&dpkg-url;"/></para>
+	<para>MD5 sum: <literal>&dpkg-md5;</literal></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
       <term>E2fsprogs (&e2fsprogs-version;) - <token>&e2fsprogs-size;</token>:</term>
       <listitem>
         <para>Home page: <ulink url="&e2fsprogs-home;"/></para>
@@ -362,6 +370,14 @@
         <para>Home page: <ulink url="&less-home;"/></para>
         <para>Download: <ulink url="&less-url;"/></para>
         <para>MD5 sum: <literal>&less-md5;</literal></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>LFS-Dpkg-Wrapper - <token>&lfs-dpkg-wrapper-size;</token>:</term>
+      <listitem>
+	<para>Download: <ulink url="&lfs-dpkg-wrapper-url;"/></para>
+	<para>MD5 sum: <literal>&lfs-dpkg-wrapper-md5;</literal></para>
       </listitem>
     </varlistentry>
 

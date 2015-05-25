@@ -133,6 +133,15 @@
       </listitem>
 
       <listitem>
+	<para>Dpkg</para>
+
+	<para>This package contains a low-level package manager. Using this
+	provides automatic backups of the initial state of a software
+	installation, as well as clean removal and upgrade of software
+	packages.</para>
+      </listitem>
+
+      <listitem>
         <para>E2fsprogs</para>
 
         <para>This package contains the utilities for handling the ext2, ext3
@@ -309,6 +318,14 @@
         <para>This package contains a very nice text file viewer that
         allows scrolling up or down when viewing a file. It is also used by
         Man-DB for viewing manpages.</para>
+      </listitem>
+
+      <listitem>
+	<para>LFS-Dpkg-Wrapper</para>
+
+	<para>This package contains a wrapper script to automate the
+	deb creation process. Without it, the build instructions would have
+	a great	deal of repetition.</para>
       </listitem>
 
       <listitem>

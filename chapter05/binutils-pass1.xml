@@ -43,11 +43,7 @@
   <sect2 role="installation">
     <title>Installation of Cross Binutils</title>
 
-    <note><para>Go back and re-read the notes in the previous section.
-    Understanding the notes labeled important will save you a lot
-    of problems later.</para></note>
-
-    <para>It is important that Binutils be the first package compiled
+    <para>It is important that Binutils be the first toolchain package compiled
     because both Glibc and GCC perform various tests on the available
     linker and assembler to determine which of their own features to
     enable.</para>
@@ -82,15 +78,6 @@ cd ../binutils-build</userinput></screen>
 
     <variablelist>
       <title>The meaning of the configure options:</title>
-
-      <varlistentry>
-        <term><parameter>--prefix=/tools</parameter></term>
-        <listitem>
-          <para>This tells the configure script to prepare to install the
-          Binutils programs in the <filename class="directory">/tools</filename>
-          directory.</para>
-        </listitem>
-      </varlistentry>
 
       <varlistentry>
         <term><parameter>--with-sysroot=$LFS</parameter></term>
@@ -151,12 +138,44 @@ cd ../binutils-build</userinput></screen>
     the toolchain:</para>
 
 <screen><userinput remap="install">case $(uname -m) in
-  x86_64) mkdir -v /tools/lib &amp;&amp; ln -sv lib /tools/lib64 ;;
+  x86_64) mkdir -pv debian/tmp/tools/lib &amp;&amp;
+          ln -sv lib debian/tmp/tools/lib64 ;;
 esac</userinput></screen>
+
+    <para>Install the package to a temporary directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Build the package archive:</para>
+
+<screen><userinput>PRESERVE_LIB64=1 buildpkg --package=binutils-pass1 --version=&binutils-version;</userinput></screen>
+
+    <variablelist>
+      <title>The meaning of the buildpkg parameters:</title>
+
+      <varlistentry>
+	<term><parameter>PRESERVE_LIB64=1</parameter></term>
+	<listitem>
+	  <para>Setting this environment variable overrides the package
+	  fixup script which would normally remove the /tools/lib64
+	  symlink when building on x86_64.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><parameter>--version=&binutils-version;</parameter></term>
+	<listitem>
+	  <para>Since the working directory name is binutils-build, the
+	  buildpkg script needs to be told the actual package version
+	  to use.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
 
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput>dpkg -i ../binutils-pass1_&binutils-version;_*.deb</userinput></screen>
 
   </sect2>
 

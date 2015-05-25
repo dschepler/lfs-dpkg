@@ -79,14 +79,27 @@
 
 <screen><userinput remap="test">make tests</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>Make a link for the programs that use <command>sh</command> for
     a shell:</para>
 
-<screen><userinput remap="install">ln -sv bash /tools/bin/sh</userinput></screen>
+<screen><userinput remap="install">ln -sv bash debian/tmp/tools/bin/sh</userinput></screen>
+
+    <para>Fix the permissions of bashbug so that dpkg can install it
+    as a non-root user:</para>
+
+<screen><userinput remap="install">chmod -v u+w debian/tmp/tools/bin/bashbug</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=bash-pass1</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../bash-pass1_&bash-version;_*.deb</userinput></screen>
 
   </sect2>
 

@@ -64,9 +64,21 @@
     <para>Only a few of the utilities and libraries need to be installed at this
     time:</para>
 
-<screen><userinput remap="install">cp -v perl cpan/podlators/pod2man /tools/bin
-mkdir -pv /tools/lib/perl5/&perl-version;
-cp -Rv lib/* /tools/lib/perl5/&perl-version;</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/tools/bin debian/tmp/tools/lib/perl5/&perl-version;
+cp -v perl cpan/podlators/pod2man debian/tmp/tools/bin
+cp -Rv lib/* debian/tmp/tools/lib/perl5/&perl-version;</userinput></screen>
+
+    <para>Fix permissions of the Perl modules:</para>
+
+<screen><userinput>chmod --changes -R u+w debian/tmp/tools/lib/perl5/&perl-version;</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=perl-pass1</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../perl-pass1_&perl-version;_*.deb</userinput></screen>
 
   </sect2>
 

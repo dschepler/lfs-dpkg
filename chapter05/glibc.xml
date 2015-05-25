@@ -209,9 +209,34 @@ esac</userinput></screen>
       linkend="ch-system-glibc" role="."/></para>
     </note>
 -->
+    <para>At this point, package ownership of the /tools/lib64 symlink
+    for x86_64 builds will be transferred to glibc-pass1, as this
+    ownership makes more sense and binutils-pass1 will soon be removed.
+    To create the new package's symbolic link:</para>
+
+<screen><userinput remap="install">case $(uname -m) in
+  x86_64) mkdir -pv debian/tmp/tools/lib &amp;&amp;
+          ln -sv lib debian/tmp/tools/lib64 ;;
+esac</userinput></screen>
+
+    <para>Install the package into a temporary directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>PRESERVE_LIB64=1 buildpkg --package=glibc-pass1 --version=&glibc-version;</userinput></screen>
+
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput>dpkg -i ../glibc-pass1_&glibc-version;_*.deb</userinput></screen>
+
+    <para>As ldconfig was just installed, all utilities required by
+    dpkg installs are now on the LFS user's path, and the --force-bad-path
+    option is no longer necessary. Remove it from the dpkg
+    configuration:</para>
+
+<screen><userinput>sed -i -e '/^force-bad-path$/ d' /tools/etc/dpkg/dpkg.cfg</userinput></screen>
 
   <caution>
     <para>At this point, it is imperative to stop and ensure that the basic

@@ -96,10 +96,10 @@ sed 's:/usr/local/bin:/bin:' configure.orig &gt; configure</userinput></screen>
 
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make SCRIPTS="" install</userinput></screen>
+<screen><userinput remap="install">make SCRIPTS="" DESTDIR=$(pwd)/debian/tmp install</userinput></screen>
 
     <variablelist>
-      <title>The meaning of the make parameter:</title>
+      <title>The meaning of the new make parameter:</title>
 
       <varlistentry>
         <term><parameter>SCRIPTS=""</parameter></term>
@@ -110,6 +110,14 @@ sed 's:/usr/local/bin:/bin:' configure.orig &gt; configure</userinput></screen>
       </varlistentry>
 
     </variablelist>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=expect-pass1 --version=&expect-version;</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../expect-pass1_&expect-version;_*.deb</userinput></screen>
 
   </sect2>
 

@@ -52,13 +52,18 @@
 
 <screen><userinput remap="pre">make mrproper</userinput></screen>
 
-    <para>Now extract the user-visible kernel headers from the source.
-    They are placed in an intermediate local directory and copied to the needed
-    location because the extraction process removes any existing files in
-    the target directory.</para>
+    <para>Now extract the user-visible kernel headers from the source,
+    placing them in the standard package staging directory:</para>
 
-<screen><userinput remap="make">make INSTALL_HDR_PATH=dest headers_install
-</userinput><userinput remap="install">cp -rv dest/include/* /tools/include</userinput></screen>
+<screen><userinput remap="install">make INSTALL_HDR_PATH=debian/tmp/tools headers_install</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=linux-headers-pass1</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../linux-headers-pass1_&linux-version;_*.deb</userinput></screen>
 
   </sect2>
 

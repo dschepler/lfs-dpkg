@@ -97,9 +97,17 @@
 
 <screen><userinput remap="make">make</userinput></screen>
 
+    <para>Install the package to a temporary directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=util-linux-pass1</userinput></screen>
+
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput>dpkg -i ../util-linux-pass1_&util-linux-version;_*.deb</userinput></screen>
 
   </sect2>
 

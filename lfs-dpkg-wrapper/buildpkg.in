@@ -1,0 +1,58 @@
+#!/bin/bash
+
+prgname="$0"
+
+usage() {
+    echo "Usage: $prgname [args] [packagedir]" >&2
+    echo "Arguments:" >&2
+    echo "  -p|--package packagename  Sets the package name" >&2
+    echo "  -v|--version version      Sets the package version" >&2
+    echo "  -n|--dryrun               Only prints what would be done" >&2
+    echo "  -h|--help                 Displays this help text" >&2
+}
+
+pwdbase=$(basename $(pwd))
+package=${pwdbase%-*}
+version=${pwdbase##*-}
+arch=$(dpkg --print-architecture)
+dryrun=0
+packagedir=debian/tmp
+packagelibdir=@PACKAGE_LIBDIR@
+
+TEMP=`getopt -o p:v:h --long package:,version:,help \
+    -n buildpkg -- "$@"`
+
+if [ $? != 0 ]; then
+    usage
+    exit 1
+fi
+
+eval set -- "$TEMP"
+
+while true; do
+    case "$1" in
+        -p|--package) package="$2"; shift 2 ;;
+        -v|--version) version="$2"; shift 2 ;;
+	-n|--dryrun) dryrun=1 ;;
+        -h|--help) usage; exit 0 ;;
+        --) shift; break ;;
+        *) echo "Internal error"; exit 1 ;;
+    esac
+done
+
+case "$#" in
+0) ;;
+1) packagedir="$1"; shift ;;
+*) usage; exit 1 ;;
+esac
+
+doit() {
+    echo "    $*"
+    if [ "$dryrun" = "0" ]; then
+	eval "$*"
+    fi
+}
+    
+for f in $packagelibdir/*.sh; do
+    source $f
+done
