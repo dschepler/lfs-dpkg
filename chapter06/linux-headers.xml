@@ -52,16 +52,26 @@
 
 <screen><userinput remap="pre">make mrproper</userinput></screen>
 
-    <para>Now extract the user-visible kernel headers from the source.
-    They are placed in an intermediate local directory and copied to the needed
-    location because the extraction process removes any existing files in
-    the target directory.  There are also some hidden files used by
-    the kernel developers and not needed by LFS that are removed from
-    the intermediate directory.</para>
+    <para>Now extract the user-visible kernel headers from the source,
+    placing them in the standard package staging directory:</para>
 
-<screen><userinput remap="make">make INSTALL_HDR_PATH=dest headers_install
-find dest/include \( -name .install -o -name ..install.cmd \) -delete
-</userinput><userinput remap="install">cp -rv dest/include/* /usr/include</userinput></screen>
+<screen><userinput remap="install">make INSTALL_HDR_PATH=debian/tmp/usr headers_install</userinput></screen>
+
+    <para>Remove some hidden files used by the kernel developers and
+    not needed by LFS from the staging directory:</para>
+
+<screen><userinput>find debian/tmp/usr/include \( -name .install -o -name ..install.cmd \) -delete</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=linux-headers</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../linux-headers_&linux-version;_*.deb</userinput></screen>
+
+    <note><para>linux-headers-pass1 cannot be removed yet as the toolchain
+    built in the previous chapter still requires it.</para></note>
 
   </sect2>
 
