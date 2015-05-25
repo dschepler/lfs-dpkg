@@ -53,17 +53,35 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>The shared library needs to be moved to
     <filename class="directory">/lib</filename>, and as a result the
     <filename class="extension">.so</filename> file in
     <filename class="directory">/usr/lib</filename> will need to be recreated:</para>
 
-<screen><userinput remap="install">mv -v /usr/lib/libz.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/lib
+mv -v debian/tmp/usr/lib/libz.so.* debian/tmp/lib
+ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libz.so) debian/tmp/usr/lib/libz.so</userinput></screen>
+
+    <para>The static zlib library is needed for several regression
+    tests later in this chapter, but after that it will not be needed.
+    In order to make it easy to remove this library, move it to a
+    separate package:</para>
+
+<screen><userinput>mkdir -pv debian/tmp-static/usr/lib
+mv -v debian/tmp/usr/lib/libz.a debian/tmp-static/usr/lib</userinput></screen>
+
+    <para>Create the package archives:</para>
+
+<screen><userinput>buildpkg
+buildpkg --package=zlib-static debian/tmp-static</userinput></screen>
+
+    <para>Install the packages:</para>
+
+<screen><userinput>dpkg -i ../zlib_&zlib-version;_*.deb ../zlib-static_&zlib-version;_*.deb</userinput></screen>
 
   </sect2>
 
