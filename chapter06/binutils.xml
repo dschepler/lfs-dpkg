@@ -112,9 +112,27 @@ cd ../binutils-build</userinput></screen>
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make tooldir=/usr install</userinput></screen>
+<screen><userinput remap="install">make tooldir=/usr DESTDIR=$(pwd)/debian/tmp install</userinput></screen>
+
+    <para>Split the static libraries (needed for future regression tests)
+    into a separate package:</para>
+
+<screen><userinput>mkdir -pv debian/tmp-static/usr/lib
+mv -v debian/tmp/usr/lib/lib{bfd,opcodes}.a debian/tmp-static/usr/lib</userinput></screen>
+
+    <para>Create the package archives:</para>
+
+<screen><userinput>buildpkg --version=&binutils-version;
+buildpkg --package=binutils-static --version=&binutils-version; debian/tmp-static</userinput></screen>
+
+    <para>Install the packages:</para>
+
+<screen><userinput>dpkg -i ../binutils_&binutils-version;_*.deb ../binutils-static_&binutils-version;_*.deb</userinput></screen>
+
+    <note><para>binutils-pass2 cannot be removed yet as gcc-pass2 still
+    requires it.</para></note>
 
   </sect2>
 
