@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.5.&nbsp;LFS-Dpkg-Wrapper-0.1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
+    media="print" />
+  </head>
+  <body class="lfs" id="lfs-20150524-dpkg">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 20150524-dpkg
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dpkg-pass1.html" title=
+          "Dpkg-1.18.0 - Pass 1">Prev</a>
+          <p>
+            Dpkg-1.18.0 - Pass 1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="binutils-pass1.html" title=
+          "Binutils-2.25 - Pass 1">Next</a>
+          <p>
+            Binutils-2.25 - Pass 1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-lfs-dpkg-wrapper" name=
+        "ch-tools-lfs-dpkg-wrapper"></a>5.5. LFS-Dpkg-Wrapper-0.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">unknown</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.5.1. Installation of LFS-Dpkg-Wrapper
+        </h2>
+        <p>
+          Repeating the packaging commands from the previous section for
+          every package would quickly become repetitive, and distract the
+          reader from the actual build process. Therefore, this section will
+          create a wrapper script to automate the process.
+        </p>
+        <p>
+          Create a version of the script which will be able to run using the
+          install image:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make PREFIX=$(pwd)/debian/tmp/tools
+mv -v buildpkg buildpkg.tmp
+make clean</kbd>
+</pre>
+        <p>
+          Install the package into a temporary directory:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp PREFIX=/tools \
+    USE_TOOLS_SCRIPTS=1</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the make parameters:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>PREFIX=/tools</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells the Makefile to generate an install image with the
+                scripts in /tools instead of /usr.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>USE_TOOLS_SCRIPTS=1</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells the Makefile to use the package fixup scripts for
+                packages from this chapter installing contents in /tools.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Run the script from the temporary directory to create a package
+          archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./buildpkg.tmp --package=lfs-dpkg-wrapper-pass1</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the buildpkg parameters:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--package=lfs-dpkg-wrapper-pass1</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Normally, based on the current working directory name of
+                lfs-dpkg-wrapper-0.1, buildpkg would create a package with
+                name lfs-dpkg-wrapper and version 0.1. For this chapter, it
+                is necessary to append -pass1 or -pass2 to package names, as
+                intermediate packages from this chapter and the final
+                packages from the next will often need to coexist for a time.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../lfs-dpkg-wrapper-pass1_0.1_*.deb</kbd>
+</pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dpkg-pass1.html" title=
+          "Dpkg-1.18.0 - Pass 1">Prev</a>
+          <p>
+            Dpkg-1.18.0 - Pass 1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="binutils-pass1.html" title=
+          "Binutils-2.25 - Pass 1">Next</a>
+          <p>
+            Binutils-2.25 - Pass 1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

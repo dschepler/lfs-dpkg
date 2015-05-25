@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.38.&nbsp;Dpkg-1.18.0 - Pass 2
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
+    media="print" />
+  </head>
+  <body class="lfs" id="lfs-20150524-dpkg">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 20150524-dpkg
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="zlib.html" title="Zlib-1.2.8">Prev</a>
+          <p>
+            Zlib-1.2.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="changingowner.html" title=
+          "Changing Ownership">Next</a>
+          <p>
+            Changing Ownership
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-dpkg-pass2" name="ch-tools-dpkg-pass2"></a>5.38.
+        Dpkg-1.18.0 - Pass 2
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.9 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">99 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.38.1. Installation of Initial Dpkg
+        </h2>
+        <p>
+          It is now necessary to rebuild Dpkg, as the first build requires
+          the build host's system libraries.
+        </p>
+        <p>
+          Prepare Dpkg for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/tools \
+    --disable-dselect       \
+    --without-selinux       \
+    PERL_LIBDIR=/tools/lib/perl/5.20.2</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          Compilation is now complete. At this point, the Dpkg test suite
+          cannot run because the Perl installation is incomplete.
+        </p>
+        <p>
+          Install the package into a temporary directory:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
+</pre>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg --package=dpkg-pass2</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">dpkg -i --force-overwrite ../dpkg-pass2_1.18.0_*.deb</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            It is not necessary to manually remove dpkg-pass1, as Dpkg
+            already detected that all files from dpkg-pass1 were replaced and
+            automatically marked dpkg-pass1 as removed.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="zlib.html" title="Zlib-1.2.8">Prev</a>
+          <p>
+            Zlib-1.2.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="changingowner.html" title=
+          "Changing Ownership">Next</a>
+          <p>
+            Changing Ownership
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

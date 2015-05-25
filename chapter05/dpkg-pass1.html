@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.4.&nbsp;Dpkg-1.18.0 - Pass 1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
+    media="print" />
+  </head>
+  <body class="lfs" id="lfs-20150524-dpkg">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 20150524-dpkg
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="generalinstructions.html" title=
+          "General Compilation Instructions">Prev</a>
+          <p>
+            General Compilation Instructions
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lfs-dpkg-wrapper.html" title=
+          "LFS-Dpkg-Wrapper-0.1">Next</a>
+          <p>
+            LFS-Dpkg-Wrapper-0.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-dpkg-pass1" name="ch-tools-dpkg-pass1"></a>5.4.
+        Dpkg-1.18.0 - Pass 1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.9 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">99 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.4.1. Installation of Initial Dpkg
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Go back and re-read the notes in the previous section.
+            Understanding the notes labeled important will save you a lot of
+            problems later.
+          </p>
+        </div>
+        <p>
+          Fix a bug which prevents dpkg-deb from being able to build .deb
+          files when compiled without zlib support:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">sed -i -e '/control_compress_params\.level = / s/-1/9/' dpkg-deb/build.c</kbd>
+</pre>
+        <p>
+          Prepare Dpkg for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/tools \
+    --disable-dselect       \
+    --without-zlib          \
+    --without-bz2           \
+    --without-liblzma       \
+    --without-selinux       \
+    PERL_LIBDIR=/tools/lib/perl/5.20.2</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--prefix=/tools</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells the configure script to prepare to install the
+                Dpkg programs in the <code class="filename">/tools</code>
+                directory.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-dselect</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This disables building of the dselect utility, which is
+                obsolete and also useless for an LFS system.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class="parameter"><code>--without-zlib,
+              --without-bz2, --without-liblzma,
+              --without-selinux</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                These parameters disable building against various libraries
+                which might be present on the build host. In the case of the
+                first three libraries, dpkg-deb will instead call the
+                corresponding compression binaries.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>PERL_LIBDIR=/tools/lib/perl/5.20.2</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells the configure script where to install the Dpkg
+                perl modules.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Continue with compiling the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          Compilation is now complete. As discussed earlier, running the test
+          suite is not mandatory for the temporary tools here in this
+          chapter. To run the Dpkg test sute anyway, issue the following
+          command:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make check</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          In preparation for creating a package archive, also install into a
+          temporary staging directory:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the make parameters:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>DESTDIR=$(pwd)/debian/tmp</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells the build system to create an install image in
+                debian/tmp instead of installing directly to the filesystem.
+                The DESTDIR variable is supported by most packages using
+                autotools or CMake, and by quite a few packages besides.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Create a package metadata file:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -v debian/tmp/DEBIAN
+cat &gt; debian/tmp/DEBIAN/control &lt;&lt; EOF
+<code class="literal">Package: dpkg-pass1
+Version: 1.18.0
+Maintainer: Linux From Scratch
+Architecture: `dpkg --print-architecture`
+Description: LFS dpkg-pass1</code>
+EOF</kbd>
+</pre>
+        <p>
+          (Note: the command above is correct. Even though the usual file
+          creation process puts quotes around "EOF", in this case the quotes
+          would cause the backquote substitution to be skipped.)
+        </p>
+        <p>
+          Optionally, strip the binaries to be placed in the package. This
+          will reduce the required disk space:
+        </p>
+        <pre class="userinput">
+<kbd class="command">strip --strip-debug debian/tmp/tools/lib/*
+strip --strip-unneeded debian/tmp/tools/{,s}bin/*</kbd>
+</pre>
+        <p>
+          These commands will skip a number of files, reporting that it does
+          not recognize their file format. Most of these are scripts or
+          directories instead of binaries.
+        </p>
+        <p>
+          Take care <span class="emphasis"><em>not</em></span> to use
+          <em class="parameter"><code>--strip-unneeded</code></em> on the
+          libraries. The static ones would be destroyed.
+        </p>
+        <p>
+          To save more disk space, remove the documentation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">rm -rf debian/tmp/tools/share/man
+rm -rf /tools/share/man</kbd>
+</pre>
+        <p>
+          Build the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg-deb --build debian/tmp ..</kbd>
+</pre>
+        <p>
+          Initialize Dpkg's package status file and triggers directory:
+        </p>
+        <pre class="userinput">
+<kbd class="command">touch /tools/var/lib/dpkg/status
+mkdir -v /tools/var/lib/dpkg/triggers</kbd>
+</pre>
+        <p>
+          Reinstall Dpkg using the newly built package archive, in order to
+          register its contents with Dpkg:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">dpkg -i --force-not-root --force-bad-path ../dpkg-pass1_1.18.0_*.deb</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the dpkg parameters:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--force-not-root</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells dpkg to install the package even though it is not
+                being run as root.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--force-bad-path</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells dpkg to install the package even though ldconfig
+                is not yet on the LFS user's PATH.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Now set these options as the default for future dpkg runs:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /tools/etc/dpkg/dpkg.cfg &lt;&lt; "EOF"
+<code class="literal">force-not-root
+force-bad-path</code>
+EOF</kbd>
+</pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="generalinstructions.html" title=
+          "General Compilation Instructions">Prev</a>
+          <p>
+            General Compilation Instructions
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lfs-dpkg-wrapper.html" title=
+          "LFS-Dpkg-Wrapper-0.1">Next</a>
+          <p>
+            LFS-Dpkg-Wrapper-0.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
