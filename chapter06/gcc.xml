@@ -116,26 +116,41 @@ cd ../gcc-build</userinput></screen>
     Unless the test results are vastly different from those at the above URL,
     it is safe to continue.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>Some packages expect the C preprocessor to be installed in the
     <filename class="directory">/lib</filename> directory.
     To support those packages, create this symlink:</para>
 
-<screen><userinput remap="install">ln -sv ../usr/bin/cpp /lib</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/lib
+ln -sv ../usr/bin/cpp debian/tmp/lib</userinput></screen>
 
     <para>Many packages use the name <command>cc</command> to call the C
     compiler. To satisfy those packages, create a symlink:</para>
 
-<screen><userinput remap="install">ln -sv gcc /usr/bin/cc</userinput></screen>
+<screen><userinput remap="install">ln -sv gcc debian/tmp/usr/bin/cc</userinput></screen>
 
     <para>Add a compatibility symlink to enable building programs with
     Link Time Optimization (LTO):</para> 
 
-<screen><userinput remap="install">install -v -dm755 /usr/lib/bfd-plugins
-ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/&gcc-version;/liblto_plugin.so /usr/lib/bfd-plugins/</userinput></screen>
+<screen><userinput remap="install">install -v -dm755 debian/tmp/usr/lib/bfd-plugins
+ln -sfv ../../libexec/gcc/$(./gcc/xgcc -dumpmachine)/&gcc-version;/liblto_plugin.so \
+    debian/tmp/usr/lib/bfd-plugins/</userinput></screen>
+
+    <para>Finally, move a misplaced file:</para>
+
+<screen><userinput remap="install">mkdir -pv debian/tmp/usr/share/gdb/auto-load/usr/lib
+mv -v debian/tmp/usr/lib*/*gdb.py debian/tmp/usr/share/gdb/auto-load/usr/lib</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --version=&gcc-version;</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../gcc_&gcc-version;_*.deb</userinput></screen>
 
     <para>Now that our final toolchain is in place, it is important to again ensure
     that compiling and linking will work as expected. We do this by performing
@@ -279,10 +294,13 @@ SEARCH_DIR("/usr/lib");</computeroutput></screen>
     href="adjusting.xml"
     xpointer="xpointer(//*[@os='v'])"/>
 
-    <para>Finally, move a misplaced file:</para>
+    <para>Once these checks have passed, it is safe to remove the
+    toolchain from the previous chapter:</para>
 
-<screen><userinput remap="install">mkdir -pv /usr/share/gdb/auto-load/usr/lib
-mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib</userinput></screen>
+<screen><userinput>rm -fv /tools/bin/ld-old \
+       /tools/$(/tools/bin/gcc -dumpmachine)/bin/ld-old \
+       /tools/lib/gcc/$(/tools/bin/gcc -dumpmachine)/&gcc-version;/specs
+dpkg --purge binutils-pass2 gcc-pass2</userinput></screen>
 
   </sect2>
 
