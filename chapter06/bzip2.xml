@@ -80,20 +80,40 @@ make clean</userinput></screen>
 
 <screen><userinput remap="make">make</userinput></screen>
 
-    <para>Install the programs:</para>
+    <para>Install the programs to a temporary directory:</para>
 
-<screen><userinput remap="install">make PREFIX=/usr install</userinput></screen>
+<screen><userinput remap="install">make PREFIX=$(pwd)/debian/tmp/usr install</userinput></screen>
 
     <para>Install the shared <command>bzip2</command> binary into the
     <filename class="directory">/bin</filename> directory, make
     some necessary symbolic links, and clean up:</para>
 
-<screen><userinput remap="install">cp -v bzip2-shared /bin/bzip2
-cp -av libbz2.so* /lib
-ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so
-rm -v /usr/bin/{bunzip2,bzcat,bzip2}
-ln -sv bzip2 /bin/bunzip2
-ln -sv bzip2 /bin/bzcat</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/{bin,lib}
+cp -v bzip2-shared debian/tmp/bin/bzip2
+cp -av libbz2.so* debian/tmp/lib
+ln -sv ../../lib/libbz2.so.1.0 debian/tmp/usr/lib/libbz2.so
+rm -v debian/tmp/usr/bin/{bunzip2,bzcat,bzip2}
+ln -sv bzip2 debian/tmp/bin/bunzip2
+ln -sv bzip2 debian/tmp/bin/bzcat</userinput></screen>
+
+    <para>Split the static libraries (needed for future regression tests)
+    into a separate package:</para>
+
+<screen><userinput>mkdir -pv debian/tmp-static/usr/lib
+mv -v debian/tmp/usr/lib/libbz2.a debian/tmp-static/usr/lib</userinput></screen>
+
+    <para>Create the package archives:</para>
+
+<screen><userinput>buildpkg
+buildpkg --package=bzip2-static debian/tmp-static</userinput></screen>
+
+    <para>Install the packages:</para>
+
+<screen><userinput>dpkg -i ../bzip2_&bzip2-version;_*.deb ../bzip2-static_&bzip2-version;_*.deb</userinput></screen>
+
+    <para>Remove the previous version of the package:</para>
+
+<screen><userinput>dpkg --purge bzip2-pass1</userinput></screen>
 
   </sect2>
 
