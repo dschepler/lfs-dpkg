@@ -5,17 +5,17 @@
     <meta http-equiv="Content-Type" content=
     "application/xhtml+xml; charset=iso-8859-1" />
     <title>
-      6.13.&nbsp;Binutils-2.25
+      6.16.&nbsp;Binutils-2.25
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150524-dpkg">
+  <body class="lfs" id="lfs-20150525-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150524-dpkg
+        Linux From Scratch - Version 20150525-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -39,13 +39,13 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-binutils" name="ch-system-binutils"></a>6.13.
+        <a id="ch-system-binutils" name="ch-system-binutils"></a>6.16.
         Binutils-2.25
       </h1>
       <div class="package" lang="en" xml:lang="en">
@@ -68,7 +68,7 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.13.1. Installation of Binutils
+          6.16.1. Installation of Binutils
         </h2>
         <p>
           Verify that the PTYs are working properly inside the chroot
@@ -158,15 +158,48 @@ cd ../binutils-build</kbd>
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          Install the package to a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make tooldir=/usr install</kbd>
+<kbd class=
+"command">make tooldir=/usr DESTDIR=$(pwd)/debian/tmp install</kbd>
 </pre>
+        <p>
+          Split the static libraries (needed for future regression tests)
+          into a separate package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -pv debian/tmp-static/usr/lib
+mv -v debian/tmp/usr/lib/lib{bfd,opcodes}.a debian/tmp-static/usr/lib</kbd>
+</pre>
+        <p>
+          Create the package archives:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg --version=2.25
+buildpkg --package=binutils-static --version=2.25 debian/tmp-static</kbd>
+</pre>
+        <p>
+          Install the packages:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">dpkg -i ../binutils_2.25_*.deb ../binutils-static_2.25_*.deb</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            binutils-pass2 cannot be removed yet as gcc-pass2 still requires
+            it.
+          </p>
+        </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-binutils" name="contents-binutils"></a>6.13.2.
+          <a id="contents-binutils" name="contents-binutils"></a>6.16.2.
           Contents of Binutils
         </h2>
         <div class="segmentedlist">
@@ -494,7 +527,7 @@ cd ../binutils-build</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>

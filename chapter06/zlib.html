@@ -5,17 +5,17 @@
     <meta http-equiv="Content-Type" content=
     "application/xhtml+xml; charset=iso-8859-1" />
     <title>
-      6.11.&nbsp;Zlib-1.2.8
+      6.14.&nbsp;Zlib-1.2.8
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150524-dpkg">
+  <body class="lfs" id="lfs-20150525-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150524-dpkg
+        Linux From Scratch - Version 20150525-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -40,13 +40,13 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-zlib" name="ch-system-zlib"></a>6.11. Zlib-1.2.8
+        <a id="ch-system-zlib" name="ch-system-zlib"></a>6.14. Zlib-1.2.8
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
@@ -68,7 +68,7 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.11.1. Installation of Zlib
+          6.14.1. Installation of Zlib
         </h2>
         <p>
           Prepare Zlib for compilation:
@@ -89,10 +89,10 @@
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          Install the package to a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make install</kbd>
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
 </pre>
         <p>
           The shared library needs to be moved to <code class=
@@ -101,13 +101,47 @@
           "filename">/usr/lib</code> will need to be recreated:
         </p>
         <pre class="userinput">
-<kbd class="command">mv -v /usr/lib/libz.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so</kbd>
+<kbd class="command">mkdir -pv debian/tmp/lib
+mv -v debian/tmp/usr/lib/libz.so.* debian/tmp/lib
+ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libz.so) debian/tmp/usr/lib/libz.so</kbd>
 </pre>
+        <p>
+          The static zlib library is needed for several regression tests
+          later in this chapter, but after that it will not be needed. In
+          order to make it easy to remove this library, move it to a separate
+          package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -pv debian/tmp-static/usr/lib
+mv -v debian/tmp/usr/lib/libz.a debian/tmp-static/usr/lib</kbd>
+</pre>
+        <p>
+          Create the package archives:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg
+buildpkg --package=zlib-static debian/tmp-static</kbd>
+</pre>
+        <p>
+          Install the packages:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">dpkg -i ../zlib_1.2.8_*.deb ../zlib-static_1.2.8_*.deb</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            zlib-pass1 cannot be removed yet as dpkg-pass2 still requires it.
+          </p>
+        </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-zlib" name="contents-zlib"></a>6.11.2. Contents of
+          <a id="contents-zlib" name="contents-zlib"></a>6.14.2. Contents of
           Zlib
         </h2>
         <div class="segmentedlist">
@@ -168,7 +202,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>

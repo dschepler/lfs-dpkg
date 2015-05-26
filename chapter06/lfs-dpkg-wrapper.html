@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content=
     "application/xhtml+xml; charset=iso-8859-1" />
     <title>
-      6.53.&nbsp;Intltool-0.51.0
+      6.7.&nbsp;LFS-Dpkg-Wrapper-0.2
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -22,16 +22,17 @@
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gettext.html" title=
-          "Gettext-0.19.4">Prev</a>
+          <a accesskey="p" href="createfiles.html" title=
+          "Creating Essential Files and Symlinks">Prev</a>
           <p>
-            Gettext-0.19.4
+            Creating Essential Files and Symlinks
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="gperf.html" title="Gperf-3.0.4">Next</a>
+          <a accesskey="n" href="lfs-base.html" title=
+          "Creating Directories, Revisited">Next</a>
           <p>
-            Gperf-3.0.4
+            Creating Directories, Revisited
           </p>
         </li>
         <li class="up">
@@ -46,13 +47,13 @@
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-intltool" name="ch-system-intltool"></a>6.53.
-        Intltool-0.51.0
+        <a id="ch-system-lfs-dpkg-wrapper" name=
+        "ch-system-lfs-dpkg-wrapper"></a>6.7. LFS-Dpkg-Wrapper-0.2
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Intltool is an internationalization tool used for extracting
-          translatable strings from source files.
+          The LFS Dpkg Wrapper provides a script to automate the tasks
+          involved in creating a deb package archive.
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
@@ -62,57 +63,82 @@
             </div>
             <div class="seg">
               <strong class="segtitle">Required disk space:</strong>
-              <span class="segbody">1.3 MB</span>
+              <span class="segbody">unknown</span>
             </div>
           </div>
         </div>
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.53.1. Installation of Intltool
+          6.7.1. Installation of LFS Dpkg Wrapper
         </h2>
         <p>
-          Prepare Intltool for compilation:
+          The version of <span class=
+          "command"><strong>buildpkg</strong></span> to be used in this
+          chapter and beyond will use a different set up fixup scripts than
+          the version used in the previous chapter. In order to create the
+          new package using the new set of fixup scripts, again create a
+          temporary version of the main script which will be able to run
+          using the install image:
         </p>
         <pre class="userinput">
-<kbd class="command">./configure --prefix=/usr</kbd>
+<kbd class="command">make PREFIX=$(pwd)/debian/tmp/usr
+mv -v buildpkg buildpkg.tmp
+make clean</kbd>
 </pre>
         <p>
-          Compile the package:
+          Install the package into a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make</kbd>
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
 </pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            If you wish to customize the way that your packages are created,
+            you should take a look at the snippets in <code class=
+            "filename">debian/tmp/usr/lib/lfs-dpkg-wrapper</code>. For
+            example, if you want to preserve debugging information, then
+            remove <code class="filename">50strip.sh</code> from that
+            directory.
+          </p>
+        </div>
         <p>
-          To test the results, issue:
+          Run the custom version of the script to create a package archive:
         </p>
         <pre class="userinput">
-<kbd class="command">make check</kbd>
+<kbd class="command">./buildpkg.tmp</kbd>
 </pre>
         <p>
           Install the package:
         </p>
         <pre class="userinput">
-<kbd class="command">make install
-install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
+<kbd class="command">dpkg -i ../lfs-dpkg-wrapper_0.2_*.deb</kbd>
+</pre>
+        <p>
+          Remove the previous version of the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg --purge lfs-dpkg-wrapper-pass1</kbd>
 </pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-intltool" name="contents-intltool"></a>6.53.2.
-          Contents of Intltool
+          <a id="contents-lfs-dpkg-wrapper" name=
+          "contents-lfs-dpkg-wrapper"></a>6.7.2. Contents of LFS Dpkg Wrapper
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
-              <span class="segbody">intltool-extract, intltool-merge,
-              intltool-prepare, intltool-update, and intltoolize</span>
+              <strong class="segtitle">Installed script:</strong>
+              <span class="segbody">/usr/bin/buildpkg</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
-              <span class="segbody">/usr/share/doc/intltool-0.51.0 and
-              /usr/share/intltool</span>
+              <strong class="segtitle">Installed directory:</strong>
+              <span class="segbody">/usr/lib/lfs-dpkg-wrapper</span>
             </div>
           </div>
         </div>
@@ -129,72 +155,31 @@ install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
               <tr>
                 <td>
                   <p>
-                    <a id="intltoolize" name="intltoolize"></a><span class=
+                    <a id="buildpkg" name="buildpkg"></a><span class=
                     "term"><span class=
-                    "command"><strong>intltoolize</strong></span></span>
+                    "command"><strong>buildpkg</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    Prepares a package to use intltool
-                  </p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p>
-                    <a id="intltool-extract" name=
-                    "intltool-extract"></a><span class="term"><span class=
-                    "command"><strong>intltool-extract</strong></span></span>
-                  </p>
-                </td>
-                <td>
-                  <p>
-                    Generates header files that can be read by <span class=
-                    "command"><strong>gettext</strong></span>
+                    Apply fixups to the package staging directory and then
+                    build a package archive
                   </p>
                 </td>
               </tr>
               <tr>
                 <td>
                   <p>
-                    <a id="intltool-merge" name=
-                    "intltool-merge"></a><span class="term"><span class=
-                    "command"><strong>intltool-merge</strong></span></span>
+                    <a id="fixups" name="fixups"></a><span class=
+                    "term"><code class=
+                    "filename">/usr/lib/lfs-dpkg-wrapper</code></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    Merges translated strings into various file types
-                  </p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p>
-                    <a id="intltool-prepare" name=
-                    "intltool-prepare"></a><span class="term"><span class=
-                    "command"><strong>intltool-prepare</strong></span></span>
-                  </p>
-                </td>
-                <td>
-                  <p>
-                    Updates pot files and merges them with translation files
-                  </p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p>
-                    <a id="intltool-update" name=
-                    "intltool-update"></a><span class="term"><span class=
-                    "command"><strong>intltool-update</strong></span></span>
-                  </p>
-                </td>
-                <td>
-                  <p>
-                    Updates the po template files and merges them with the
-                    translations
+                    Contains snippets sourced by the main <span class=
+                    "command"><strong>buildpkg</strong></span> script to do
+                    the actual work
                   </p>
                 </td>
               </tr>
@@ -206,16 +191,17 @@ install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gettext.html" title=
-          "Gettext-0.19.4">Prev</a>
+          <a accesskey="p" href="createfiles.html" title=
+          "Creating Essential Files and Symlinks">Prev</a>
           <p>
-            Gettext-0.19.4
+            Creating Essential Files and Symlinks
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="gperf.html" title="Gperf-3.0.4">Next</a>
+          <a accesskey="n" href="lfs-base.html" title=
+          "Creating Directories, Revisited">Next</a>
           <p>
-            Gperf-3.0.4
+            Creating Directories, Revisited
           </p>
         </li>
         <li class="up">

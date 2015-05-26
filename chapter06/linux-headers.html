@@ -5,27 +5,27 @@
     <meta http-equiv="Content-Type" content=
     "application/xhtml+xml; charset=iso-8859-1" />
     <title>
-      6.7.&nbsp;Linux-4.0.3 API Headers
+      6.9.&nbsp;Linux-4.0.3 API Headers
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150524-dpkg">
+  <body class="lfs" id="lfs-20150525-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150524-dpkg
+        Linux From Scratch - Version 20150525-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="createfiles.html" title=
-          "Creating Essential Files and Symlinks">Prev</a>
+          <a accesskey="p" href="lfs-base.html" title=
+          "Creating Directories, Revisited">Prev</a>
           <p>
-            Creating Essential Files and Symlinks
+            Creating Directories, Revisited
           </p>
         </li>
         <li class="next">
@@ -41,14 +41,14 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="ch-system-linux-headers" name=
-        "ch-system-linux-headers"></a>6.7. Linux-4.0.3 API Headers
+        "ch-system-linux-headers"></a>6.9. Linux-4.0.3 API Headers
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
@@ -70,7 +70,7 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.7.1. Installation of Linux API Headers
+          6.9.1. Installation of Linux API Headers
         </h2>
         <p>
           The Linux kernel needs to expose an Application Programming
@@ -86,23 +86,48 @@
 <kbd class="command">make mrproper</kbd>
 </pre>
         <p>
-          Now extract the user-visible kernel headers from the source. They
-          are placed in an intermediate local directory and copied to the
-          needed location because the extraction process removes any existing
-          files in the target directory. There are also some hidden files
-          used by the kernel developers and not needed by LFS that are
-          removed from the intermediate directory.
+          Now extract the user-visible kernel headers from the source,
+          placing them in the standard package staging directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make INSTALL_HDR_PATH=dest headers_install
-find dest/include \( -name .install -o -name ..install.cmd \) -delete
-</kbd><kbd class="command">cp -rv dest/include/* /usr/include</kbd>
+<kbd class=
+"command">make INSTALL_HDR_PATH=debian/tmp/usr headers_install</kbd>
 </pre>
+        <p>
+          Remove some hidden files used by the kernel developers and not
+          needed by LFS from the staging directory:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">find debian/tmp/usr/include \( -name .install -o -name ..install.cmd \) -delete</kbd>
+</pre>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg --package=linux-headers</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../linux-headers_4.0.3_*.deb</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            linux-headers-pass1 cannot be removed yet as the toolchain built
+            in the previous chapter still requires it.
+          </p>
+        </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-linux-headers" name=
-          "contents-linux-headers"></a>6.7.2. Contents of Linux API Headers
+          "contents-linux-headers"></a>6.9.2. Contents of Linux API Headers
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
@@ -279,10 +304,10 @@ find dest/include \( -name .install -o -name ..install.cmd \) -delete
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="createfiles.html" title=
-          "Creating Essential Files and Symlinks">Prev</a>
+          <a accesskey="p" href="lfs-base.html" title=
+          "Creating Directories, Revisited">Prev</a>
           <p>
-            Creating Essential Files and Symlinks
+            Creating Directories, Revisited
           </p>
         </li>
         <li class="next">
@@ -298,7 +323,7 @@ find dest/include \( -name .install -o -name ..install.cmd \) -delete
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>

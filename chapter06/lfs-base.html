@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.8.&nbsp;Creating Directories, Revisited
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
+    media="print" />
+  </head>
+  <body class="lfs" id="lfs-20150525-dpkg">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 20150525-dpkg
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="lfs-dpkg-wrapper.html" title=
+          "LFS-Dpkg-Wrapper-0.2">Prev</a>
+          <p>
+            LFS-Dpkg-Wrapper-0.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="linux-headers.html" title=
+          "Linux-4.0.3 API Headers">Next</a>
+          <p>
+            Linux-4.0.3 API Headers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-lfs-base" name="ch-system-lfs-base"></a>6.8.
+        Creating Directories, Revisited
+      </h1>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          This section is completely optional.
+        </p>
+      </div>
+      <p>
+        If you wish to register the file system directories previously
+        created, then first create a working directory:
+      </p>
+      <pre class="userinput">
+<kbd class="command">mkdir -pv /sources/lfs-base-20150525-dpkg
+cd /sources/lfs-base-20150525-dpkg</kbd>
+</pre>
+      <p>
+        Repeat the creation of a standard directory tree, but this time
+        create the directories in a staging directory:
+      </p>
+      <pre class="userinput">
+<kbd class="command">mkdir -pv debian/tmp/{dev,proc,sys,run}
+mkdir -pv debian/tmp/{bin,boot,etc/{opt,sysconfig},home,lib/firmware,mnt,opt}
+mkdir -pv debian/tmp/{media/{floppy,cdrom},sbin,srv,var}
+install -dv -m 0750 debian/tmp/root
+install -dv -m 1777 debian/tmp/tmp debian/tmp/var/tmp
+mkdir -pv debian/tmp/usr/{,local/}{bin,include,lib,sbin,src}
+mkdir -pv debian/tmp/usr/{,local/}share/{color,dict,doc,info,locale,man}
+mkdir -v  debian/tmp/usr/{,local/}share/{misc,terminfo,zoneinfo}
+mkdir -v  debian/tmp/usr/libexec
+mkdir -pv debian/tmp/usr/{,local/}share/man/man{1..8}
+
+case $(uname -m) in
+ x86_64) ln -sv lib debian/tmp/lib64
+         ln -sv lib debian/tmp/usr/lib64
+         ln -sv lib debian/tmp/usr/local/lib64 ;;
+esac
+
+mkdir -v debian/tmp/var/{log,mail,spool}
+ln -sv debian/tmp/run debian/tmp/var/run
+ln -sv debian/tmp/run/lock debian/tmp/var/lock
+mkdir -pv debian/tmp/var/{opt,cache,lib/{color,misc,locate},local}
+
+ln -sv /proc/self/mounts debian/tmp/etc/mtab</kbd>
+</pre>
+      <p>
+        Create the package archive:
+      </p>
+      <pre class="userinput">
+<kbd class=
+"command">PRESERVE_LIB64=1 buildpkg --package=lfs-base --version=20150525-dpkg</kbd>
+</pre>
+      <p>
+        Install the package:
+      </p>
+      <pre class="userinput">
+<kbd class="command">dpkg -i ../lfs-base_20150525-dpkg_*.deb</kbd>
+</pre>
+      <p>
+        Now, as usual, you may remove the working directory:
+      </p>
+      <pre class="userinput">
+<kbd class="command">cd ..
+rm -rf lfs-base-20150525-dpkg</kbd>
+</pre>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          It is not a good idea to add the other symbolic links from
+          <a class="xref" href="createfiles.html" title=
+          "6.6.&nbsp;Creating Essential Files and Symlinks">Section&nbsp;6.6,
+          &ldquo;Creating Essential Files and Symlinks.&rdquo;</a> to the
+          package: they are intended to be purely temporary links which will
+          be overwritten later. If you do add them to the package, that will
+          mean you will need to use --force-overwrite for each package that
+          overwrites one of these links.
+        </p>
+        <p>
+          Likewise, it is not a good idea to add <code class=
+          "filename">/etc/passwd</code>, <code class=
+          "filename">/etc/group</code>, or the log files in <code class=
+          "filename">/var/log</code> to the package. The rationale here is:
+          if you go back and upgrade this package using a future version of
+          this book, then these files should not be overwritten. It will be
+          up to you to maintain these files.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="lfs-dpkg-wrapper.html" title=
+          "LFS-Dpkg-Wrapper-0.2">Prev</a>
+          <p>
+            LFS-Dpkg-Wrapper-0.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="linux-headers.html" title=
+          "Linux-4.0.3 API Headers">Next</a>
+          <p>
+            Linux-4.0.3 API Headers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

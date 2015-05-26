@@ -5,17 +5,17 @@
     <meta http-equiv="Content-Type" content=
     "application/xhtml+xml; charset=iso-8859-1" />
     <title>
-      6.14.&nbsp;GMP-6.0.0a
+      6.17.&nbsp;GMP-6.0.0a
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150524-dpkg">
+  <body class="lfs" id="lfs-20150525-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150524-dpkg
+        Linux From Scratch - Version 20150525-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -40,13 +40,13 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-gmp" name="ch-system-gmp"></a>6.14. GMP-6.0.0a
+        <a id="ch-system-gmp" name="ch-system-gmp"></a>6.17. GMP-6.0.0a
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
@@ -68,7 +68,7 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.14.1. Installation of GMP
+          6.17.1. Installation of GMP
         </h2>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
@@ -155,16 +155,29 @@ make html</kbd>
 "command">awk '/tests passed/{total+=$2} ; END{print total}' gmp-check-log</kbd>
 </pre>
         <p>
-          Install the package and its documentation:
+          Install the package and its documentation into a temporary
+          directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make install
-make install-html</kbd>
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp
+make install-html DESTDIR=$(pwd)/debian/tmp</kbd>
+</pre>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg --version=6.0.0a</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../gmp_6.0.0a_*.deb</kbd>
 </pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-gmp" name="contents-gmp"></a>6.14.2. Contents of
+          <a id="contents-gmp" name="contents-gmp"></a>6.17.2. Contents of
           GMP
         </h2>
         <div class="segmentedlist">
@@ -241,7 +254,7 @@ make install-html</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>

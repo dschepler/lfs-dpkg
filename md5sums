@@ -37,6 +37,7 @@ da981f86677d58a106496e68de6f8995  gzip-1.6.tar.xz
 87475eb78b1d6e6ab06686dd323ad4ba  kbd-2.0.2.tar.xz
 d6f4fef718a50bd88080de6a43bc64d8  kmod-20.tar.xz
 935b38aa2e73c888c210dedf8fd94f49  less-458.tar.gz
+f31fa5edf7562b4c85fe560f3560eaae  lfs-dpkg-wrapper-0.2.tar.xz
 d43ab9f680435a7fff35b4ace8d45b80  libcap-2.24.tar.xz
 660f4ac9340834a231d1516746d03d28  libpipeline-1.4.0.tar.gz
 1bfb9b923f2c1339b4d2ce1807064aa5  libtool-2.4.6.tar.xz

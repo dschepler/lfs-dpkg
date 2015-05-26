@@ -5,17 +5,17 @@
     <meta http-equiv="Content-Type" content=
     "application/xhtml+xml; charset=iso-8859-1" />
     <title>
-      6.18.&nbsp;Bzip2-1.0.6
+      6.21.&nbsp;Bzip2-1.0.6
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150524-dpkg">
+  <body class="lfs" id="lfs-20150525-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150524-dpkg
+        Linux From Scratch - Version 20150525-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -40,13 +40,13 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-bzip2" name="ch-system-bzip2"></a>6.18. Bzip2-1.0.6
+        <a id="ch-system-bzip2" name="ch-system-bzip2"></a>6.21. Bzip2-1.0.6
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
@@ -71,7 +71,7 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.18.1. Installation of Bzip2
+          6.21.1. Installation of Bzip2
         </h2>
         <p>
           Apply a patch that will install the documentation for this package:
@@ -128,10 +128,10 @@ make clean</kbd>
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          Install the programs:
+          Install the programs to a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make PREFIX=/usr install</kbd>
+<kbd class="command">make PREFIX=$(pwd)/debian/tmp/usr install</kbd>
 </pre>
         <p>
           Install the shared <span class=
@@ -140,17 +140,46 @@ make clean</kbd>
           symbolic links, and clean up:
         </p>
         <pre class="userinput">
-<kbd class="command">cp -v bzip2-shared /bin/bzip2
-cp -av libbz2.so* /lib
-ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so
-rm -v /usr/bin/{bunzip2,bzcat,bzip2}
-ln -sv bzip2 /bin/bunzip2
-ln -sv bzip2 /bin/bzcat</kbd>
+<kbd class="command">mkdir -pv debian/tmp/{bin,lib}
+cp -v bzip2-shared debian/tmp/bin/bzip2
+cp -av libbz2.so* debian/tmp/lib
+ln -sv ../../lib/libbz2.so.1.0 debian/tmp/usr/lib/libbz2.so
+rm -v debian/tmp/usr/bin/{bunzip2,bzcat,bzip2}
+ln -sv bzip2 debian/tmp/bin/bunzip2
+ln -sv bzip2 debian/tmp/bin/bzcat</kbd>
+</pre>
+        <p>
+          Split the static libraries (needed for future regression tests)
+          into a separate package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -pv debian/tmp-static/usr/lib
+mv -v debian/tmp/usr/lib/libbz2.a debian/tmp-static/usr/lib</kbd>
+</pre>
+        <p>
+          Create the package archives:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg
+buildpkg --package=bzip2-static debian/tmp-static</kbd>
+</pre>
+        <p>
+          Install the packages:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">dpkg -i ../bzip2_1.0.6_*.deb ../bzip2-static_1.0.6_*.deb</kbd>
+</pre>
+        <p>
+          Remove the previous version of the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg --purge bzip2-pass1</kbd>
 </pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-bzip2" name="contents-bzip2"></a>6.18.2. Contents
+          <a id="contents-bzip2" name="contents-bzip2"></a>6.21.2. Contents
           of Bzip2
         </h2>
         <div class="segmentedlist">
@@ -389,7 +418,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>

@@ -5,17 +5,17 @@
     <meta http-equiv="Content-Type" content=
     "application/xhtml+xml; charset=iso-8859-1" />
     <title>
-      6.12.&nbsp;File-5.22
+      6.15.&nbsp;File-5.22
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150524-dpkg">
+  <body class="lfs" id="lfs-20150525-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150524-dpkg
+        Linux From Scratch - Version 20150525-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -40,13 +40,13 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-file" name="ch-system-file"></a>6.12. File-5.22
+        <a id="ch-system-file" name="ch-system-file"></a>6.15. File-5.22
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
@@ -68,7 +68,7 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.12.1. Installation of File
+          6.15.1. Installation of File
         </h2>
         <p>
           Prepare File for compilation:
@@ -89,15 +89,33 @@
 <kbd class="command">make check</kbd>
 </pre>
         <p>
+          Install the package to a temporary directory:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
+</pre>
+        <p>
+          Build the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg</kbd>
+</pre>
+        <p>
           Install the package:
         </p>
         <pre class="userinput">
-<kbd class="command">make install</kbd>
+<kbd class="command">dpkg -i ../file_5.22_*.deb</kbd>
+</pre>
+        <p>
+          Remove the previous version of the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg --purge file-pass1</kbd>
 </pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-file" name="contents-file"></a>6.12.2. Contents of
+          <a id="contents-file" name="contents-file"></a>6.15.2. Contents of
           File
         </h2>
         <div class="segmentedlist">
@@ -179,7 +197,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150524-dpkg">Home</a>
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
         </li>
       </ul>
     </div>

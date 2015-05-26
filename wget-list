@@ -37,6 +37,7 @@ https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-4.0.0.tar.xz
 https://www.kernel.org/pub/linux/utils/kbd/kbd-2.0.2.tar.xz
 https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-20.tar.xz
 http://www.greenwoodsoftware.com/less/less-458.tar.gz
+http://dschepler.github.io/lfs-dpkg/lfs-dpkg-wrapper-0.2.tar.xz
 https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.24.tar.xz
 http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.4.0.tar.gz
 http://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.xz

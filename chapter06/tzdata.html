@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.12.&nbsp;Tzdata-2015d
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
+    media="print" />
+  </head>
+  <body class="lfs" id="lfs-20150525-dpkg">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 20150525-dpkg
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="glibc.html" title="Glibc-2.21">Prev</a>
+          <p>
+            Glibc-2.21
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="adjusting.html" title=
+          "Adjusting the Toolchain">Next</a>
+          <p>
+            Adjusting the Toolchain
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-tzdata" name="ch-system-tzdata"></a>6.12.
+        Tzdata-2015d
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Tzdata package contains time zone and daylight-saving time
+          data.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">unknown</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.12.1. Installation of Tzdata
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The tzdata tar file does not extract to a single directory as the
+            other tar files do. To unpack, use:
+          </p>
+          <pre class="userinput">
+<kbd class="command">mkdir -pv /sources/tzdata-2015d
+cd /sources/tzdata-2015d
+tar -x -f ../tzdata2015d.tar.gz</kbd>
+</pre>
+        </div>
+        <p>
+          Install and set up the timezone data to a temporary directory with
+          the following:
+        </p>
+        <pre class="userinput">
+<kbd class="command">ZONEINFO=debian/tmp/usr/share/zoneinfo
+mkdir -pv $ZONEINFO/{posix,right}
+
+for tz in etcetera southamerica northamerica europe africa antarctica  \
+          asia australasia backward pacificnew systemv; do
+    zic -L /dev/null   -d $ZONEINFO       -y "sh yearistype.sh" ${tz}
+    zic -L /dev/null   -d $ZONEINFO/posix -y "sh yearistype.sh" ${tz}
+    zic -L leapseconds -d $ZONEINFO/right -y "sh yearistype.sh" ${tz}
+done
+
+cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
+zic -d $ZONEINFO -p America/New_York
+unset ZONEINFO</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the zic commands:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class="parameter"><code>zic -L /dev/null
+              ...</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This creates posix timezones, without any leap seconds. It is
+                conventional to put these in both <code class=
+                "filename">zoneinfo</code> and <code class=
+                "filename">zoneinfo/posix</code>. It is necessary to put the
+                POSIX timezones in <code class="filename">zoneinfo</code>,
+                otherwise various test-suites will report errors. On an
+                embedded system, where space is tight and you do not intend
+                to ever update the timezones, you could save 1.9MB by not
+                using the <code class="filename">posix</code> directory, but
+                some applications or test-suites might produce some failures.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class="parameter"><code>zic -L
+              leapseconds ...</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This creates right timezones, including leap seconds. On an
+                embedded system, where space is tight and you do not intend
+                to ever update the timezones, or care about the correct time,
+                you could save 1.9MB by omitting the <code class=
+                "filename">right</code> directory.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class="parameter"><code>zic ... -p
+              ...</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This creates the <code class="filename">posixrules</code>
+                file. We use New York because POSIX requires the daylight
+                savings time rules to be in accordance with US rules.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../tzdata_2015d_*.deb</kbd>
+</pre>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.12.2. Configuration of Tzdata
+        </h2>
+        <p>
+          One way to determine the local time zone is to run the following
+          script:
+        </p>
+        <pre class="userinput">
+<kbd class="command">tzselect</kbd>
+</pre>
+        <p>
+          After answering a few questions about the location, the script will
+          output the name of the time zone (e.g., <span class=
+          "emphasis"><em>America/Edmonton</em></span>). There are also some
+          other possible timezones listed in <code class=
+          "filename">/usr/share/zoneinfo</code> such as <span class=
+          "emphasis"><em>Canada/Eastern</em></span> or <span class=
+          "emphasis"><em>EST5EDT</em></span> that are not identified by the
+          script but can be used.
+        </p>
+        <p>
+          Then create the <code class="filename">/etc/localtime</code> file
+          by running:
+        </p>
+        <pre class="userinput">
+<kbd class="command">ln -sfv /usr/share/zoneinfo/<em class=
+"replaceable"><code>&lt;xxx&gt;</code></em> /etc/localtime</kbd>
+</pre>
+        <p>
+          Replace <em class="replaceable"><code>&lt;xxx&gt;</code></em> with
+          the name of the time zone selected (e.g., Canada/Eastern).
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.12.3. Contents of Tzdata
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed directory:</strong>
+              <span class="segbody">/usr/share/zoneinfo</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Description
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <span class="term"><code class=
+                    "filename">/usr/share/zoneinfo</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Provides timezone and daylight saving time information
+                    for glibc time functions
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="glibc.html" title="Glibc-2.21">Prev</a>
+          <p>
+            Glibc-2.21
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="adjusting.html" title=
+          "Adjusting the Toolchain">Next</a>
+          <p>
+            Adjusting the Toolchain
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
