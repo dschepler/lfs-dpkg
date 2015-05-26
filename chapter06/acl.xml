@@ -73,18 +73,28 @@
     tests</command> after <application>Coreutils</application> has been built
     later in this chapter.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install install-dev install-lib
-chmod -v 755 /usr/lib/libacl.so</userinput></screen>
+<screen><userinput remap="install">make install install-dev install-lib DESTDIR=$(pwd)/debian/tmp
+chmod -v 755 debian/tmp/usr/lib/libacl.so</userinput></screen>
 
     <para>The shared library needs to be moved to
     <filename class="directory">/lib</filename>, and as a result the
     <filename class="extension">.so</filename> file in
     <filename class="directory">/usr/lib</filename> will need to be recreated:</para>
 
-<screen><userinput remap="install">mv -v /usr/lib/libacl.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libacl.so) /usr/lib/libacl.so</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/lib
+mv -v debian/tmp/usr/lib/libacl.so.* debian/tmp/lib
+ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libacl.so) \
+        debian/tmp/usr/lib/libacl.so</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../acl_&acl-version;_*.deb</userinput></screen>
 
   </sect2>
 
