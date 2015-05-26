@@ -105,43 +105,45 @@
     <filename>README</filename> file in that directory for further details.
     </para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>Move the shared libraries to the
     <filename class="directory">/lib</filename> directory, where they are
     expected to reside:</para>
 
-<screen><userinput remap="install">mv -v /usr/lib/libncursesw.so.5* /lib</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/lib
+mv -v debian/tmp/usr/lib/libncursesw.so.5* debian/tmp/lib</userinput></screen>
 
     <para>Because the libraries have been moved, one symlink points to
     a non-existent file. Recreate it:</para>
 
-<screen><userinput remap="install">ln -sfv ../../lib/$(readlink /usr/lib/libncursesw.so) /usr/lib/libncursesw.so</userinput></screen>
+<screen><userinput remap="install">ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libncursesw.so) \
+        debian/tmp/usr/lib/libncursesw.so</userinput></screen>
 
     <para>Many applications still expect the linker to be able to find
     non-wide-character Ncurses libraries. Trick such applications into linking with
     wide-character libraries by means of symlinks and linker scripts:</para>
 
 <screen><userinput remap="install">for lib in ncurses form panel menu ; do
-    rm -vf                    /usr/lib/lib${lib}.so
-    echo "INPUT(-l${lib}w)" &gt; /usr/lib/lib${lib}.so
-    ln -sfv ${lib}w.pc        /usr/lib/pkgconfig/${lib}.pc
+    rm -vf                    debian/tmp/usr/lib/lib${lib}.so
+    echo "INPUT(-l${lib}w)" &gt; debian/tmp/usr/lib/lib${lib}.so
+    ln -sfv ${lib}w.pc        debian/tmp/usr/lib/pkgconfig/${lib}.pc
 done</userinput></screen>
 
     <para>Finally, make sure that old applications that look for
     <filename class="libraryfile">-lcurses</filename> at build time are still
     buildable:</para>
 
-<screen><userinput remap="install">rm -vf                     /usr/lib/libcursesw.so
-echo "INPUT(-lncursesw)" &gt; /usr/lib/libcursesw.so
-ln -sfv libncurses.so      /usr/lib/libcurses.so</userinput></screen>
+<screen><userinput remap="install">rm -vf                     debian/tmp/usr/lib/libcursesw.so
+echo "INPUT(-lncursesw)" &gt; debian/tmp/usr/lib/libcursesw.so
+ln -sfv libncurses.so      debian/tmp/usr/lib/libcurses.so</userinput></screen>
 
     <para>If desired, install the Ncurses documentation:</para>
 
-<screen><userinput remap="install">mkdir -v       /usr/share/doc/ncurses-&ncurses-version;
-cp -v -R doc/* /usr/share/doc/ncurses-&ncurses-version;</userinput></screen>
+<screen><userinput remap="install">mkdir -pv      debian/tmp/usr/share/doc/ncurses-&ncurses-version;
+cp -v -R doc/* debian/tmp/usr/share/doc/ncurses-&ncurses-version;</userinput></screen>
 
     <note>
       <para>The instructions above don't create non-wide-character Ncurses
@@ -157,8 +159,19 @@ cp -v -R doc/* /usr/share/doc/ncurses-&ncurses-version;</userinput></screen>
             --without-debug  \
             --without-cxx-binding
 make sources libs
-cp -av lib/lib*.so.5* /usr/lib</userinput></screen>
+cp -av lib/lib*.so.5* debian/tmp/usr/lib</userinput></screen>
     </note>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../ncurses_&ncurses-version;_*.deb</userinput></screen>
+
+    <note><para>ncurses-pass1 should not be removed yet as a couple
+    utilities from util-linux-pass1 still depend on it.</para></note>
 
   </sect2>
 
