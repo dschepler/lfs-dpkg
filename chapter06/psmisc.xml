@@ -51,15 +51,24 @@
 
     <para>This package does not come with a test suite.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
-    <para>Finally, move the <command>killall</command> and <command>fuser</command>
+    <para>Move the <command>killall</command> and <command>fuser</command>
     programs to the location specified by the FHS:</para>
 
-<screen><userinput remap="install">mv -v /usr/bin/fuser   /bin
-mv -v /usr/bin/killall /bin</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/bin
+mv -v debian/tmp/usr/bin/fuser   debian/tmp/bin
+mv -v debian/tmp/usr/bin/killall debian/tmp/bin</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i psmisc_&psmisc-version;_*.deb</userinput></screen>
 
   </sect2>
 
