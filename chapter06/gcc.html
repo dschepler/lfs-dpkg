@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150525-dpkg">
+  <body class="lfs" id="lfs-20150527-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150525-dpkg
+        Linux From Scratch - Version 20150527-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -39,7 +39,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -381,15 +381,26 @@ SEARCH_DIR("/usr/lib");</code>
 <kbd class="command">rm -v dummy.c a.out dummy.log</kbd>
 </pre>
         <p>
-          Once these checks have passed, it is safe to remove the toolchain
-          from the previous chapter:
+          Once these checks have passed, it is safe to remove some of the
+          toolchain packages from the previous chapter:
         </p>
         <pre class="userinput">
 <kbd class="command">rm -fv /tools/bin/ld-old \
        /tools/$(/tools/bin/gcc -dumpmachine)/bin/ld-old \
        /tools/lib/gcc/$(/tools/bin/gcc -dumpmachine)/5.1.0/specs
-dpkg --purge binutils-pass2 gcc-pass2</kbd>
+dpkg --purge binutils-pass2 linux-headers-pass1</kbd>
 </pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            gcc-pass2 cannot be removed yet, as future testsuites rely on the
+            presence of /tools/lib/libgcc_s.so.1 via a path embedded into
+            dejagnu-pass1.
+          </p>
+        </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -746,7 +757,7 @@ dpkg --purge binutils-pass2 gcc-pass2</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>

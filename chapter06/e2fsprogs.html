@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150525-dpkg">
+  <body class="lfs" id="lfs-20150527-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150525-dpkg
+        Linux From Scratch - Version 20150527-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -41,7 +41,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -196,35 +196,41 @@ make LD_LIBRARY_PATH=/tools/lib check</kbd>
           creating and enabling swap space.
         </p>
         <p>
-          Install the binaries, documentation, and shared libraries:
+          Install the binaries, documentation, and shared libraries to a
+          temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make install</kbd>
+<kbd class="command">make install DESTDIR=$(pwd)/../debian/tmp</kbd>
 </pre>
         <p>
           Install the static libraries and headers:
         </p>
         <pre class="userinput">
-<kbd class="command">make install-libs</kbd>
+<kbd class="command">make install-libs DESTDIR=$(pwd)/../debian/tmp</kbd>
 </pre>
         <p>
           Make the installed static libraries writable so debugging symbols
-          can be removed later:
+          can be removed by the buildpkg fixup scripts:
         </p>
         <pre class="userinput">
-<kbd class=
-"command">chmod -v u+w /usr/lib/{libcom_err,libe2p,libext2fs,libss}.a</kbd>
+<kbd class="command">cd ..
+chmod -v u+w debian/tmp/usr/lib/*.a</kbd>
+</pre>
+        <p>
+          Move these static libraries into a separate package for later
+          removal:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -pv debian/tmp-static/usr/lib
+mv -v debian/tmp/usr/lib/*.a debian/tmp-static/usr/lib</kbd>
 </pre>
         <p>
           This package installs a gzipped <code class="filename">.info</code>
-          file but doesn't update the system-wide <code class=
-          "filename">dir</code> file. Unzip this file and then update the
-          system <code class="filename">dir</code> file using the following
-          commands.
+          file; unzip this file using the following command.
         </p>
         <pre class="userinput">
-<kbd class="command">gunzip -v /usr/share/info/libext2fs.info.gz
-install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info</kbd>
+<kbd class=
+"command">gunzip -v debian/tmp/usr/share/info/libext2fs.info.gz</kbd>
 </pre>
         <p>
           If desired, create and install some additional documentation by
@@ -232,9 +238,22 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info</kbd>
         </p>
         <pre class="userinput">
 <kbd class=
-"command">makeinfo -o      doc/com_err.info ../lib/et/com_err.texinfo
-install -v -m644 doc/com_err.info /usr/share/info
-install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info</kbd>
+"command">makeinfo -o      build/doc/com_err.info lib/et/com_err.texinfo
+install -v -m644 build/doc/com_err.info debian/tmp/usr/share/info</kbd>
+</pre>
+        <p>
+          Create the package archives:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg
+buildpkg --package=e2fsprogs-static debian/tmp-static</kbd>
+</pre>
+        <p>
+          Install the packages:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../e2fsprogs_1.42.12_*.deb \
+        ../e2fsprogs-static_1.42.12_*.deb</kbd>
 </pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
@@ -799,7 +818,7 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>

@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150525-dpkg">
+  <body class="lfs" id="lfs-20150527-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150525-dpkg
+        Linux From Scratch - Version 20150527-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -40,7 +40,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -75,6 +75,15 @@
         </p>
         <pre class="userinput">
 <kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
+</pre>
+        <p>
+          Remove a few man pages that will be provided by their own packages
+          later:
+        </p>
+        <pre class="userinput">
+<kbd class="command">rm -fv debian/tmp/usr/share/man/man5/attr.5 \
+       debian/tmp/usr/share/man/man3/getspnam.3 \
+       debian/tmp/usr/share/man/man5/passwd.5</kbd>
 </pre>
         <p>
           Create the package archive:
@@ -152,7 +161,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>

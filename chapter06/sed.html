@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150525-dpkg">
+  <body class="lfs" id="lfs-20150527-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150525-dpkg
+        Linux From Scratch - Version 20150527-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -39,7 +39,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -106,11 +106,29 @@ make html</kbd>
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package and its documentation:
+          Install the package and its documentation to a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make install
-make -C doc install-html</kbd>
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp
+make -C doc install-html DESTDIR=$(pwd)/debian/tmp</kbd>
+</pre>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../sed_4.2.2_*.deb</kbd>
+</pre>
+        <p>
+          Remove the previous version of the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg --purge sed-pass1</kbd>
 </pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
@@ -178,7 +196,7 @@ make -C doc install-html</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>

@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150525-dpkg">
+  <body class="lfs" id="lfs-20150527-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150525-dpkg
+        Linux From Scratch - Version 20150527-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -39,7 +39,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -120,10 +120,22 @@
 <kbd class="command">make check</kbd>
 </pre>
         <p>
+          Install the package to a temporary directory:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
+</pre>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg</kbd>
+</pre>
+        <p>
           Install the package:
         </p>
         <pre class="userinput">
-<kbd class="command">make install</kbd>
+<kbd class="command">dpkg -i ../pkg-config_0.28_*.deb</kbd>
 </pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
@@ -193,7 +205,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>

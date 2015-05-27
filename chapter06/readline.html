@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150525-dpkg">
+  <body class="lfs" id="lfs-20150527-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150525-dpkg
+        Linux From Scratch - Version 20150527-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -39,7 +39,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -125,31 +125,130 @@ sed -i '/{OLDSUFF}/c:' support/shlib-install</kbd>
           This package does not come with a test suite.
         </p>
         <p>
-          Install the package:
+          Install the package to a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make SHLIB_LIBS=-lncurses install</kbd>
+<kbd class=
+"command">make SHLIB_LIBS=-lncurses DESTDIR=$(pwd)/debian/tmp install</kbd>
 </pre>
         <p>
           Now move the dynamic libraries to a more appropriate location and
           fix up some symbolic links:
         </p>
         <pre class="userinput">
-<kbd class="command">mv -v /usr/lib/lib{readline,history}.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libreadline.so) /usr/lib/libreadline.so
-ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) /usr/lib/libhistory.so</kbd>
+<kbd class="command">mkdir -pv debian/tmp/lib
+mv -v debian/tmp/usr/lib/lib{readline,history}.so.* debian/tmp/lib
+ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libreadline.so) \
+        debian/tmp/usr/lib/libreadline.so
+ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libhistory.so ) \
+        debian/tmp/usr/lib/libhistory.so</kbd>
 </pre>
         <p>
           If desired, install the documentation:
         </p>
         <pre class="userinput">
 <kbd class=
-"command">install -v -m644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-6.3</kbd>
+"command">install -v -m644 doc/*.{ps,pdf,html,dvi} debian/tmp/usr/share/doc/readline-6.3</kbd>
+</pre>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.38.2. Creating the /etc/inputrc File
+        </h2>
+        <p>
+          The <code class="filename">inputrc</code> file handles keyboard
+          mapping for specific situations. This file is the startup file used
+          by Readline.
+        </p>
+        <p>
+          Most people do not need user-specific keyboard mappings so the
+          command below creates a global <code class=
+          "filename">/etc/inputrc</code> used by everyone who logs in. If you
+          later decide you need to override the defaults on a per-user basis,
+          you can create a <code class="filename">.inputrc</code> file in the
+          user's home directory with the modified mappings.
+        </p>
+        <p>
+          For more information on how to edit the <code class=
+          "filename">inputrc</code> file, see <span class=
+          "command"><strong>info bash</strong></span> under the <span class=
+          "emphasis"><em>Readline Init File</em></span> section. <span class=
+          "command"><strong>info readline</strong></span> is also a good
+          source of information.
+        </p>
+        <p>
+          Below is a generic global <code class="filename">inputrc</code>
+          along with comments to explain what the various options do. Note
+          that comments cannot be on the same line as commands. Create the
+          file using the following command:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -pv debian/tmp/etc
+cat &gt; debian/tmp/etc/inputrc &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/inputrc
+# Modified by Chris Lynn &lt;roryo@roryo.dynup.net&gt;
+
+# Allow the command prompt to wrap to the next line
+set horizontal-scroll-mode Off
+
+# Enable 8bit input
+set meta-flag On
+set input-meta On
+
+# Turns off 8th bit stripping
+set convert-meta Off
+
+# Keep the 8th bit for display
+set output-meta On
+
+# none, visible or audible
+set bell-style none
+
+# All of the following map the escape sequence of the value
+# contained in the 1st argument to the readline specific functions
+"\eOd": backward-word
+"\eOc": forward-word
+
+# for linux console
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[5~": beginning-of-history
+"\e[6~": end-of-history
+"\e[3~": delete-char
+"\e[2~": quoted-insert
+
+# for xterm
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+
+# for Konsole
+"\e[H": beginning-of-line
+"\e[F": end-of-line
+
+# End /etc/inputrc</code>
+EOF</kbd>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.38.3. Finishing the Readline Installation
+        </h2>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../readline_6.3_*.deb</kbd>
 </pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-readline" name="contents-readline"></a>6.38.2.
+          <a id="contents-readline" name="contents-readline"></a>6.38.4.
           Contents of Readline
         </h2>
         <div class="segmentedlist">
@@ -229,7 +328,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) /usr/lib/libhistory.so</kb
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>

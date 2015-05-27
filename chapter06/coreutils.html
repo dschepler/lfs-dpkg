@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150525-dpkg">
+  <body class="lfs" id="lfs-20150527-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150525-dpkg
+        Linux From Scratch - Version 20150527-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -41,7 +41,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -185,22 +185,22 @@ touch Makefile.in</kbd>
 <kbd class="command">sed -i '/dummy/d' /etc/group</kbd>
 </pre>
         <p>
-          Install the package:
+          Install the package to a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make install</kbd>
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
 </pre>
         <p>
           Move programs to the locations specified by the FHS:
         </p>
         <pre class="userinput">
-<kbd class=
-"command">mv -v /usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} /bin
-mv -v /usr/bin/{false,ln,ls,mkdir,mknod,mv,pwd,rm} /bin
-mv -v /usr/bin/{rmdir,stty,sync,true,uname} /bin
-mv -v /usr/bin/chroot /usr/sbin
-mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8
-sed -i s/\"1\"/\"8\"/1 /usr/share/man/man8/chroot.8</kbd>
+<kbd class="command">mkdir -pv debian/tmp/{bin,usr/{sbin,share/man/man8}}
+mv -v debian/tmp/usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} debian/tmp/bin
+mv -v debian/tmp/usr/bin/{false,ln,ls,mkdir,mknod,mv,pwd,rm} debian/tmp/bin
+mv -v debian/tmp/usr/bin/{rmdir,stty,sync,true,uname} debian/tmp/bin
+mv -v debian/tmp/usr/bin/chroot debian/tmp/usr/sbin
+mv -v debian/tmp/usr/share/man/man1/chroot.1 debian/tmp/usr/share/man/man8/chroot.8
+sed -i s/\"1\"/\"8\"/1 debian/tmp/usr/share/man/man8/chroot.8</kbd>
 </pre>
         <p>
           Some packages in BLFS and beyond expect the following programs in
@@ -208,8 +208,32 @@ sed -i s/\"1\"/\"8\"/1 /usr/share/man/man8/chroot.8</kbd>
           there:
         </p>
         <pre class="userinput">
-<kbd class="command">mv -v /usr/bin/{head,sleep,nice,test,[} /bin</kbd>
+<kbd class=
+"command">mv -v debian/tmp/usr/bin/{head,sleep,nice,test,[} debian/tmp/bin</kbd>
 </pre>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../coreutils_8.23_*.deb</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            coreutils-pass1 cannot be removed yet as it is currently the only
+            package providing a hostname binary, and several upcoming builds
+            require that command.
+          </p>
+        </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -1727,7 +1751,7 @@ sed -i s/\"1\"/\"8\"/1 /usr/share/man/man8/chroot.8</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>

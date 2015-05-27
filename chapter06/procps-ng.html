@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150525-dpkg">
+  <body class="lfs" id="lfs-20150527-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150525-dpkg
+        Linux From Scratch - Version 20150527-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -40,7 +40,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -116,19 +116,40 @@
 make check</kbd>
 </pre>
         <p>
-          Install the package:
+          Install the package to a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make install</kbd>
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
 </pre>
         <p>
-          Finally, move essential files to a location that can be found if
+          Move essential files to a location that can be found if
           <code class="filename">/usr</code> is not mounted.
         </p>
         <pre class="userinput">
-<kbd class="command">mv -v /usr/bin/pidof /bin
-mv -v /usr/lib/libprocps.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
+<kbd class="command">mkdir -pv debian/tmp/lib
+mv -v debian/tmp/usr/bin/pidof debian/tmp/bin
+mv -v debian/tmp/usr/lib/libprocps.so.* debian/tmp/lib
+ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libprocps.so) \
+        debian/tmp/usr/lib/libprocps.so</kbd>
+</pre>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../procps-ng_3.3.10_*.deb</kbd>
+</pre>
+        <p>
+          Past this point, the build of GCC from the previous chapter is not
+          needed anymore, so remove it:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg --purge gcc-pass2</kbd>
 </pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
@@ -424,7 +445,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>

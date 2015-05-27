@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150525-dpkg">
+  <body class="lfs" id="lfs-20150527-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150525-dpkg
+        Linux From Scratch - Version 20150527-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -40,7 +40,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -153,17 +153,18 @@
           details.
         </p>
         <p>
-          Install the package:
+          Install the package to a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make install</kbd>
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
 </pre>
         <p>
           Move the shared libraries to the <code class="filename">/lib</code>
           directory, where they are expected to reside:
         </p>
         <pre class="userinput">
-<kbd class="command">mv -v /usr/lib/libncursesw.so.5* /lib</kbd>
+<kbd class="command">mkdir -pv debian/tmp/lib
+mv -v debian/tmp/usr/lib/libncursesw.so.5* debian/tmp/lib</kbd>
 </pre>
         <p>
           Because the libraries have been moved, one symlink points to a
@@ -171,7 +172,8 @@
         </p>
         <pre class="userinput">
 <kbd class=
-"command">ln -sfv ../../lib/$(readlink /usr/lib/libncursesw.so) /usr/lib/libncursesw.so</kbd>
+"command">ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libncursesw.so) \
+        debian/tmp/usr/lib/libncursesw.so</kbd>
 </pre>
         <p>
           Many applications still expect the linker to be able to find
@@ -181,9 +183,9 @@
         </p>
         <pre class="userinput">
 <kbd class="command">for lib in ncurses form panel menu ; do
-    rm -vf                    /usr/lib/lib${lib}.so
-    echo "INPUT(-l${lib}w)" &gt; /usr/lib/lib${lib}.so
-    ln -sfv ${lib}w.pc        /usr/lib/pkgconfig/${lib}.pc
+    rm -vf                    debian/tmp/usr/lib/lib${lib}.so
+    echo "INPUT(-l${lib}w)" &gt; debian/tmp/usr/lib/lib${lib}.so
+    ln -sfv ${lib}w.pc        debian/tmp/usr/lib/pkgconfig/${lib}.pc
 done</kbd>
 </pre>
         <p>
@@ -191,16 +193,17 @@ done</kbd>
           "filename">-lcurses</code> at build time are still buildable:
         </p>
         <pre class="userinput">
-<kbd class="command">rm -vf                     /usr/lib/libcursesw.so
-echo "INPUT(-lncursesw)" &gt; /usr/lib/libcursesw.so
-ln -sfv libncurses.so      /usr/lib/libcurses.so</kbd>
+<kbd class=
+"command">rm -vf                     debian/tmp/usr/lib/libcursesw.so
+echo "INPUT(-lncursesw)" &gt; debian/tmp/usr/lib/libcursesw.so
+ln -sfv libncurses.so      debian/tmp/usr/lib/libcurses.so</kbd>
 </pre>
         <p>
           If desired, install the Ncurses documentation:
         </p>
         <pre class="userinput">
-<kbd class="command">mkdir -v       /usr/share/doc/ncurses-5.9
-cp -v -R doc/* /usr/share/doc/ncurses-5.9</kbd>
+<kbd class="command">mkdir -pv      debian/tmp/usr/share/doc/ncurses-5.9
+cp -v -R doc/* debian/tmp/usr/share/doc/ncurses-5.9</kbd>
 </pre>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
@@ -223,8 +226,30 @@ cp -v -R doc/* /usr/share/doc/ncurses-5.9</kbd>
             --without-debug  \
             --without-cxx-binding
 make sources libs
-cp -av lib/lib*.so.5* /usr/lib</kbd>
+cp -av lib/lib*.so.5* debian/tmp/usr/lib</kbd>
 </pre>
+        </div>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../ncurses_5.9_*.deb</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            ncurses-pass1 should not be removed yet as a couple utilities
+            from util-linux-pass1 still depend on it.
+          </p>
         </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
@@ -520,7 +545,7 @@ cp -av lib/lib*.so.5* /usr/lib</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150525-dpkg">Home</a>
+          "Linux From Scratch - Version 20150527-dpkg">Home</a>
         </li>
       </ul>
     </div>
