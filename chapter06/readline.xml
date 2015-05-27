@@ -80,20 +80,104 @@ sed -i '/{OLDSUFF}/c:' support/shlib-install</userinput></screen>
 
     <para>This package does not come with a test suite.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make SHLIB_LIBS=-lncurses install</userinput></screen>
+<screen><userinput remap="install">make SHLIB_LIBS=-lncurses DESTDIR=$(pwd)/debian/tmp install</userinput></screen>
 
     <para>Now move the dynamic libraries to a more appropriate location
     and fix up some symbolic links:</para>
 
-<screen><userinput remap="install">mv -v /usr/lib/lib{readline,history}.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libreadline.so) /usr/lib/libreadline.so
-ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) /usr/lib/libhistory.so</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/lib
+mv -v debian/tmp/usr/lib/lib{readline,history}.so.* debian/tmp/lib
+ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libreadline.so) \
+        debian/tmp/usr/lib/libreadline.so
+ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libhistory.so ) \
+        debian/tmp/usr/lib/libhistory.so</userinput></screen>
 
     <para>If desired, install the documentation:</para>
 
-<screen><userinput remap="install">install -v -m644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-&readline-version;</userinput></screen>
+<screen><userinput remap="install">install -v -m644 doc/*.{ps,pdf,html,dvi} debian/tmp/usr/share/doc/readline-&readline-version;</userinput></screen>
+
+  </sect2>
+
+  <sect2 role="configuration">
+  <title>Creating the /etc/inputrc File</title>
+
+  <para>The <filename>inputrc</filename> file handles keyboard mapping for
+  specific situations. This file is the startup file used by Readline.</para>
+
+  <para>Most people do not need user-specific keyboard mappings so the command
+  below creates a global <filename>/etc/inputrc</filename> used by everyone who
+  logs in. If you later decide you need to override the defaults on a per-user
+  basis, you can create a <filename>.inputrc</filename> file in the user's home
+  directory with the modified mappings.</para>
+
+  <para>For more information on how to edit the <filename>inputrc</filename>
+  file, see <command>info bash</command> under the <emphasis>Readline Init
+  File</emphasis> section. <command>info readline</command> is also a good
+  source of information.</para>
+
+  <para>Below is a generic global <filename>inputrc</filename> along with comments
+  to explain what the various options do. Note that comments cannot be on the same
+  line as commands. Create the file using the following command:</para>
+
+<screen><userinput>mkdir -pv debian/tmp/etc
+cat &gt; debian/tmp/etc/inputrc &lt;&lt; "EOF"
+<literal># Begin /etc/inputrc
+# Modified by Chris Lynn &lt;roryo@roryo.dynup.net&gt;
+
+# Allow the command prompt to wrap to the next line
+set horizontal-scroll-mode Off
+
+# Enable 8bit input
+set meta-flag On
+set input-meta On
+
+# Turns off 8th bit stripping
+set convert-meta Off
+
+# Keep the 8th bit for display
+set output-meta On
+
+# none, visible or audible
+set bell-style none
+
+# All of the following map the escape sequence of the value
+# contained in the 1st argument to the readline specific functions
+"\eOd": backward-word
+"\eOc": forward-word
+
+# for linux console
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[5~": beginning-of-history
+"\e[6~": end-of-history
+"\e[3~": delete-char
+"\e[2~": quoted-insert
+
+# for xterm
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+
+# for Konsole
+"\e[H": beginning-of-line
+"\e[F": end-of-line
+
+# End /etc/inputrc</literal>
+EOF</userinput></screen>
+
+  </sect2>
+
+  <sect2>
+    <title>Finishing the Readline Installation</title>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../readline_&readline-version;_*.deb</userinput></screen>
 
   </sect2>
 

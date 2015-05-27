@@ -57,9 +57,6 @@
      <listitem>
        <para><xref linkend="ch-scripts-locale" role="."/></para>
      </listitem>
-     <listitem>
-       <para><xref linkend="ch-scripts-inputrc" role="."/></para>
-     </listitem>
   </itemizedlist>
 
   <para>And finally, configuring the systemd behavior.</para>
