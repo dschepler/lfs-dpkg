@@ -47,7 +47,9 @@
     <para>Remove a few man pages that will be provided by their own
     packages later:</para>
 
-<screen><userinput>rm -fv debian/tmp/usr/share/man/man5/attr.5</userinput></screen>
+<screen><userinput>rm -fv debian/tmp/usr/share/man/man5/attr.5 \
+       debian/tmp/usr/share/man/man3/getspnam.3 \
+       debian/tmp/usr/share/man/man5/passwd.5</userinput></screen>
 
     <para>Create the package archive:</para>
 
