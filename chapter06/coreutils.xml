@@ -156,9 +156,10 @@ sed -i s/\"1\"/\"8\"/1 debian/tmp/usr/share/man/man8/chroot.8</userinput></scree
 
 <screen><userinput>dpkg -i ../coreutils_&coreutils-version;_*.deb</userinput></screen>
 
-    <para>Remove the previous version of the package:</para>
+    <note><para>coreutils-pass1 cannot be removed yet as it is currently
+    the only package providing a hostname binary, and several upcoming
+    builds require that command.</para></note>
 
-<screen><userinput>dpkg --purge coreutils-pass1</userinput></screen>
   </sect2>
 
   <sect2 id="contents-coreutils" role="content">
