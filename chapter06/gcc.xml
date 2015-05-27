@@ -294,13 +294,13 @@ SEARCH_DIR("/usr/lib");</computeroutput></screen>
     href="adjusting.xml"
     xpointer="xpointer(//*[@os='v'])"/>
 
-    <para>Once these checks have passed, it is safe to remove the
-    binutils build from the previous chapter:</para>
+    <para>Once these checks have passed, it is safe to remove some of the
+    toolchain packages from the previous chapter:</para>
 
 <screen><userinput>rm -fv /tools/bin/ld-old \
        /tools/$(/tools/bin/gcc -dumpmachine)/bin/ld-old \
        /tools/lib/gcc/$(/tools/bin/gcc -dumpmachine)/&gcc-version;/specs
-dpkg --purge binutils-pass2</userinput></screen>
+dpkg --purge binutils-pass2 linux-headers-pass1</userinput></screen>
 
     <note><para>gcc-pass2 cannot be removed yet, as future testsuites
     rely on the presence of /tools/lib/libgcc_s.so.1 via a path
