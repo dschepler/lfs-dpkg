@@ -135,34 +135,49 @@ make LD_LIBRARY_PATH=/tools/lib check</userinput></screen>
     linkend="space-creatingfilesystem"/> and <xref linkend="space-mounting"/>
     for details on creating and enabling swap space.</para>
 
-    <para>Install the binaries, documentation, and shared libraries:</para>
+    <para>Install the binaries, documentation, and shared libraries to a
+    temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/../debian/tmp</userinput></screen>
 
     <para>Install the static libraries and headers:</para>
 
-<screen><userinput remap="install">make install-libs</userinput></screen>
+<screen><userinput remap="install">make install-libs DESTDIR=$(pwd)/../debian/tmp</userinput></screen>
 
     <para>Make the installed static libraries writable so debugging symbols can
-    be removed later:</para>
+    be removed by the buildpkg fixup scripts:</para>
 
-<screen><userinput remap="install">chmod -v u+w /usr/lib/{libcom_err,libe2p,libext2fs,libss}.a</userinput></screen>
+<screen><userinput remap="install">cd ..
+chmod -v u+w debian/tmp/usr/lib/*.a</userinput></screen>
+
+    <para>Move these static libraries into a separate package for later
+    removal:</para>
+
+<screen><userinput>mkdir -pv debian/tmp-static/usr/lib
+mv -v debian/tmp/usr/lib/*.a debian/tmp-static/usr/lib</userinput></screen>
 
     <para>This package installs a gzipped
-    <filename class="extension">.info</filename> file but doesn't update the
-    system-wide <filename>dir</filename> file. Unzip this file and then update
-    the system <filename>dir</filename> file using the following
-    commands.</para>
+    <filename class="extension">.info</filename> file; unzip this file
+    using the following command.</para>
 
-<screen><userinput remap="install">gunzip -v /usr/share/info/libext2fs.info.gz
-install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info</userinput></screen>
+<screen><userinput remap="install">gunzip -v debian/tmp/usr/share/info/libext2fs.info.gz</userinput></screen>
 
     <para>If desired, create and install some additional documentation by
     issuing the following commands:</para>
 
-<screen><userinput remap="install">makeinfo -o      doc/com_err.info ../lib/et/com_err.texinfo
-install -v -m644 doc/com_err.info /usr/share/info
-install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info</userinput></screen>
+<screen><userinput remap="install">makeinfo -o      build/doc/com_err.info lib/et/com_err.texinfo
+install -v -m644 build/doc/com_err.info debian/tmp/usr/share/info</userinput></screen>
+
+<para>Create the package archives:</para>
+
+<screen><userinput>buildpkg
+buildpkg --package=e2fsprogs-static debian/tmp-static</userinput></screen>
+
+<para>Install the packages:</para>
+
+<screen><userinput>dpkg -i ../e2fsprogs_&e2fsprogs-version;_*.deb \
+        ../e2fsprogs-static_&e2fsprogs-version;_*.deb</userinput></screen>
+
   </sect2>
 
   <sect2 id="contents-e2fsprogs" role="content">
