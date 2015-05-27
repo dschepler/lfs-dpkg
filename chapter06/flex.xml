@@ -57,9 +57,9 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 <!--
     <para>There are some packages that expect to find the
     <filename class="libraryfile">lex</filename> library in <filename
@@ -74,7 +74,15 @@
     runs <filename>flex</filename> in <command>lex</command> emulation
     mode:</para>
 
-<screen><userinput remap="install">ln -sv flex /usr/bin/lex</userinput></screen>
+<screen><userinput remap="install">ln -sv flex debian/tmp/usr/bin/lex</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../flex_&flex-version;_*.deb</userinput></screen>
 
   </sect2>
 
