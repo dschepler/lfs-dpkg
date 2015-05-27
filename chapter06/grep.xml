@@ -56,9 +56,20 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 
+    <para>Install the package to a temporary directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput>dpkg -i ../grep_&grep-version;_*.deb</userinput></screen>
+
+    <note><para>grep-pass1 should not be removed yet as the zgrep script
+    from gzip-pass1 still contains a reference to /tools/bin/grep.</para></note>
 
   </sect2>
 
