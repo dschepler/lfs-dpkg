@@ -53,10 +53,10 @@
 
     <para>This package does not come with a test suite.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make RAISE_SETFCAP=no prefix=/usr install
-chmod -v 755 /usr/lib/libcap.so</userinput></screen>
+<screen><userinput remap="install">make RAISE_SETFCAP=no prefix=/usr DESTDIR=$(pwd)/debian/tmp install
+chmod -v 755 debian/tmp/usr/lib/libcap.so</userinput></screen>
 
     <variablelist>
       <title>The meaning of the make option:</title>
@@ -77,8 +77,18 @@ chmod -v 755 /usr/lib/libcap.so</userinput></screen>
     <filename class="extension">.so</filename> file in
     <filename class="directory">/usr/lib</filename> will need to be recreated:</para>
 
-<screen><userinput remap="install">mv -v /usr/lib/libcap.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/lib
+mv -v debian/tmp/usr/lib*/libcap.so.* debian/tmp/lib
+ln -sfv ../../lib/$(readlink debian/tmp/usr/lib*/libcap.so) \
+        debian/tmp/usr/lib*/libcap.so</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../libcap_&libcap-version;_*.deb</userinput></screen>
 
   </sect2>
 
