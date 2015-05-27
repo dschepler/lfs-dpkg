@@ -64,10 +64,23 @@ make html</userinput></screen>
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-    <para>Install the package and its documentation:</para>
+    <para>Install the package and its documentation to a temporary
+    directory:</para>
 
-<screen><userinput remap="install">make install
-make -C doc install-html</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp
+make -C doc install-html DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../sed_&sed-version;_*.deb</userinput></screen>
+
+    <para>Remove the previous version of the package:</para>
+
+<screen><userinput>dpkg --purge sed-pass1</userinput></screen>
 
   </sect2>
 
