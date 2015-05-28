@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150527-dpkg">
+  <body class="lfs" id="lfs-20150528-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150527-dpkg
+        Linux From Scratch - Version 20150528-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -41,7 +41,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150527-dpkg">Home</a>
+          "Linux From Scratch - Version 20150528-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -178,12 +178,39 @@ export BUILD_BZIP2=0</kbd>
 <kbd class="command">make -k test</kbd>
 </pre>
         <p>
-          Install the package and clean up:
+          Install the package to a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make install
-unset BUILD_ZLIB BUILD_BZIP2</kbd>
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
 </pre>
+        <p>
+          Create the package archive:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">dpkg -i ../perl_5.20.2_*.deb</kbd>
+</pre>
+        <p>
+          Finally, clean up the environment:
+        </p>
+        <pre class="userinput">
+<kbd class="command">unset BUILD_ZLIB BUILD_BZIP2</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            perl-pass1 cannot be removed yet as the makeinfo script from
+            texinfo-pass1 still depends on it.
+          </p>
+        </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -854,7 +881,7 @@ unset BUILD_ZLIB BUILD_BZIP2</kbd>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150527-dpkg">Home</a>
+          "Linux From Scratch - Version 20150528-dpkg">Home</a>
         </li>
       </ul>
     </div>

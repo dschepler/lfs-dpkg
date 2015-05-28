@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
     media="print" />
   </head>
-  <body class="lfs" id="lfs-20150527-dpkg">
+  <body class="lfs" id="lfs-20150528-dpkg">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 20150527-dpkg
+        Linux From Scratch - Version 20150528-dpkg
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Installing Basic System Software
@@ -39,7 +39,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150527-dpkg">Home</a>
+          "Linux From Scratch - Version 20150528-dpkg">Home</a>
         </li>
       </ul>
     </div>
@@ -95,10 +95,31 @@
           is installed.
         </p>
         <p>
-          Install the package:
+          Install the package to a temporary directory:
         </p>
         <pre class="userinput">
-<kbd class="command">make install</kbd>
+<kbd class="command">make install DESTDIR=$(pwd)/debian/tmp</kbd>
+</pre>
+        <p>
+          Move the static library to a separate package for later removal:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -pv debian/tmp-static/usr/lib
+mv -v debian/tmp/usr/lib/libltdl.a debian/tmp-static/usr/lib</kbd>
+</pre>
+        <p>
+          Create the package archives:
+        </p>
+        <pre class="userinput">
+<kbd class="command">buildpkg
+buildpkg --package=libtool-static debian/tmp-static</kbd>
+</pre>
+        <p>
+          Install the packages:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">dpkg -i ../libtool_2.4.6_*.deb ../libtool-static_2.4.6_*.deb</kbd>
 </pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
@@ -201,7 +222,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 20150527-dpkg">Home</a>
+          "Linux From Scratch - Version 20150528-dpkg">Home</a>
         </li>
       </ul>
     </div>
