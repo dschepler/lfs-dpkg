@@ -119,10 +119,24 @@ export BUILD_BZIP2=0</userinput></screen>
 
 <screen><userinput remap="test">make -k test</userinput></screen>
 
-    <para>Install the package and clean up:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install
-unset BUILD_ZLIB BUILD_BZIP2</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../perl_&perl-version;_*.deb</userinput></screen>
+
+    <para>Finally, clean up the environment:</para>
+
+<screen><userinput>unset BUILD_ZLIB BUILD_BZIP2</userinput></screen>
+
+    <note><para>perl-pass1 cannot be removed yet as the makeinfo script
+    from texinfo-pass1 still depends on it.</para></note>
 
   </sect2>
 
