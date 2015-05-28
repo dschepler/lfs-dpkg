@@ -96,15 +96,29 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>Move some programs so they are available if <filename
     class='directory'>/usr</filename> is not accessible:</para>
 
-<screen><userinput remap="install">mv -v /usr/bin/{hostname,ping,ping6,traceroute} /bin
-mv -v /usr/bin/ifconfig /sbin</userinput></screen>
+<screen><userinput remap="install">mkdir -v debian/tmp/{bin,sbin}
+mv -v debian/tmp/usr/bin/{hostname,ping,ping6,traceroute} debian/tmp/bin
+mv -v debian/tmp/usr/bin/ifconfig debian/tmp/sbin</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../inetutils_&inetutils-version;_*.deb</userinput></screen>
+
+    <para>Since the inetutils package provides hostname, coreutils-pass1 can
+now be removed:</para>
+
+<screen><userinput>dpkg --purge coreutils-pass1</userinput></screen>
 
   </sect2>
 
