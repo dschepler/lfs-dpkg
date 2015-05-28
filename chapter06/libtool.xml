@@ -58,9 +58,24 @@
     to a circular dependency, but all tests pass if rechecked after 
     automake is installed.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Move the static library to a separate package for later
+    removal:</para>
+
+<screen><userinput>mkdir -pv debian/tmp-static/usr/lib
+mv -v debian/tmp/usr/lib/libltdl.a debian/tmp-static/usr/lib</userinput></screen>
+
+    <para>Create the package archives:</para>
+
+<screen><userinput>buildpkg
+buildpkg --package=libtool-static debian/tmp-static</userinput></screen>
+
+    <para>Install the packages:</para>
+
+<screen><userinput>dpkg -i ../libtool_&libtool-version;_*.deb ../libtool-static_&libtool-version;_*.deb</userinput></screen>
 
   </sect2>
 
