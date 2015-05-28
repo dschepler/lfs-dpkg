@@ -53,9 +53,17 @@
 
 <screen><userinput remap="test">make test</userinput></screen>
 
+    <para>Install the package to a temporary directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=xml-parser</userinput></screen>
+
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput>dpkg -i ../xml-parser_&xml-parser-version;_*.deb</userinput></screen>
 
   </sect2>
 
