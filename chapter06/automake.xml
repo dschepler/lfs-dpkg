@@ -58,9 +58,17 @@
 <screen><userinput remap="test">sed -i "s:./configure:LEXLIB=/usr/lib/libfl.a &amp;:" t/lex-{clean,depend}-cxx.sh
 make -j4 check</userinput></screen>
 
+    <para>Install the package to a temporary directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput>dpkg -i ../automake_&automake-version;_*.deb</userinput></screen>
 
   </sect2>
 
