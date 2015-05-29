@@ -69,17 +69,34 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>Some packages in BLFS and beyond expect the
     <command>find</command> program in <filename
     class="directory">/bin</filename>, so make sure
     it's placed there:</para>
 
-<screen><userinput remap="install">mv -v /usr/bin/find /bin
-sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb</userinput></screen>
+<screen><userinput remap="install">mkdir -v debian/tmp/bin
+mv -v debian/tmp/usr/bin/find debian/tmp/bin
+sed -i 's|find:=${BINDIR}|find:=/bin|' debian/tmp/usr/bin/updatedb</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../findutils_&findutils-version;_*.deb</userinput></screen>
+
+    <para>Remove the previous version of the package.  Also, this was the
+    last package from the LFS system to use Dejagnu in
+    its testsuite; so it is now safe to remove the bootstrap builds of
+    Dejagnu and its dependencies:</para>
+
+<screen><userinput>dpkg --purge findutils-pass1 dejagnu-pass1 expect-pass1 \
+             tcl-pass1 gcc-pass2</userinput></screen>
 
   </sect2>
 

@@ -93,11 +93,6 @@ ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libprocps.so) \
 
 <screen><userinput>dpkg -i ../procps-ng_&procps-ng-version;_*.deb</userinput></screen>
 
-    <para>Past this point, the build of GCC from the previous chapter is
-    not needed anymore, so remove it:</para>
-
-<screen><userinput>dpkg --purge gcc-pass2</userinput></screen>
-
   </sect2>
 
   <sect2 id="contents-procps" role="content">
