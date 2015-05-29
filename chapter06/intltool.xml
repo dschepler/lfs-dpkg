@@ -53,10 +53,18 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 
+    <para>Install the package to a temporary directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp
+install -v -Dm644 doc/I18N-HOWTO debian/tmp/usr/share/doc/intltool-&intltool-version;/I18N-HOWTO</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make install
-install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-&intltool-version;/I18N-HOWTO</userinput></screen>
+<screen><userinput>dpkg -i ../intltool_&intltool-version;_*.deb</userinput></screen>
 
   </sect2>
 
