@@ -66,9 +66,22 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 
+    <para>Install the package to a temporary directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput>dpkg -i ../libpipeline_&libpipeline-version;_*.deb</userinput></screen>
+
+    <para>As this is the only source package in the base LFS system to
+    use check, the bootstrap build can now be removed:</para>
+
+<screen><userinput>dpkg --purge check-pass1</userinput></screen>
 
   </sect2>
 
