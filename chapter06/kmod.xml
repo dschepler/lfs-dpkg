@@ -83,17 +83,26 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 -->
-    <para>Install the package, and create symlinks for
+    <para>Install the package to a temporary directory, and create symlinks for
     compatibility with Module-Init-Tools (the package that previously handled
     Linux kernel modules):</para>
 
-<screen><userinput remap="install">make install
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp
 
+mkdir -v debian/tmp/sbin
 for target in depmod insmod lsmod modinfo modprobe rmmod; do
-  ln -sv ../bin/kmod /sbin/$target
+  ln -sv ../bin/kmod debian/tmp/sbin/$target
 done
 
-ln -sv kmod /bin/lsmod</userinput></screen>
+ln -sv kmod debian/tmp/bin/lsmod</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../kmod_&kmod-version;_*.deb</userinput></screen>
 
   </sect2>
 
