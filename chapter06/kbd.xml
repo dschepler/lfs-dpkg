@@ -93,9 +93,9 @@ sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in</userinput></screen>
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <note>
       <para>For some languages (e.g., Belarusian) the Kbd package doesn't
@@ -116,8 +116,16 @@ sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in</userinput></screen>
 -->
     <para>If desired, install the documentation:</para>
 
-<screen><userinput remap="install">mkdir -v       /usr/share/doc/kbd-&kbd-version;
-cp -R -v docs/doc/* /usr/share/doc/kbd-&kbd-version;</userinput></screen>
+<screen><userinput remap="install">mkdir -pv      debian/tmp/usr/share/doc/kbd-&kbd-version;
+cp -R -v docs/doc/* debian/tmp/usr/share/doc/kbd-&kbd-version;</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../kbd_&kbd-version;_*.deb</userinput></screen>
 
   </sect2>
 
