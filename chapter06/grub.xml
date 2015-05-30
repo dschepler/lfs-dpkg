@@ -76,9 +76,17 @@
 
     <para>This package does not come with a test suite.</para>
 
+    <para>Install the package to a temporary directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput>dpkg -i ../grub_&grub-version;_*.deb</userinput></screen>
 
   <para>Using GRUB to make your LFS system bootable will be discussed in
   <xref linkend="ch-bootable-grub"/>.</para>
