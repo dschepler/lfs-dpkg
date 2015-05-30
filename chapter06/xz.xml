@@ -58,13 +58,26 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-  <para>Install the package and make sure that all essential files are in the
-  correct directory:</para>
+    <para>Install the package to a temporary directory and make sure that all
+    essential files are in the correct directory:</para>
 
-<screen><userinput remap="install">make install
-mv -v   /usr/bin/{lzma,unlzma,lzcat,xz,unxz,xzcat} /bin
-mv -v /usr/lib/liblzma.so.* /lib
-ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp
+mkdir -v debian/tmp/{bin,lib}
+mv -v   debian/tmp/usr/bin/{lzma,unlzma,lzcat,xz,unxz,xzcat} debian/tmp/bin
+mv -v debian/tmp/usr/lib/liblzma.so.* debian/tmp/lib
+ln -svf ../../lib/$(readlink debian/tmp/usr/lib/liblzma.so) \
+        debian/tmp/usr/lib/liblzma.so</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../xz_&xz-version;_*.deb</userinput></screen>
+
+    <note><para>xz-pass1 cannot be removed yet as dpkg-pass2 still
+    requires it.</para></note>
 
   </sect2>
 
