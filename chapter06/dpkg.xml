@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+  <!ENTITY % general-entities SYSTEM "../general.ent">
+  %general-entities;
+]>
+
+<sect1 id="ch-system-dpkg" role="wrap">
+  <?dbhtml filename="dpkg.html"?>
+
+  <sect1info condition="script">
+    <productname>dpkg</productname>
+    <productnumber>&dpkg-version;</productnumber>
+    <address>&dpkg-url;</address>
+  </sect1info>
+
+  <title>Dpkg-&dpkg-version;</title>
+
+  <indexterm zone="ch-system-dpkg">
+    <primary sortas="a-dpkg">Dpkg</primary>
+  </indexterm>
+
+  <sect2 role="package">
+    <title/>
+
+    <para>The Dpkg package contains the low-level Debian package
+    manager.  From the point of view of an LFS system, it provides
+    tracking and queries of package file contents and software
+    versions; clean upgrades and removal of packages; and backup
+    archival of the initial installation state of software
+    packages.</para>
+
+    <segmentedlist>
+      <segtitle>&buildtime;</segtitle>
+      <segtitle>&diskspace;</segtitle>
+
+      <seglistitem>
+        <seg>&dpkg-ch6-sbu;</seg>
+        <seg>&dpkg-ch6-du;</seg>
+      </seglistitem>
+    </segmentedlist>
+
+  </sect2>
+
+  <sect2 role="installation">
+    <title>Installation of Dpkg</title>
+
+    <para>Prepare Dpkg for compilation with:</para>
+
+<screen><userinput remap="configure">./configure --prefix=/usr     \
+            --disable-dselect \
+            --sysconfdir=/etc \
+            --sbindir=/sbin   \
+            --localstatedir=/var</userinput></screen>
+
+    <para>Compile the package:</para>
+
+<screen><userinput remap="make">make</userinput></screen>
+
+    <para>At this point, not all Perl modules required for the Dpkg
+    testsuite are installed.</para>
+
+    <para>Install the package to a temporary directory:</para>
+
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../dpkg_&dpkg-version;_*.deb</userinput></screen>
+
+    <para>Move the Dpkg database to its new location:</para>
+
+<screen><userinput>mv -v /tools/var/lib/dpkg/status /var/lib/dpkg
+mkdir -v /var/lib/dpkg/triggers
+mv -v /tools/var/lib/dpkg/triggers/* /var/lib/dpkg/triggers
+mv -v /tools/var/lib/dpkg/info/* /var/lib/dpkg/info</userinput></screen>
+
+    <para>Finally, remove the previous build of Dpkg and its
+    dependencies:</para>
+
+<screen><userinput>rm -f /tools/var/lib/dpkg/status-old \
+      /tools/var/lib/dpkg/lock
+rmdir /tools/var/lib/dpkg/triggers
+dpkg --purge dpkg-pass2 xz-pass1 zlib-pass1</userinput></screen>
+
+  </sect2>
+
+  <sect2 id="contents-dpkg" role="content">
+    <title>Contents of Dpkg</title>
+
+    <para>This will contain the contents of Dpkg</para>
+
+  </sect2>
+
+</sect1>

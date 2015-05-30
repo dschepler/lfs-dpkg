@@ -23,6 +23,10 @@
   <sect2 role="package">
     <title/>
 
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+    href="../chapter06/dpkg.xml"
+    xpointer="xpointer(/sect1/sect2[1]/para[1])"/>
+
     <segmentedlist>
       <segtitle>&buildtime;</segtitle>
       <segtitle>&diskspace;</segtitle>
@@ -70,6 +74,14 @@
     <note><para>It is not necessary to manually remove dpkg-pass1,
     as Dpkg already detected that all files from dpkg-pass1 were
     replaced and automatically marked dpkg-pass1 as removed.</para></note>
+
+  </sect2>
+
+  <sect2 role="content">
+    <title/>
+
+    <para>Details on this package are located in
+    <xref linkend="contents-dpkg" role="."/></para>
 
   </sect2>
 
