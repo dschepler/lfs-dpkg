@@ -53,14 +53,25 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>Move some programs that do not need to be on the root filesystem:</para>
 
-<screen><userinput remap="install">mv -v /bin/{gzexe,uncompress,zcmp,zdiff,zegrep} /usr/bin
-mv -v /bin/{zfgrep,zforce,zgrep,zless,zmore,znew} /usr/bin</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/usr/bin
+mv -v debian/tmp/bin/{gzexe,uncompress,zcmp,zdiff,zegrep} debian/tmp/usr/bin
+mv -v debian/tmp/bin/{zfgrep,zforce,zgrep,zless,zmore,znew} debian/tmp/usr/bin</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package, then remove the previous version and its
+    dependencies:</para>
+
+<screen><userinput>dpkg -i ../gzip_&gzip-version;_*.deb
+dpkg --purge gzip-pass1 grep-pass1</userinput></screen>
 
   </sect2>
 
