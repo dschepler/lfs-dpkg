@@ -179,32 +179,43 @@ EOF</userinput></screen>
     <para>This package has a test suite, but it can only be run after the
     package has been installed.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make LD_LIBRARY_PATH=/tools/lib install</userinput></screen>
+<screen><userinput remap="install">make LD_LIBRARY_PATH=/tools/lib DESTDIR=$(pwd)/debian/tmp install</userinput></screen>
 
     <para>Move NSS libraries to <filename class="directory">/lib</filename>:</para>
 
-<screen><userinput remap="install">mv -v /usr/lib/libnss_{myhostname,mymachines,resolve}.so.2 /lib</userinput></screen>
+<screen><userinput remap="install">mv -v debian/tmp/usr/lib/libnss_{myhostname,mymachines,resolve}.so.2 \
+      debian/tmp/lib</userinput></screen>
 
     <para>Remove an unnecessary directory:</para>
 
-<screen><userinput remap="install">rm -rfv /usr/lib/rpm</userinput></screen>
+<screen><userinput remap="install">rm -rfv debian/tmp/usr/lib/rpm</userinput></screen>
 
     <para>Create the Sysvinit compatibility symlinks, so systemd is used
     as the default init system:</para>
 
-<screen><userinput remap="install">for tool in runlevel reboot shutdown poweroff halt telinit; do
-     ln -sfv ../bin/systemctl /sbin/${tool}
+<screen><userinput remap="install">mkdir -v debian/tmp/sbin
+for tool in runlevel reboot shutdown poweroff halt telinit; do
+     ln -sfv ../bin/systemctl debian/tmp/sbin/${tool}
 done
-ln -sfv ../lib/systemd/systemd /sbin/init</userinput></screen>
+ln -sfv ../lib/systemd/systemd debian/tmp/sbin/init</userinput></screen>
 
     <para>Remove a reference to a non-existent group and fix
     a configuration file so it doesn't cause
     <command>systemd-tmpfiles</command> to fail at boot:</para>
 
-<screen><userinput remap="install">sed -i "s:0775 root lock:0755 root root:g" /usr/lib/tmpfiles.d/legacy.conf
-sed -i "/pam.d/d" /usr/lib/tmpfiles.d/etc.conf</userinput></screen>
+<screen><userinput remap="install">sed -i "s:0775 root lock:0755 root root:g" \
+       debian/tmp/usr/lib/tmpfiles.d/legacy.conf
+sed -i "/pam.d/d" debian/tmp/usr/lib/tmpfiles.d/etc.conf</userinput></screen>
+
+    <para>Create the system archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../systemd_&systemd-version;_*.deb</userinput></screen>
 
     <para>Create the <filename>/etc/machine-id</filename> file needed by
     <command>systemd-journald</command>:</para>
