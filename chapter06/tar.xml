@@ -72,15 +72,26 @@
 
 <screen><userinput remap="test">make check</userinput></screen>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install
-make -C doc install-html docdir=/usr/share/doc/tar-&tar-version;</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp
+make -C doc install-html docdir=/usr/share/doc/tar-&tar-version; \
+                         DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 <!--
     <para>Finally, generate the man page and place it in the proper location:</para>
 
 <screen><userinput remap="install">perl tarman &gt; /usr/share/man/man1/tar.1</userinput></screen>
 -->
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package and remove the previous version:</para>
+
+<screen><userinput>dpkg -i ../tar_&tar-version;_*.deb
+dpkg --purge tar-pass1</userinput></screen>
+
   </sect2>
 
 
