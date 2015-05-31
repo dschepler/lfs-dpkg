@@ -55,13 +55,13 @@
 
     <para>Install the package:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>Optionally, install the components belonging in a TeX
     installation:</para>
     <!-- FIXME: doesn't the TeX installation in BLFS overwrite files there? -->
 
-<screen><userinput remap="install">make TEXMF=/usr/share/texmf install-tex</userinput></screen>
+<screen><userinput remap="install">make TEXMF=/usr/share/texmf DESTDIR=$(pwd)/debian/tmp install-tex</userinput></screen>
 
     <variablelist>
       <title>The meaning of the make parameter:</title>
@@ -76,6 +76,17 @@
       </varlistentry>
 
     </variablelist>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package, then remove the previous version and its
+    dependencies:</para>
+
+<screen><userinput>dpkg -i ../texinfo_&texinfo-version;_*.deb
+rm -fv /tools/etc/ld.so.cache
+dpkg --purge texinfo-pass1 perl-pass1 glibc-pass1</userinput></screen>
 
     <para>The Info documentation system uses a plain text file to hold its list of
     menu entries. The file is located at <filename>/usr/share/info/dir</filename>.
