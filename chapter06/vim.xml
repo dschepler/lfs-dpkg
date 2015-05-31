@@ -65,9 +65,9 @@
     be resolved by redirecting the output to a log file.  A successful test
     will result in the words "ALL DONE" at completion.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>Many users are used to using <command>vi</command> instead of
     <command>vim</command>. To allow execution of <command>vim</command>
@@ -75,8 +75,8 @@
     symlink for both the binary and the man page in the provided
     languages:</para>
 
-<screen><userinput remap="install">ln -sv vim /usr/bin/vi
-for L in  /usr/share/man/{,*/}man1/vim.1; do
+<screen><userinput remap="install">ln -sv vim debian/tmp/usr/bin/vi
+for L in  debian/tmp/usr/share/man/{,*/}man1/vim.1; do
     ln -sv vim.1 $(dirname $L)/vi.1
 done</userinput></screen>
 
@@ -86,7 +86,8 @@ done</userinput></screen>
     class="directory">/usr/share/doc/vim-&vim-version;</filename>, making
     it consistent with the location of documentation for other packages:</para>
 
-<screen><userinput remap="install">ln -sv ../&vim-docdir;/doc /usr/share/doc/vim-&vim-version;</userinput></screen>
+<screen><userinput remap="install">mkdir -pv debian/tmp/usr/share/doc
+ln -sv ../&vim-docdir;/doc debian/tmp/usr/share/doc/vim-&vim-version;</userinput></screen>
 
     <para>If an X Window System is going to be installed on the LFS
     system, it may be necessary to recompile Vim after installing X. Vim
@@ -114,7 +115,8 @@ done</userinput></screen>
     other settings, and overrides must come after this setting. Create a default
     <command>vim</command> configuration file by running the following:</para>
 
-<screen><userinput>cat &gt; /etc/vimrc &lt;&lt; "EOF"
+<screen><userinput>mkdir -v debian/tmp/etc
+cat &gt; debian/tmp/etc/vimrc &lt;&lt; "EOF"
 <literal>" Begin /etc/vimrc
 
 set nocompatible
@@ -141,7 +143,8 @@ EOF</userinput></screen>
     background of these programs.</para>
 
     <para>Documentation for other available options can be obtained by
-    running the following command:</para>
+    running the following command (after installing the vim package
+    below):</para>
 
 <screen role="nodump"><userinput>vim -c ':options'</userinput></screen>
 
@@ -162,6 +165,19 @@ set spell</literal></screen>
       <para>For more information, see the appropriate README file located
       at the URL above.</para>
     </note>
+
+  </sect2>
+
+  <sect2>
+    <title>Finishing the Vim Installation</title>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg --package=vim --version=&vim-version;</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../vim_&vim-version;_*.deb</userinput></screen>
 
   </sect2>
 
