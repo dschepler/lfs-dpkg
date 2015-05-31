@@ -77,22 +77,37 @@
     testsuite can be found in the BLFS book at
     <ulink url="&blfs-book;general/dbus.html"/>.</para>
 
-    <para>Install the package:</para>
+    <para>Install the package to a temporary directory:</para>
 
-<screen><userinput remap="install">make install</userinput></screen>
+<screen><userinput remap="install">make install DESTDIR=$(pwd)/debian/tmp</userinput></screen>
 
     <para>The shared library needs to be moved to
     <filename class="directory">/lib</filename>, and as a result the
     <filename class="extension">.so</filename> file in
     <filename class="directory">/usr/lib</filename> will need to be recreated:</para>
 
-<screen><userinput remap="install">mv -v /usr/lib/libdbus-1.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libdbus-1.so) /usr/lib/libdbus-1.so</userinput></screen>
+<screen><userinput remap="install">mv -v debian/tmp/usr/lib/libdbus-1.so.* debian/tmp/lib
+ln -sfv ../../lib/$(readlink debian/tmp/usr/lib/libdbus-1.so) \
+        debian/tmp/usr/lib/libdbus-1.so</userinput></screen>
 
     <para>Create a symlink, so that D-Bus and systemd can use the same
     <filename>machine-id</filename> file:</para>
 
-<screen><userinput remap="install">ln -sfv /etc/machine-id /var/lib/dbus</userinput></screen>
+<screen><userinput remap="install">ln -sfv /etc/machine-id debian/tmp/var/lib/dbus</userinput></screen>
+
+    <para>Remove /var/run/dbus from the packaging image; it will need
+    to be created on each boot as /var/run points to /run which will be
+    mounted as a tmpfs:</para>
+
+<screen><userinput>rm -rfv debian/tmp/var/run</userinput></screen>
+
+    <para>Create the package archive:</para>
+
+<screen><userinput>buildpkg</userinput></screen>
+
+    <para>Install the package:</para>
+
+<screen><userinput>dpkg -i ../dbus_&dbus-version;_*.deb</userinput></screen>
 
   </sect2>
 

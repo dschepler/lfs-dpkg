@@ -39,8 +39,8 @@ case $(uname -m) in
 esac
 
 mkdir -v debian/tmp/var/{log,mail,spool}
-ln -sv debian/tmp/run debian/tmp/var/run
-ln -sv debian/tmp/run/lock debian/tmp/var/lock
+ln -sv /run debian/tmp/var/run
+ln -sv /run/lock debian/tmp/var/lock
 mkdir -pv debian/tmp/var/{opt,cache,lib/{color,misc,locate},local}
 
 ln -sv /proc/self/mounts debian/tmp/etc/mtab</userinput></screen>
