@@ -46,12 +46,6 @@
     Understanding the notes labeled important will save you a lot
     of problems later.</para></note>
 
-    <para>Fix a bug which prevents dpkg-deb from
-    being able to build .deb files when compiled
-    without zlib support:</para>
-
-<screen><userinput>sed -i -e '/control_compress_params\.level = / s/-1/9/' dpkg-deb/build.c</userinput></screen>
-
     <para>Prepare Dpkg for compilation:</para>
 
 <screen><userinput remap="configure">./configure --prefix=/tools \

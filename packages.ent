@@ -131,10 +131,10 @@
 <!ENTITY diffutils-ch6-du "30 MB">
 <!ENTITY diffutils-ch6-sbu "0.4 SBU">
 
-<!ENTITY dpkg-version "1.18.0">
+<!ENTITY dpkg-version "1.18.1">
 <!ENTITY dpkg-size "4.2 MB">
-<!ENTITY dpkg-url "http://http.debian.net/debian/pool/main/d/dpkg/dpkg_1.18.0.tar.xz">
-<!ENTITY dpkg-md5 "22d1a0cc18910fc1275a4fbc22aa4982">
+<!ENTITY dpkg-url "http://http.debian.net/debian/pool/main/d/dpkg/dpkg_&dpkg-version;.tar.xz">
+<!ENTITY dpkg-md5 "809169e14489dbcc603dc011381fdc67">
 <!ENTITY dpkg-ch5p1-du "99 MB">
 <!ENTITY dpkg-ch5p1-sbu "0.9 SBU">
 <!ENTITY dpkg-ch5p2-du "99 MB">
