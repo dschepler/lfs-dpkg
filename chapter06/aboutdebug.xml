@@ -46,7 +46,7 @@
 
   <para>Because most users will never use a debugger on their system software,
   a lot of disk space can be regained by removing these symbols. The next
-  section shows how to strip all debugging symbols from the programs and
-  libraries.</para>
+  section will set up the packaging process by default to strip all debugging
+  symbols from the programs and libraries.</para>
 
 </sect1>
